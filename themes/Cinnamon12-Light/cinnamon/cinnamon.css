@@ -31,10 +31,10 @@
 .applet-box { color: #edf6ff; text-shadow: none; border-radius: 5px; }
 .applet-box:hover, .applet-box:checked { color: #ffffff; }
 /* Applet pills: symmetric padding keeps the icon centered and the pill square-ish:
- * 20 px status icon + 16 = 36 x 36 at the ends; 28 px start icon + 12 = 40 x 40 in the
+ * 20 px status icon + 12 = 32 x 32 at the ends; 28 px start icon + 12 = 40 x 40 in the
  * center, like the window list. */
-.panel-bottom .applet-box, .panel-top .applet-box { padding: 0 8px; }
-.panel-left .applet-box, .panel-right .applet-box { padding: 8px 0; }
+.panel-bottom .applet-box, .panel-top .applet-box { padding: 0 6px; }
+.panel-left .applet-box, .panel-right .applet-box { padding: 6px 0; }
 .panel-bottom .applet-box:hover, .panel-bottom .applet-box:checked,
 .panel-top .applet-box:hover, .panel-top .applet-box:checked { border-image: url("assets/pill-h-hover-sm.svg") 20 10; }
 .panel-left .applet-box:hover, .panel-left .applet-box:checked,

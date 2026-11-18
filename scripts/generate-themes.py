@@ -106,10 +106,10 @@ CINNAMON = Template(r'''/* Cinnamon12 Studio | $variant | Cinnamon shell theme.
 .applet-box { color: $panel_text; text-shadow: none; border-radius: 5px; }
 .applet-box:hover, .applet-box:checked { color: #ffffff; }
 /* Applet pills: symmetric padding keeps the icon centered and the pill square-ish:
- * 20 px status icon + 16 = 36 x 36 at the ends; 28 px start icon + 12 = 40 x 40 in the
+ * 20 px status icon + 12 = 32 x 32 at the ends; 28 px start icon + 12 = 40 x 40 in the
  * center, like the window list. */
-.panel-bottom .applet-box, .panel-top .applet-box { padding: 0 8px; }
-.panel-left .applet-box, .panel-right .applet-box { padding: 8px 0; }
+.panel-bottom .applet-box, .panel-top .applet-box { padding: 0 6px; }
+.panel-left .applet-box, .panel-right .applet-box { padding: 6px 0; }
 .panel-bottom .applet-box:hover, .panel-bottom .applet-box:checked,
 .panel-top .applet-box:hover, .panel-top .applet-box:checked { border-image: url("assets/pill-h-hover-sm.svg") 20 10; }
 .panel-left .applet-box:hover, .panel-left .applet-box:checked,
@@ -842,9 +842,9 @@ def svg_assets(p):
         line_v = '<rect x="49" y="12" width="3" height="40" rx="1.5" fill="#36ccf6"/>' if ind else ''
         panels[f'pill-h-{name}.svg'] = svg(f'<rect x="0" y="10" width="64" height="44" rx="8" fill="{col}" fill-opacity="{op}"/>{line_h}')
         panels[f'pill-v-{name}.svg'] = svg(f'<rect x="10" y="0" width="44" height="64" rx="8" fill="{col}" fill-opacity="{op}"/>{line_v}')
-    # smaller pills (36 px: 6 px gap + 6 px inset) for applets at the ends of the bar
-    panels['pill-h-hover-sm.svg'] = svg('<rect x="0" y="12" width="64" height="40" rx="8" fill="#c2e0ff" fill-opacity="0.14"/>')
-    panels['pill-v-hover-sm.svg'] = svg('<rect x="12" y="0" width="40" height="64" rx="8" fill="#c2e0ff" fill-opacity="0.14"/>')
+    # smaller pills (32 px: 6 px gap + 8 px inset) for applets at the ends of the bar
+    panels['pill-h-hover-sm.svg'] = svg('<rect x="0" y="14" width="64" height="36" rx="7" fill="#c2e0ff" fill-opacity="0.14"/>')
+    panels['pill-v-hover-sm.svg'] = svg('<rect x="14" y="0" width="36" height="64" rx="7" fill="#c2e0ff" fill-opacity="0.14"/>')
     return {
         **panels,
         'toggle-on.svg': f'''<svg xmlns="http://www.w3.org/2000/svg" width="64" height="22" viewBox="0 0 64 22">
