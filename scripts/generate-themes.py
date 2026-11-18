@@ -690,6 +690,14 @@ placessidebar row { border-radius: 5px; margin: 1px 4px; }
 .nemo-window treeview.view:selected, .nemo-window .sidebar .view:selected,
 .nemo-window .sidebar .view:selected:backdrop, .nemo-places-sidebar treeview.view:selected,
 treeview.view:selected { border-radius: 0; }
+/* hover rules come later than :selected and would paint the light hover background
+ * under the selection's white text; a hovered selected row stays selected */
+.view:selected:hover, treeview.view:selected:hover, row:selected:hover,
+.nemo-window .sidebar .view:selected:hover, .nemo-places-sidebar treeview.view:selected:hover,
+placessidebar row:selected:hover, .sidebar row:selected:hover { background-color: $accent_fill; color: $on_accent; }
+.nemo-window .view:selected:hover, .nemo-window iconview:selected:hover,
+.nemo-window treeview.view:selected:hover { background-color: $item_active; color: $text; }
+.nemo-window .sidebar .view:selected:hover { background-color: $accent_fill; color: $on_accent; }
 .nemo-window toolbar, .nemo-window .primary-toolbar, .primary-toolbar {
   background-image: none; background-color: $titlebar; border-color: $line; box-shadow: inset 0 -1px $line; }
 .nemo-window statusbar, statusbar { background-color: $window; color: $muted; border-top: 1px solid $line; }
