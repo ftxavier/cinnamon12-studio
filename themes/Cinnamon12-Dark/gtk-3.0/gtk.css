@@ -9,7 +9,7 @@
 @define-color theme_base_color #203a56;
 @define-color theme_text_color #e9f4ff;
 @define-color theme_selected_bg_color #2baaff;
-@define-color theme_selected_fg_color #ffffff;
+@define-color theme_selected_fg_color #06203d;
 @define-color insensitive_bg_color #14253b;
 @define-color insensitive_fg_color #a4bfdc;
 @define-color insensitive_base_color #14253b;
@@ -18,7 +18,7 @@
 @define-color theme_unfocused_base_color #203a56;
 @define-color theme_unfocused_text_color #e9f4ff;
 @define-color theme_unfocused_selected_bg_color #2baaff;
-@define-color theme_unfocused_selected_fg_color #ffffff;
+@define-color theme_unfocused_selected_fg_color #06203d;
 @define-color borders #355474;
 @define-color unfocused_borders #355474;
 @define-color warning_color #f6c262;
@@ -26,7 +26,7 @@
 @define-color success_color #42d5ad;
 @define-color accent_color #2baaff;
 @define-color accent_bg_color #2baaff;
-@define-color accent_fg_color #ffffff;
+@define-color accent_fg_color #06203d;
 @define-color window_bg_color #17283e;
 @define-color window_fg_color #e9f4ff;
 @define-color view_bg_color #203a56;
@@ -50,7 +50,7 @@ window.background, .background, dialog, messagedialog.background { background-co
   background-color: #203a56; color: #e9f4ff; }
 .view:selected, iconview:selected, treeview.view:selected, .view text selection, textview text selection,
 flowboxchild:selected, row:selected, label selection, entry selection {
-  background-color: #2baaff; color: #ffffff; }
+  background-color: #2baaff; color: #06203d; }
 .view:hover, treeview.view:hover { background-color: #21405f; }
 .nemo-window .view:selected, .nemo-window iconview:selected,
 .nemo-window .view:selected:focus, .nemo-window iconview:selected:focus {
@@ -107,7 +107,7 @@ button.flat, button.flat:backdrop, button.image-button.flat, .toolbar button, he
 button.flat:hover, headerbar button.flat:hover, .toolbar button:hover { background-color: #21405f; border-color: transparent; }
 button.flat:checked, button.flat:active { background-color: #254d71; border-color: transparent; }
 button.suggested-action, button.default:not(.flat) {
-  background-image: none; background-color: #2baaff; color: #ffffff; border-color: #2baaff; }
+  background-image: none; background-color: #2baaff; color: #06203d; border-color: #2baaff; }
 button.suggested-action:hover { background-color: #5dc2ff; border-color: #5dc2ff; }
 button.suggested-action:disabled { background-color: #14253b; color: #a4bfdc; border-color: #355474; }
 button.destructive-action { background-image: none; background-color: #f17189; color: #ffffff; border-color: #f17189; }
@@ -135,7 +135,7 @@ combobox button.combo, combobox box.linked > button.combo { background-color: #2
   background-color: #14253b; color: #e9f4ff; border-color: #355474; }
 .nemo-window .sidebar .view:selected, .nemo-places-sidebar treeview.view:selected,
 placessidebar row:selected, stacksidebar row:selected, .sidebar row:selected {
-  background-color: #2baaff; color: #ffffff; border-radius: 5px; }
+  background-color: #2baaff; color: #06203d; border-radius: 5px; }
 .nemo-window .sidebar .view:hover, placessidebar row:hover, .sidebar row:hover { background-color: #21405f; }
 .nemo-window .sidebar .view:selected:backdrop, placessidebar row:selected:backdrop { background-color: #254d71; color: #e9f4ff; }
 placessidebar row { border-radius: 5px; margin: 1px 4px; }
@@ -152,7 +152,7 @@ menu, .menu, .context-menu, popover.menu, popover, popover.background {
 menu, .menu, .context-menu { padding: 4px 0; }
 menu menuitem, .menu menuitem, .context-menu menuitem { color: #e9f4ff; padding: 5px 12px; border-radius: 0; }
 menu menuitem:hover, .menu menuitem:hover, .context-menu menuitem:hover, modelbutton.flat:hover, popover modelbutton:hover {
-  background-color: #2baaff; color: #ffffff; }
+  background-color: #2baaff; color: #06203d; }
 menu menuitem:disabled, .menu menuitem:disabled { color: #a4bfdc; }
 menu separator, popover separator { background-color: #355474; }
 menubar { background-color: #17283e; box-shadow: inset 0 -1px #355474; }
@@ -174,7 +174,7 @@ check, radio { background-image: none; background-color: #203651; border: 1px so
 check { border-radius: 4px; }
 check:hover, radio:hover { border-color: #2baaff; }
 check:checked, check:indeterminate, radio:checked, radio:indeterminate {
-  background-image: none; background-color: #2baaff; border-color: #2baaff; color: #ffffff; }
+  background-image: none; background-color: #2baaff; border-color: #2baaff; color: #06203d; }
 check:disabled, radio:disabled { background-color: #14253b; border-color: #355474; }
 menu menuitem check, menu menuitem radio, .menu menuitem check, .menu menuitem radio { border-color: #355474; }
 switch { background-image: none; background-color: #355474; border: 1px solid #355474; border-radius: 14px; }
@@ -204,7 +204,7 @@ infobar.warning > revealer > box { background-color: alpha(#f6c262, 0.25); color
 infobar.error > revealer > box { background-color: alpha(#f17189, 0.25); color: #e9f4ff; }
 .app-notification { background-color: rgba(9,20,39,0.96); color: #eef6ff; border-radius: 0 0 6px 6px; }
 calendar { color: #e9f4ff; border-color: #355474; }
-calendar:selected { background-color: #2baaff; color: #ffffff; border-radius: 4px; }
+calendar:selected { background-color: #2baaff; color: #06203d; border-radius: 4px; }
 calendar.header { background-color: #14253b; border-color: #355474; }
 toolbar, .inline-toolbar { background-color: #17283e; }
 .dim-label, label.separator { color: #a4bfdc; opacity: 1; }

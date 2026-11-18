@@ -43,7 +43,7 @@
 - Implementação e documentação de sinalizações de brilho e energia em ambientes com diferentes backends.
 - Tela de login/lockscreen opcional, testada sem alterar o login manager.
 - Verificação de GTK 4/libadwaita, apps Flatpak e instalação de terceiros.
-- Revisão de contraste e ajustes de escala/touch.
+- Ajustes de escala/touch (contraste WCAG AA já verificado automaticamente pelo `validate.py`).
 
 ## Referências oficiais e padrões
 
@@ -91,3 +91,12 @@ Ambiente: Ubuntu 24.04.5 LTS, Cinnamon 6.0.4, X11, dois monitores (2560×1440 + 
 | Monitor do sistema | CPU/RAM/disco/rede com valores reais; sem erros no log após correção da leitura de largura fora do palco |
 | Clima | Desligado por padrão (cartão "Desativado"). Teste único com a cidade "Brasília": geocodificação + previsão OK, cache gravado; depois revertido para desligado e cache apagado |
 | `widgets apply/restore` | Restore devolve `enabled-desklets` original (`[]`); reaplicação OK |
+
+### Launcher e contraste (0.4.0-dev)
+
+| Verificação | Resultado |
+|---|---|
+| Categorias (Internet, Locais, Todos os aplicativos) por clique | Conteúdo troca corretamente; sem erros no log |
+| Launcher na variante Dark | Conferido por captura de tela |
+| Sair / Reiniciar / Desligar | Mesmas chamadas do menu oficial (`LogoutRemote(0)`, `ShutdownRemote()`) e `cinnamon-session-quit --reboot` sem `--no-prompt`: todas pedem confirmação. Não acionados na sessão de teste |
+| Contraste de texto (20 pares, Light e Dark) | Todos ≥ 4,5:1; verificado a cada `validate.py` |

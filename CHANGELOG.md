@@ -2,6 +2,8 @@
 
 ## 0.4.0 (em desenvolvimento)
 
+- **Contraste WCAG AA** nas duas variantes: no Light, azul de destaque como texto `#056bbb` e preenchimento sob texto branco `#0571c4`; no Dark, o azul vivo é mantido e o texto sobre ele passa a ser azul-marinho `#06203d` (6,5:1 em vez de 2,5:1). Vale para shell, GTK3/GTK4 e para os SVG de checkbox, rádio e toggle. O `validate.py` agora reprova pares de texto abaixo de 4,5:1.
+- **Launcher**: barras de rolagem finas (8 px) no shell; categorias cabem sem rolagem. Categorias, variante Dark e botões de sessão verificados (sair, reiniciar e desligar sempre pedem confirmação).
 - **Desklets**: `c12-calendar` (mês, navegação, hoje destacado, início da semana automático/domingo/segunda, números de semana opcionais), `c12-performance` reescrito como Monitor do sistema (CPU e RAM com gráfico de histórico, barras de CPU/RAM/disco, velocidade de rede; leitura de /proc e do sistema de arquivos; intervalo 1–5 s) e `c12-weather` (Open-Meteo, **desligado por padrão**: exige cidade digitada + permissão de rede; cache local, atualização mínima de 30 min, modo offline). Todos com configurações e tradução pt-BR.
 - `cinnamon12 widgets apply [--weather] | restore`: coloca os desklets na coluna esquerda do monitor principal, com backup de `enabled-desklets`; `uninstall` também restaura.
 - Cartões dos widgets mais opacos (tokens `widget`).

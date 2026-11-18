@@ -35,6 +35,9 @@ EXTRA = {
         'gtk4_base': 'Default/Default-light.css', 'titlebar': '#e2efff',
         'titlebar_backdrop': '#edf5ff', 'scroll': 'rgba(82,110,144,0.45)',
         'tooltip_bg': 'rgba(22,46,77,0.95)', 'tooltip_fg': '#f2f8ff',
+        # WCAG AA: accent as text on light surfaces (4.7:1 over the 97% popup) and as a fill under white text (5.0:1).
+        'accent_fg': '#056bbb', 'accent_fill': '#0571c4', 'on_accent': '#ffffff',
+        'on_accent_muted': 'rgba(255,255,255,0.85)', 'on_accent_line': 'rgba(255,255,255,0.30)',
     },
     'dark': {
         'popup_solid': '#17283c', 'popup_border': '#2d4766', 'hover_bg': '#21405f',
@@ -45,6 +48,9 @@ EXTRA = {
         'gtk4_base': 'Default/Default-dark.css', 'titlebar': '#1c334f',
         'titlebar_backdrop': '#17283e', 'scroll': 'rgba(164,191,220,0.40)',
         'tooltip_bg': 'rgba(9,20,39,0.96)', 'tooltip_fg': '#eef6ff',
+        # Bright accent keeps the look; text on it is dark navy (6.5:1) instead of white (2.5:1).
+        'accent_fg': '#2baaff', 'accent_fill': '#2baaff', 'on_accent': '#06203d',
+        'on_accent_muted': 'rgba(6,32,61,0.80)', 'on_accent_line': 'rgba(6,32,61,0.30)',
     },
 }
 # The panel and the widgets are dark navy in both variants (reference image).
@@ -135,7 +141,7 @@ CINNAMON = Template(r'''/* Cinnamon12 Studio | $variant | Cinnamon shell theme.
 .grouped-window-list-thumbnail-alert { background: rgba(241,113,137,0.30); }
 
 .workspace-button { color: $panel_text; border-color: rgba(237,246,255,0.35); border-radius: 4px; }
-.workspace-button:outlined { background: $accent; color: #ffffff; box-shadow: none; }
+.workspace-button:outlined { background: $accent_fill; color: $on_accent; box-shadow: none; }
 .workspace-graph .workspace { border: 1px solid rgba(237,246,255,0.25);
   background-gradient-direction: none; background-color: rgba(255,255,255,0.06); border-radius: 3px; }
 .workspace-graph .workspace:active { border: 1px solid $cyan;
@@ -181,7 +187,7 @@ CINNAMON = Template(r'''/* Cinnamon12 Studio | $variant | Cinnamon shell theme.
   -slider-handle-radius: 7px;
   -slider-handle-border-width: 2px;
   -slider-handle-border-color: $popup_solid;
-  color: $accent;
+  color: $accent_fg;
 }
 
 .toggle-switch-us, .toggle-switch-intl { background-image: url("assets/toggle-off.svg"); }
@@ -210,7 +216,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .menu-category-button-greyed { color: $muted; }
 .menu-selected-app-title, .menu-selected-app-description { color: $text; }
 #menu-search-entry {
-  color: $text; caret-color: $accent; selected-color: #ffffff; selection-background-color: $accent;
+  color: $text; caret-color: $accent; selected-color: $on_accent; selection-background-color: $accent_fill;
   border: 1px solid $entry_border; border-radius: 6px;
   background-gradient-direction: none; background-color: $entry; padding: 6px 8px; }
 #menu-search-entry:hover { border: 1px solid $accent; background-gradient-direction: none; background-color: $entry; }
@@ -229,7 +235,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .calendar-not-today, .calendar-week-number { color: $text; }
 .calendar-day-heading, .calendar-week-number { color: $muted; }
 .calendar-event-time-past { color: $muted; }
-.calendar-event-countdown:soon { color: $accent; }
+.calendar-event-countdown:soon { color: $accent_fg; }
 .calendar-event-countdown:imminent { color: $warning; }
 .calendar-event-countdown:current, .calendar-event-time-present:all-day { color: $success; }
 .calendar-events-no-events-button:hover, .calendar-event-button:hover,
@@ -249,14 +255,14 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .calendar-nonwork-day { background-color: transparent; color: $muted; }
 .calendar-other-month-day { color: $muted; background-color: transparent; opacity: 0.55; }
 .calendar-today {
-  background-gradient-direction: none; background-color: $accent; color: #ffffff;
+  background-gradient-direction: none; background-color: $accent_fill; color: $on_accent;
   font-weight: bold; border-radius: 5px; }
-.calendar-today:selected, .calendar-not-today:selected { color: $accent; }
-.calendar-today:selected { color: #ffffff; }
+.calendar-today:selected, .calendar-not-today:selected { color: $accent_fg; }
+.calendar-today:selected { color: $on_accent; }
 
 /* ---------- Sound applet / media player ---------- */
 .sound-player StButton { color: $muted; border-radius: 5px; }
-.sound-player StButton:hover, .sound-player StButton:active { color: $accent; background-color: $hover_bg; }
+.sound-player StButton:hover, .sound-player StButton:active { color: $accent_fg; background-color: $hover_bg; }
 .sound-player .slider { -slider-background-color: $line; -slider-active-background-color: $accent; }
 .sound-player-overlay { background-color: $popup_solid; color: $text; border-top: 1px solid $popup_border; }
 .sound-player-overlay StButton, .notification-button, .notification-icon-button, .modal-dialog-button {
@@ -276,7 +282,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
   box-shadow: 0 6px 18px $shadow; }
 #notification.multi-line-notification, .notification-with-image { color: $text; }
 #notification StEntry, #notification StEntry:focus {
-  color: $text; selected-color: #ffffff; selection-background-color: $accent; caret-color: $accent;
+  color: $text; selected-color: $on_accent; selection-background-color: $accent_fill; caret-color: $accent;
   border: 1px solid $entry_border; border-radius: 6px;
   background-gradient-direction: none; background-color: $entry; box-shadow: none; }
 #notification StEntry:focus { border: 1px solid $accent; }
@@ -297,7 +303,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .switcher-list .separator { background: $popup_border; }
 .thumbnail-scroll-gradient-left, .thumbnail-scroll-gradient-right { background-gradient-direction: none; }
 .switcher-arrow { color: $muted; }
-.switcher-arrow:highlighted { color: $accent; }
+.switcher-arrow:highlighted { color: $accent_fg; }
 .switcher-preview-backdrop { background-color: rgba(9,20,39,0.55); }
 
 .osd-window, .info-osd {
@@ -311,7 +317,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
   color: $text; box-shadow: 0 10px 30px $shadow; }
 .run-dialog-label, .run-dialog-description { color: $text; }
 .run-dialog-description.error { color: $danger; }
-.run-dialog-entry { color: $text; selection-background-color: $accent; selected-color: #ffffff; }
+.run-dialog-entry { color: $text; selection-background-color: $accent_fill; selected-color: $on_accent; }
 .lightbox { background-color: rgba(9,20,39,0.45); }
 
 /* ---------- Expo / overview / tiling ---------- */
@@ -373,7 +379,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-calendar-day { width: 30px; padding: 4px 0; text-align: center; border-radius: 5px; color: #eef6ff; font-size: 9.5pt; }
 .c12-calendar-weekend { color: #b9d6f2; }
 .c12-calendar-other { color: rgba(185,214,242,0.38); }
-.c12-calendar-today { background-color: $accent; color: #ffffff; font-weight: bold; }
+.c12-calendar-today { background-color: $accent_fill; color: $on_accent; font-weight: bold; }
 .c12-calendar-weeknum { width: 22px; text-align: center; color: rgba(185,214,242,0.5); font-size: 8pt; padding: 4px 0; }
 .c12-sysmon { spacing: 10px; }
 .c12-sysmon-header, .c12-weather-top { spacing: 8px; }
@@ -404,7 +410,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-launcher-menu .popup-menu-content { padding: 0; }
 .c12-launcher { padding: 14px 14px 0 14px; spacing: 12px; color: $text; }
 .c12-launcher-search {
-  color: $text; caret-color: $accent; selected-color: #ffffff; selection-background-color: $accent;
+  color: $text; caret-color: $accent; selected-color: $on_accent; selection-background-color: $accent_fill;
   background-color: $entry; border: 1px solid $entry_border; border-radius: 6px; padding: 8px 10px; }
 .c12-launcher-search:focus { border: 1px solid $accent; box-shadow: inset 0 0 0 1px $accent; }
 .c12-launcher-search StLabel.hint-text { color: $muted; }
@@ -414,7 +420,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-launcher-category { color: $text; border-radius: 5px; padding: 6px 10px; margin-bottom: 1px; }
 .c12-launcher-category-box { spacing: 10px; }
 .c12-launcher-category:hover, .c12-launcher-category:focus { background-color: $hover_bg; }
-.c12-launcher-category:checked { background-color: $accent; color: #ffffff; }
+.c12-launcher-category:checked { background-color: $accent_fill; color: $on_accent; }
 .c12-launcher-content { padding-right: 4px; }
 .c12-launcher-section-title { font-weight: bold; color: $text; padding: 2px 4px 8px 4px; }
 .c12-launcher-grid-row { spacing: 4px; padding-bottom: 6px; }
@@ -433,9 +439,9 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-launcher-user { border-radius: 6px; padding: 4px 10px 4px 4px; color: $text; }
 .c12-launcher-user:hover, .c12-launcher-user:focus { background-color: $hover_bg; }
 .c12-launcher-user-box { spacing: 10px; }
-.c12-launcher-avatar { border-radius: 14px; color: $accent; }
+.c12-launcher-avatar { border-radius: 14px; color: $accent_fg; }
 .c12-launcher-session { border-radius: 6px; padding: 8px; color: $text; }
-.c12-launcher-session:hover, .c12-launcher-session:focus { background-color: $hover_bg; color: $accent; }
+.c12-launcher-session:hover, .c12-launcher-session:focus { background-color: $hover_bg; color: $accent_fg; }
 .c12-launcher-session-icon { color: $text; }
 
 /* Cinnamon12 Quick Settings (c12-quicksettings@cinnamon12.local) */
@@ -448,38 +454,38 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-qs-row { spacing: 8px; }
 .c12-qs-tile, .c12-qs-tile-spacer { width: 162px; }
 .c12-qs-tile { border-radius: 6px; background-color: $card; border: 1px solid $entry_border; }
-.c12-qs-tile:checked { background-color: $accent; border: 1px solid $accent; }
+.c12-qs-tile:checked { background-color: $accent_fill; border: 1px solid $accent_fill; }
 .c12-qs-tile:insensitive { opacity: 0.55; }
 .c12-qs-tile-main { padding: 10px 10px 9px 12px; border-radius: 6px; color: $text; }
 .c12-qs-tile-main:hover, .c12-qs-tile-main:focus { background-color: $hover_bg; }
-.c12-qs-tile:checked .c12-qs-tile-main { color: #ffffff; }
+.c12-qs-tile:checked .c12-qs-tile-main { color: $on_accent; }
 .c12-qs-tile:checked .c12-qs-tile-main:hover, .c12-qs-tile:checked .c12-qs-tile-main:focus { background-color: rgba(255,255,255,0.14); }
 .c12-qs-tile-box { spacing: 3px; }
-.c12-qs-tile-icon { color: $accent; }
-.c12-qs-tile:checked .c12-qs-tile-icon { color: #ffffff; }
+.c12-qs-tile-icon { color: $accent_fg; }
+.c12-qs-tile:checked .c12-qs-tile-icon { color: $on_accent; }
 .c12-qs-tile-title { font-weight: bold; }
 .c12-qs-tile-subtitle { font-size: 8.5pt; color: $muted; }
-.c12-qs-tile:checked .c12-qs-tile-subtitle { color: rgba(255,255,255,0.85); }
+.c12-qs-tile:checked .c12-qs-tile-subtitle { color: $on_accent_muted; }
 .c12-qs-tile-arrow { padding: 0 8px; border-radius: 0 6px 6px 0; color: $muted; border-left: 1px solid $entry_border; }
-.c12-qs-tile:checked .c12-qs-tile-arrow { color: #ffffff; border-left: 1px solid rgba(255,255,255,0.30); }
+.c12-qs-tile:checked .c12-qs-tile-arrow { color: $on_accent; border-left: 1px solid $on_accent_line; }
 .c12-qs-tile-arrow:hover, .c12-qs-tile-arrow:focus { background-color: $hover_bg; }
 .c12-qs-tile:checked .c12-qs-tile-arrow:hover { background-color: rgba(255,255,255,0.14); }
 .c12-qs-sliders { spacing: 6px; padding: 2px 0; }
 .c12-qs-slider-row { spacing: 8px; }
 .c12-qs-slider-icon { padding: 6px; border-radius: 6px; color: $text; }
-.c12-qs-slider-icon:hover, .c12-qs-slider-icon:focus { background-color: $hover_bg; color: $accent; }
+.c12-qs-slider-icon:hover, .c12-qs-slider-icon:focus { background-color: $hover_bg; color: $accent_fg; }
 .c12-qs-slider { height: 20px; -slider-height: 4px; -slider-background-color: $line;
   -slider-active-background-color: $accent; -slider-border-width: 0; -slider-handle-radius: 8px; }
 .c12-qs-slider-value { width: 44px; text-align: right; color: $muted; font-size: 9pt; }
 .c12-qs-actions { spacing: 8px; padding-top: 8px; border-top: 1px solid $popup_border; }
 .c12-qs-action { padding: 9px 14px; border-radius: 6px; color: $text; background-color: $card; border: 1px solid $entry_border; }
 .c12-qs-action:hover, .c12-qs-action:focus { background-color: $hover_bg; }
-.c12-qs-action:checked { background-color: $accent; border: 1px solid $accent; color: #ffffff; }
+.c12-qs-action:checked { background-color: $accent_fill; border: 1px solid $accent_fill; color: $on_accent; }
 .c12-qs-action-icon { color: $text; }
-.c12-qs-action:checked .c12-qs-action-icon { color: #ffffff; }
-.c12-launcher-session:hover .c12-launcher-session-icon, .c12-launcher-session:focus .c12-launcher-session-icon { color: $accent; }
+.c12-qs-action:checked .c12-qs-action-icon { color: $on_accent; }
+.c12-launcher-session:hover .c12-launcher-session-icon, .c12-launcher-session:focus .c12-launcher-session-icon { color: $accent_fg; }
 
-.cinnamon-link { color: $accent; }
+.cinnamon-link { color: $accent_fg; }
 .cinnamon-link:hover { color: $hover; }
 ''')
 
@@ -495,8 +501,8 @@ GTK3 = Template(r'''/* Cinnamon12 Studio | $variant | GTK 3 theme.
 @define-color theme_fg_color $text;
 @define-color theme_base_color $card;
 @define-color theme_text_color $text;
-@define-color theme_selected_bg_color $accent;
-@define-color theme_selected_fg_color #ffffff;
+@define-color theme_selected_bg_color $accent_fill;
+@define-color theme_selected_fg_color $on_accent;
 @define-color insensitive_bg_color $side;
 @define-color insensitive_fg_color $muted;
 @define-color insensitive_base_color $side;
@@ -504,16 +510,16 @@ GTK3 = Template(r'''/* Cinnamon12 Studio | $variant | GTK 3 theme.
 @define-color theme_unfocused_fg_color $text;
 @define-color theme_unfocused_base_color $card;
 @define-color theme_unfocused_text_color $text;
-@define-color theme_unfocused_selected_bg_color $accent;
-@define-color theme_unfocused_selected_fg_color #ffffff;
+@define-color theme_unfocused_selected_bg_color $accent_fill;
+@define-color theme_unfocused_selected_fg_color $on_accent;
 @define-color borders $line;
 @define-color unfocused_borders $line;
 @define-color warning_color $warning;
 @define-color error_color $danger;
 @define-color success_color $success;
 @define-color accent_color $accent;
-@define-color accent_bg_color $accent;
-@define-color accent_fg_color #ffffff;
+@define-color accent_bg_color $accent_fill;
+@define-color accent_fg_color $on_accent;
 @define-color window_bg_color $window;
 @define-color window_fg_color $text;
 @define-color view_bg_color $card;
@@ -528,7 +534,7 @@ GTK3 = Template(r'''/* Cinnamon12 Studio | $variant | GTK 3 theme.
 @define-color wm_bg $titlebar;
 @define-color wm_bg_unfocused $titlebar_backdrop;
 
-*:link, link, button.link:link { color: $accent; }
+*:link, link, button.link:link { color: $accent_fg; }
 *:visited, link:visited { color: $hover; }
 
 /* ---------- windows & surfaces ---------- */
@@ -537,7 +543,7 @@ window.background, .background, dialog, messagedialog.background { background-co
   background-color: $card; color: $text; }
 .view:selected, iconview:selected, treeview.view:selected, .view text selection, textview text selection,
 flowboxchild:selected, row:selected, label selection, entry selection {
-  background-color: $accent; color: #ffffff; }
+  background-color: $accent_fill; color: $on_accent; }
 .view:hover, treeview.view:hover { background-color: $hover_bg; }
 .nemo-window .view:selected, .nemo-window iconview:selected,
 .nemo-window .view:selected:focus, .nemo-window iconview:selected:focus {
@@ -594,7 +600,7 @@ button.flat, button.flat:backdrop, button.image-button.flat, .toolbar button, he
 button.flat:hover, headerbar button.flat:hover, .toolbar button:hover { background-color: $hover_bg; border-color: transparent; }
 button.flat:checked, button.flat:active { background-color: $item_active; border-color: transparent; }
 button.suggested-action, button.default:not(.flat) {
-  background-image: none; background-color: $accent; color: #ffffff; border-color: $accent; }
+  background-image: none; background-color: $accent_fill; color: $on_accent; border-color: $accent; }
 button.suggested-action:hover { background-color: $hover; border-color: $hover; }
 button.suggested-action:disabled { background-color: $side; color: $muted; border-color: $line; }
 button.destructive-action { background-image: none; background-color: $danger; color: #ffffff; border-color: $danger; }
@@ -622,7 +628,7 @@ combobox button.combo, combobox box.linked > button.combo { background-color: $c
   background-color: $side; color: $text; border-color: $line; }
 .nemo-window .sidebar .view:selected, .nemo-places-sidebar treeview.view:selected,
 placessidebar row:selected, stacksidebar row:selected, .sidebar row:selected {
-  background-color: $accent; color: #ffffff; border-radius: 5px; }
+  background-color: $accent_fill; color: $on_accent; border-radius: 5px; }
 .nemo-window .sidebar .view:hover, placessidebar row:hover, .sidebar row:hover { background-color: $hover_bg; }
 .nemo-window .sidebar .view:selected:backdrop, placessidebar row:selected:backdrop { background-color: $item_active; color: $text; }
 placessidebar row { border-radius: 5px; margin: 1px 4px; }
@@ -639,7 +645,7 @@ menu, .menu, .context-menu, popover.menu, popover, popover.background {
 menu, .menu, .context-menu { padding: 4px 0; }
 menu menuitem, .menu menuitem, .context-menu menuitem { color: $text; padding: 5px 12px; border-radius: 0; }
 menu menuitem:hover, .menu menuitem:hover, .context-menu menuitem:hover, modelbutton.flat:hover, popover modelbutton:hover {
-  background-color: $accent; color: #ffffff; }
+  background-color: $accent_fill; color: $on_accent; }
 menu menuitem:disabled, .menu menuitem:disabled { color: $muted; }
 menu separator, popover separator { background-color: $line; }
 menubar { background-color: $window; box-shadow: inset 0 -1px $line; }
@@ -661,7 +667,7 @@ check, radio { background-image: none; background-color: $entry; border: 1px sol
 check { border-radius: 4px; }
 check:hover, radio:hover { border-color: $accent; }
 check:checked, check:indeterminate, radio:checked, radio:indeterminate {
-  background-image: none; background-color: $accent; border-color: $accent; color: #ffffff; }
+  background-image: none; background-color: $accent_fill; border-color: $accent; color: $on_accent; }
 check:disabled, radio:disabled { background-color: $side; border-color: $line; }
 menu menuitem check, menu menuitem radio, .menu menuitem check, .menu menuitem radio { border-color: $entry_border; }
 switch { background-image: none; background-color: $line; border: 1px solid $line; border-radius: 14px; }
@@ -691,7 +697,7 @@ infobar.warning > revealer > box { background-color: alpha($warning, 0.25); colo
 infobar.error > revealer > box { background-color: alpha($danger, 0.25); color: $text; }
 .app-notification { background-color: $tooltip_bg; color: $tooltip_fg; border-radius: 0 0 6px 6px; }
 calendar { color: $text; border-color: $line; }
-calendar:selected { background-color: $accent; color: #ffffff; border-radius: 4px; }
+calendar:selected { background-color: $accent_fill; color: $on_accent; border-radius: 4px; }
 calendar.header { background-color: $side; border-color: $line; }
 toolbar, .inline-toolbar { background-color: $window; }
 .dim-label, label.separator { color: $muted; opacity: 1; }
@@ -706,8 +712,8 @@ GTK4 = Template(r'''/* Cinnamon12 Studio | $variant | GTK 4 theme (non-libadwait
 @import url("resource:///org/gtk/libgtk/theme/$gtk4_base");
 
 @define-color accent_color $accent;
-@define-color accent_bg_color $accent;
-@define-color accent_fg_color #ffffff;
+@define-color accent_bg_color $accent_fill;
+@define-color accent_fg_color $on_accent;
 @define-color window_bg_color $window;
 @define-color window_fg_color $text;
 @define-color view_bg_color $card;
@@ -727,8 +733,8 @@ GTK4 = Template(r'''/* Cinnamon12 Studio | $variant | GTK 4 theme (non-libadwait
 @define-color theme_fg_color $text;
 @define-color theme_base_color $card;
 @define-color theme_text_color $text;
-@define-color theme_selected_bg_color $accent;
-@define-color theme_selected_fg_color #ffffff;
+@define-color theme_selected_bg_color $accent_fill;
+@define-color theme_selected_fg_color $on_accent;
 @define-color borders $line;
 @define-color warning_color $warning;
 @define-color error_color $danger;
@@ -739,7 +745,7 @@ headerbar { background-image: none; background-color: $titlebar; color: $text; b
 headerbar:backdrop { background-color: $titlebar_backdrop; }
 window.csd { border-radius: ${r_window}px; }
 button { border-radius: ${r_button}px; }
-button.suggested-action { background-color: $accent; color: #ffffff; }
+button.suggested-action { background-color: $accent_fill; color: $on_accent; }
 entry { border-radius: ${r_button}px; }
 entry:focus-within { outline-color: alpha($accent, 0.6); }
 popover > contents { background-color: $popup_solid; color: $text; border-radius: ${r_menu}px; }
@@ -752,19 +758,20 @@ switch:checked, scale highlight, progressbar progress { background-color: $accen
 # ======================================================================================
 # Small recolored shell assets (originals drawn here, replacing the stock grey ones)
 def svg_assets(p):
-    acc, line, entry, text, muted = p['accent'], p['line'], p['entry'], p['text'], p['muted']
+    acc, line, entry, text, muted = p['accent_fill'], p['line'], p['entry'], p['text'], p['muted']
+    on = p['on_accent']
     border = p['entry_border']
     return {
         'toggle-on.svg': f'''<svg xmlns="http://www.w3.org/2000/svg" width="64" height="22" viewBox="0 0 64 22">
-<rect x="14" y="2" width="36" height="18" rx="9" fill="{acc}"/><circle cx="41" cy="11" r="6.5" fill="#ffffff"/></svg>''',
+<rect x="14" y="2" width="36" height="18" rx="9" fill="{acc}"/><circle cx="41" cy="11" r="6.5" fill="{on}"/></svg>''',
         'toggle-off.svg': f'''<svg xmlns="http://www.w3.org/2000/svg" width="64" height="22" viewBox="0 0 64 22">
 <rect x="14.5" y="2.5" width="35" height="17" rx="8.5" fill="{entry}" stroke="{muted}" stroke-width="1"/><circle cx="23" cy="11" r="5.5" fill="{muted}"/></svg>''',
         'checkbox-on.svg': f'''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-<rect x="1" y="1" width="14" height="14" rx="3.5" fill="{acc}"/><path d="M4.5 8.2l2.3 2.3 4.7-5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>''',
+<rect x="1" y="1" width="14" height="14" rx="3.5" fill="{acc}"/><path d="M4.5 8.2l2.3 2.3 4.7-5" fill="none" stroke="{on}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>''',
         'checkbox-off.svg': f'''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
 <rect x="1.5" y="1.5" width="13" height="13" rx="3" fill="{entry}" stroke="{border}" stroke-width="1"/></svg>''',
         'radio-on.svg': f'''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-<circle cx="8" cy="8" r="7" fill="{acc}"/><circle cx="8" cy="8" r="3" fill="#fff"/></svg>''',
+<circle cx="8" cy="8" r="7" fill="{acc}"/><circle cx="8" cy="8" r="3" fill="{on}"/></svg>''',
         'radio-off.svg': f'''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
 <circle cx="8" cy="8" r="6.5" fill="{entry}" stroke="{border}" stroke-width="1"/></svg>''',
         'arrow-left.svg': f'''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">

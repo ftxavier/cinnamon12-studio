@@ -5,7 +5,7 @@
 
 @define-color accent_color #2baaff;
 @define-color accent_bg_color #2baaff;
-@define-color accent_fg_color #ffffff;
+@define-color accent_fg_color #06203d;
 @define-color window_bg_color #17283e;
 @define-color window_fg_color #e9f4ff;
 @define-color view_bg_color #203a56;
@@ -26,7 +26,7 @@
 @define-color theme_base_color #203a56;
 @define-color theme_text_color #e9f4ff;
 @define-color theme_selected_bg_color #2baaff;
-@define-color theme_selected_fg_color #ffffff;
+@define-color theme_selected_fg_color #06203d;
 @define-color borders #355474;
 @define-color warning_color #f6c262;
 @define-color error_color #f17189;
@@ -37,7 +37,7 @@ headerbar { background-image: none; background-color: #1c334f; color: #e9f4ff; b
 headerbar:backdrop { background-color: #17283e; }
 window.csd { border-radius: 7px; }
 button { border-radius: 6px; }
-button.suggested-action { background-color: #2baaff; color: #ffffff; }
+button.suggested-action { background-color: #2baaff; color: #06203d; }
 entry { border-radius: 6px; }
 entry:focus-within { outline-color: alpha(#2baaff, 0.6); }
 popover > contents { background-color: #17283c; color: #e9f4ff; border-radius: 8px; }

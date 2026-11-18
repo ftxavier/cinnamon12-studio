@@ -67,7 +67,7 @@
 .grouped-window-list-thumbnail-alert { background: rgba(241,113,137,0.30); }
 
 .workspace-button { color: #eef6ff; border-color: rgba(237,246,255,0.35); border-radius: 4px; }
-.workspace-button:outlined { background: #2baaff; color: #ffffff; box-shadow: none; }
+.workspace-button:outlined { background: #2baaff; color: #06203d; box-shadow: none; }
 .workspace-graph .workspace { border: 1px solid rgba(237,246,255,0.25);
   background-gradient-direction: none; background-color: rgba(255,255,255,0.06); border-radius: 3px; }
 .workspace-graph .workspace:active { border: 1px solid #36ccf6;
@@ -142,7 +142,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .menu-category-button-greyed { color: #a4bfdc; }
 .menu-selected-app-title, .menu-selected-app-description { color: #e9f4ff; }
 #menu-search-entry {
-  color: #e9f4ff; caret-color: #2baaff; selected-color: #ffffff; selection-background-color: #2baaff;
+  color: #e9f4ff; caret-color: #2baaff; selected-color: #06203d; selection-background-color: #2baaff;
   border: 1px solid #355474; border-radius: 6px;
   background-gradient-direction: none; background-color: #203651; padding: 6px 8px; }
 #menu-search-entry:hover { border: 1px solid #2baaff; background-gradient-direction: none; background-color: #203651; }
@@ -181,10 +181,10 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .calendar-nonwork-day { background-color: transparent; color: #a4bfdc; }
 .calendar-other-month-day { color: #a4bfdc; background-color: transparent; opacity: 0.55; }
 .calendar-today {
-  background-gradient-direction: none; background-color: #2baaff; color: #ffffff;
+  background-gradient-direction: none; background-color: #2baaff; color: #06203d;
   font-weight: bold; border-radius: 5px; }
 .calendar-today:selected, .calendar-not-today:selected { color: #2baaff; }
-.calendar-today:selected { color: #ffffff; }
+.calendar-today:selected { color: #06203d; }
 
 /* ---------- Sound applet / media player ---------- */
 .sound-player StButton { color: #a4bfdc; border-radius: 5px; }
@@ -208,7 +208,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
   box-shadow: 0 6px 18px rgba(0,0,0,0.40); }
 #notification.multi-line-notification, .notification-with-image { color: #e9f4ff; }
 #notification StEntry, #notification StEntry:focus {
-  color: #e9f4ff; selected-color: #ffffff; selection-background-color: #2baaff; caret-color: #2baaff;
+  color: #e9f4ff; selected-color: #06203d; selection-background-color: #2baaff; caret-color: #2baaff;
   border: 1px solid #355474; border-radius: 6px;
   background-gradient-direction: none; background-color: #203651; box-shadow: none; }
 #notification StEntry:focus { border: 1px solid #2baaff; }
@@ -243,7 +243,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
   color: #e9f4ff; box-shadow: 0 10px 30px rgba(0,0,0,0.40); }
 .run-dialog-label, .run-dialog-description { color: #e9f4ff; }
 .run-dialog-description.error { color: #f17189; }
-.run-dialog-entry { color: #e9f4ff; selection-background-color: #2baaff; selected-color: #ffffff; }
+.run-dialog-entry { color: #e9f4ff; selection-background-color: #2baaff; selected-color: #06203d; }
 .lightbox { background-color: rgba(9,20,39,0.45); }
 
 /* ---------- Expo / overview / tiling ---------- */
@@ -305,7 +305,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-calendar-day { width: 30px; padding: 4px 0; text-align: center; border-radius: 5px; color: #eef6ff; font-size: 9.5pt; }
 .c12-calendar-weekend { color: #b9d6f2; }
 .c12-calendar-other { color: rgba(185,214,242,0.38); }
-.c12-calendar-today { background-color: #2baaff; color: #ffffff; font-weight: bold; }
+.c12-calendar-today { background-color: #2baaff; color: #06203d; font-weight: bold; }
 .c12-calendar-weeknum { width: 22px; text-align: center; color: rgba(185,214,242,0.5); font-size: 8pt; padding: 4px 0; }
 .c12-sysmon { spacing: 10px; }
 .c12-sysmon-header, .c12-weather-top { spacing: 8px; }
@@ -336,7 +336,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-launcher-menu .popup-menu-content { padding: 0; }
 .c12-launcher { padding: 14px 14px 0 14px; spacing: 12px; color: #e9f4ff; }
 .c12-launcher-search {
-  color: #e9f4ff; caret-color: #2baaff; selected-color: #ffffff; selection-background-color: #2baaff;
+  color: #e9f4ff; caret-color: #2baaff; selected-color: #06203d; selection-background-color: #2baaff;
   background-color: #203651; border: 1px solid #355474; border-radius: 6px; padding: 8px 10px; }
 .c12-launcher-search:focus { border: 1px solid #2baaff; box-shadow: inset 0 0 0 1px #2baaff; }
 .c12-launcher-search StLabel.hint-text { color: #a4bfdc; }
@@ -346,7 +346,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-launcher-category { color: #e9f4ff; border-radius: 5px; padding: 6px 10px; margin-bottom: 1px; }
 .c12-launcher-category-box { spacing: 10px; }
 .c12-launcher-category:hover, .c12-launcher-category:focus { background-color: #21405f; }
-.c12-launcher-category:checked { background-color: #2baaff; color: #ffffff; }
+.c12-launcher-category:checked { background-color: #2baaff; color: #06203d; }
 .c12-launcher-content { padding-right: 4px; }
 .c12-launcher-section-title { font-weight: bold; color: #e9f4ff; padding: 2px 4px 8px 4px; }
 .c12-launcher-grid-row { spacing: 4px; padding-bottom: 6px; }
@@ -384,16 +384,16 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-qs-tile:insensitive { opacity: 0.55; }
 .c12-qs-tile-main { padding: 10px 10px 9px 12px; border-radius: 6px; color: #e9f4ff; }
 .c12-qs-tile-main:hover, .c12-qs-tile-main:focus { background-color: #21405f; }
-.c12-qs-tile:checked .c12-qs-tile-main { color: #ffffff; }
+.c12-qs-tile:checked .c12-qs-tile-main { color: #06203d; }
 .c12-qs-tile:checked .c12-qs-tile-main:hover, .c12-qs-tile:checked .c12-qs-tile-main:focus { background-color: rgba(255,255,255,0.14); }
 .c12-qs-tile-box { spacing: 3px; }
 .c12-qs-tile-icon { color: #2baaff; }
-.c12-qs-tile:checked .c12-qs-tile-icon { color: #ffffff; }
+.c12-qs-tile:checked .c12-qs-tile-icon { color: #06203d; }
 .c12-qs-tile-title { font-weight: bold; }
 .c12-qs-tile-subtitle { font-size: 8.5pt; color: #a4bfdc; }
-.c12-qs-tile:checked .c12-qs-tile-subtitle { color: rgba(255,255,255,0.85); }
+.c12-qs-tile:checked .c12-qs-tile-subtitle { color: rgba(6,32,61,0.80); }
 .c12-qs-tile-arrow { padding: 0 8px; border-radius: 0 6px 6px 0; color: #a4bfdc; border-left: 1px solid #355474; }
-.c12-qs-tile:checked .c12-qs-tile-arrow { color: #ffffff; border-left: 1px solid rgba(255,255,255,0.30); }
+.c12-qs-tile:checked .c12-qs-tile-arrow { color: #06203d; border-left: 1px solid rgba(6,32,61,0.30); }
 .c12-qs-tile-arrow:hover, .c12-qs-tile-arrow:focus { background-color: #21405f; }
 .c12-qs-tile:checked .c12-qs-tile-arrow:hover { background-color: rgba(255,255,255,0.14); }
 .c12-qs-sliders { spacing: 6px; padding: 2px 0; }
@@ -406,9 +406,9 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-qs-actions { spacing: 8px; padding-top: 8px; border-top: 1px solid #2d4766; }
 .c12-qs-action { padding: 9px 14px; border-radius: 6px; color: #e9f4ff; background-color: #203a56; border: 1px solid #355474; }
 .c12-qs-action:hover, .c12-qs-action:focus { background-color: #21405f; }
-.c12-qs-action:checked { background-color: #2baaff; border: 1px solid #2baaff; color: #ffffff; }
+.c12-qs-action:checked { background-color: #2baaff; border: 1px solid #2baaff; color: #06203d; }
 .c12-qs-action-icon { color: #e9f4ff; }
-.c12-qs-action:checked .c12-qs-action-icon { color: #ffffff; }
+.c12-qs-action:checked .c12-qs-action-icon { color: #06203d; }
 .c12-launcher-session:hover .c12-launcher-session-icon, .c12-launcher-session:focus .c12-launcher-session-icon { color: #2baaff; }
 
 .cinnamon-link { color: #2baaff; }

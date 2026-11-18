@@ -4,7 +4,7 @@
 @import url("resource:///org/gtk/libgtk/theme/Default/Default-light.css");
 
 @define-color accent_color #078fe8;
-@define-color accent_bg_color #078fe8;
+@define-color accent_bg_color #0571c4;
 @define-color accent_fg_color #ffffff;
 @define-color window_bg_color #edf5ff;
 @define-color window_fg_color #162e4d;
@@ -25,7 +25,7 @@
 @define-color theme_fg_color #162e4d;
 @define-color theme_base_color #f5faff;
 @define-color theme_text_color #162e4d;
-@define-color theme_selected_bg_color #078fe8;
+@define-color theme_selected_bg_color #0571c4;
 @define-color theme_selected_fg_color #ffffff;
 @define-color borders #b6d0eb;
 @define-color warning_color #f3b34d;
@@ -37,7 +37,7 @@ headerbar { background-image: none; background-color: #e2efff; color: #162e4d; b
 headerbar:backdrop { background-color: #edf5ff; }
 window.csd { border-radius: 7px; }
 button { border-radius: 6px; }
-button.suggested-action { background-color: #078fe8; color: #ffffff; }
+button.suggested-action { background-color: #0571c4; color: #ffffff; }
 entry { border-radius: 6px; }
 entry:focus-within { outline-color: alpha(#078fe8, 0.6); }
 popover > contents { background-color: #ebf6ff; color: #162e4d; border-radius: 8px; }

@@ -67,7 +67,7 @@
 .grouped-window-list-thumbnail-alert { background: rgba(241,113,137,0.30); }
 
 .workspace-button { color: #edf6ff; border-color: rgba(237,246,255,0.35); border-radius: 4px; }
-.workspace-button:outlined { background: #078fe8; color: #ffffff; box-shadow: none; }
+.workspace-button:outlined { background: #0571c4; color: #ffffff; box-shadow: none; }
 .workspace-graph .workspace { border: 1px solid rgba(237,246,255,0.25);
   background-gradient-direction: none; background-color: rgba(255,255,255,0.06); border-radius: 3px; }
 .workspace-graph .workspace:active { border: 1px solid #13c8f3;
@@ -113,7 +113,7 @@
   -slider-handle-radius: 7px;
   -slider-handle-border-width: 2px;
   -slider-handle-border-color: #ebf6ff;
-  color: #078fe8;
+  color: #056bbb;
 }
 
 .toggle-switch-us, .toggle-switch-intl { background-image: url("assets/toggle-off.svg"); }
@@ -142,7 +142,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .menu-category-button-greyed { color: #526e90; }
 .menu-selected-app-title, .menu-selected-app-description { color: #162e4d; }
 #menu-search-entry {
-  color: #162e4d; caret-color: #078fe8; selected-color: #ffffff; selection-background-color: #078fe8;
+  color: #162e4d; caret-color: #078fe8; selected-color: #ffffff; selection-background-color: #0571c4;
   border: 1px solid #b6d0eb; border-radius: 6px;
   background-gradient-direction: none; background-color: #ffffff; padding: 6px 8px; }
 #menu-search-entry:hover { border: 1px solid #078fe8; background-gradient-direction: none; background-color: #ffffff; }
@@ -161,7 +161,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .calendar-not-today, .calendar-week-number { color: #162e4d; }
 .calendar-day-heading, .calendar-week-number { color: #526e90; }
 .calendar-event-time-past { color: #526e90; }
-.calendar-event-countdown:soon { color: #078fe8; }
+.calendar-event-countdown:soon { color: #056bbb; }
 .calendar-event-countdown:imminent { color: #f3b34d; }
 .calendar-event-countdown:current, .calendar-event-time-present:all-day { color: #28b89a; }
 .calendar-events-no-events-button:hover, .calendar-event-button:hover,
@@ -181,14 +181,14 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .calendar-nonwork-day { background-color: transparent; color: #526e90; }
 .calendar-other-month-day { color: #526e90; background-color: transparent; opacity: 0.55; }
 .calendar-today {
-  background-gradient-direction: none; background-color: #078fe8; color: #ffffff;
+  background-gradient-direction: none; background-color: #0571c4; color: #ffffff;
   font-weight: bold; border-radius: 5px; }
-.calendar-today:selected, .calendar-not-today:selected { color: #078fe8; }
+.calendar-today:selected, .calendar-not-today:selected { color: #056bbb; }
 .calendar-today:selected { color: #ffffff; }
 
 /* ---------- Sound applet / media player ---------- */
 .sound-player StButton { color: #526e90; border-radius: 5px; }
-.sound-player StButton:hover, .sound-player StButton:active { color: #078fe8; background-color: #d6ecff; }
+.sound-player StButton:hover, .sound-player StButton:active { color: #056bbb; background-color: #d6ecff; }
 .sound-player .slider { -slider-background-color: #b6d0eb; -slider-active-background-color: #078fe8; }
 .sound-player-overlay { background-color: #ebf6ff; color: #162e4d; border-top: 1px solid #b6d0eb; }
 .sound-player-overlay StButton, .notification-button, .notification-icon-button, .modal-dialog-button {
@@ -208,7 +208,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
   box-shadow: 0 6px 18px rgba(11,37,79,0.23); }
 #notification.multi-line-notification, .notification-with-image { color: #162e4d; }
 #notification StEntry, #notification StEntry:focus {
-  color: #162e4d; selected-color: #ffffff; selection-background-color: #078fe8; caret-color: #078fe8;
+  color: #162e4d; selected-color: #ffffff; selection-background-color: #0571c4; caret-color: #078fe8;
   border: 1px solid #b6d0eb; border-radius: 6px;
   background-gradient-direction: none; background-color: #ffffff; box-shadow: none; }
 #notification StEntry:focus { border: 1px solid #078fe8; }
@@ -229,7 +229,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .switcher-list .separator { background: #b6d0eb; }
 .thumbnail-scroll-gradient-left, .thumbnail-scroll-gradient-right { background-gradient-direction: none; }
 .switcher-arrow { color: #526e90; }
-.switcher-arrow:highlighted { color: #078fe8; }
+.switcher-arrow:highlighted { color: #056bbb; }
 .switcher-preview-backdrop { background-color: rgba(9,20,39,0.55); }
 
 .osd-window, .info-osd {
@@ -243,7 +243,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
   color: #162e4d; box-shadow: 0 10px 30px rgba(11,37,79,0.23); }
 .run-dialog-label, .run-dialog-description { color: #162e4d; }
 .run-dialog-description.error { color: #d9516a; }
-.run-dialog-entry { color: #162e4d; selection-background-color: #078fe8; selected-color: #ffffff; }
+.run-dialog-entry { color: #162e4d; selection-background-color: #0571c4; selected-color: #ffffff; }
 .lightbox { background-color: rgba(9,20,39,0.45); }
 
 /* ---------- Expo / overview / tiling ---------- */
@@ -305,7 +305,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-calendar-day { width: 30px; padding: 4px 0; text-align: center; border-radius: 5px; color: #eef6ff; font-size: 9.5pt; }
 .c12-calendar-weekend { color: #b9d6f2; }
 .c12-calendar-other { color: rgba(185,214,242,0.38); }
-.c12-calendar-today { background-color: #078fe8; color: #ffffff; font-weight: bold; }
+.c12-calendar-today { background-color: #0571c4; color: #ffffff; font-weight: bold; }
 .c12-calendar-weeknum { width: 22px; text-align: center; color: rgba(185,214,242,0.5); font-size: 8pt; padding: 4px 0; }
 .c12-sysmon { spacing: 10px; }
 .c12-sysmon-header, .c12-weather-top { spacing: 8px; }
@@ -336,7 +336,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-launcher-menu .popup-menu-content { padding: 0; }
 .c12-launcher { padding: 14px 14px 0 14px; spacing: 12px; color: #162e4d; }
 .c12-launcher-search {
-  color: #162e4d; caret-color: #078fe8; selected-color: #ffffff; selection-background-color: #078fe8;
+  color: #162e4d; caret-color: #078fe8; selected-color: #ffffff; selection-background-color: #0571c4;
   background-color: #ffffff; border: 1px solid #b6d0eb; border-radius: 6px; padding: 8px 10px; }
 .c12-launcher-search:focus { border: 1px solid #078fe8; box-shadow: inset 0 0 0 1px #078fe8; }
 .c12-launcher-search StLabel.hint-text { color: #526e90; }
@@ -346,7 +346,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-launcher-category { color: #162e4d; border-radius: 5px; padding: 6px 10px; margin-bottom: 1px; }
 .c12-launcher-category-box { spacing: 10px; }
 .c12-launcher-category:hover, .c12-launcher-category:focus { background-color: #d6ecff; }
-.c12-launcher-category:checked { background-color: #078fe8; color: #ffffff; }
+.c12-launcher-category:checked { background-color: #0571c4; color: #ffffff; }
 .c12-launcher-content { padding-right: 4px; }
 .c12-launcher-section-title { font-weight: bold; color: #162e4d; padding: 2px 4px 8px 4px; }
 .c12-launcher-grid-row { spacing: 4px; padding-bottom: 6px; }
@@ -365,9 +365,9 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-launcher-user { border-radius: 6px; padding: 4px 10px 4px 4px; color: #162e4d; }
 .c12-launcher-user:hover, .c12-launcher-user:focus { background-color: #d6ecff; }
 .c12-launcher-user-box { spacing: 10px; }
-.c12-launcher-avatar { border-radius: 14px; color: #078fe8; }
+.c12-launcher-avatar { border-radius: 14px; color: #056bbb; }
 .c12-launcher-session { border-radius: 6px; padding: 8px; color: #162e4d; }
-.c12-launcher-session:hover, .c12-launcher-session:focus { background-color: #d6ecff; color: #078fe8; }
+.c12-launcher-session:hover, .c12-launcher-session:focus { background-color: #d6ecff; color: #056bbb; }
 .c12-launcher-session-icon { color: #162e4d; }
 
 /* Cinnamon12 Quick Settings (c12-quicksettings@cinnamon12.local) */
@@ -380,14 +380,14 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-qs-row { spacing: 8px; }
 .c12-qs-tile, .c12-qs-tile-spacer { width: 162px; }
 .c12-qs-tile { border-radius: 6px; background-color: #f5faff; border: 1px solid #b6d0eb; }
-.c12-qs-tile:checked { background-color: #078fe8; border: 1px solid #078fe8; }
+.c12-qs-tile:checked { background-color: #0571c4; border: 1px solid #0571c4; }
 .c12-qs-tile:insensitive { opacity: 0.55; }
 .c12-qs-tile-main { padding: 10px 10px 9px 12px; border-radius: 6px; color: #162e4d; }
 .c12-qs-tile-main:hover, .c12-qs-tile-main:focus { background-color: #d6ecff; }
 .c12-qs-tile:checked .c12-qs-tile-main { color: #ffffff; }
 .c12-qs-tile:checked .c12-qs-tile-main:hover, .c12-qs-tile:checked .c12-qs-tile-main:focus { background-color: rgba(255,255,255,0.14); }
 .c12-qs-tile-box { spacing: 3px; }
-.c12-qs-tile-icon { color: #078fe8; }
+.c12-qs-tile-icon { color: #056bbb; }
 .c12-qs-tile:checked .c12-qs-tile-icon { color: #ffffff; }
 .c12-qs-tile-title { font-weight: bold; }
 .c12-qs-tile-subtitle { font-size: 8.5pt; color: #526e90; }
@@ -399,17 +399,17 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-qs-sliders { spacing: 6px; padding: 2px 0; }
 .c12-qs-slider-row { spacing: 8px; }
 .c12-qs-slider-icon { padding: 6px; border-radius: 6px; color: #162e4d; }
-.c12-qs-slider-icon:hover, .c12-qs-slider-icon:focus { background-color: #d6ecff; color: #078fe8; }
+.c12-qs-slider-icon:hover, .c12-qs-slider-icon:focus { background-color: #d6ecff; color: #056bbb; }
 .c12-qs-slider { height: 20px; -slider-height: 4px; -slider-background-color: #b6d0eb;
   -slider-active-background-color: #078fe8; -slider-border-width: 0; -slider-handle-radius: 8px; }
 .c12-qs-slider-value { width: 44px; text-align: right; color: #526e90; font-size: 9pt; }
 .c12-qs-actions { spacing: 8px; padding-top: 8px; border-top: 1px solid #b6d0eb; }
 .c12-qs-action { padding: 9px 14px; border-radius: 6px; color: #162e4d; background-color: #f5faff; border: 1px solid #b6d0eb; }
 .c12-qs-action:hover, .c12-qs-action:focus { background-color: #d6ecff; }
-.c12-qs-action:checked { background-color: #078fe8; border: 1px solid #078fe8; color: #ffffff; }
+.c12-qs-action:checked { background-color: #0571c4; border: 1px solid #0571c4; color: #ffffff; }
 .c12-qs-action-icon { color: #162e4d; }
 .c12-qs-action:checked .c12-qs-action-icon { color: #ffffff; }
-.c12-launcher-session:hover .c12-launcher-session-icon, .c12-launcher-session:focus .c12-launcher-session-icon { color: #078fe8; }
+.c12-launcher-session:hover .c12-launcher-session-icon, .c12-launcher-session:focus .c12-launcher-session-icon { color: #056bbb; }
 
-.cinnamon-link { color: #078fe8; }
+.cinnamon-link { color: #056bbb; }
 .cinnamon-link:hover { color: #0571c4; }

@@ -41,7 +41,29 @@ for obj in (R/'applets').glob('*/metadata.json'):
 for obj in (R/'desklets').glob('*/metadata.json'):
  try:json.loads(obj.read_text())
  except Exception as ex:errors.append('invalid JSON '+str(obj)+str(ex))
-print('Validated icons:',count,'wallpapers:',3,'themes:',2,'optional applets:',len(list((R/'applets').iterdir())),'desklets:',len(list((R/'desklets').iterdir())))
+# WCAG AA contrast (4.5:1) for text pairs of both variants; derived values live in
+# generate-themes.py (EXTRA), the base palette in design/tokens.json.
+import importlib.util, re
+_spec=importlib.util.spec_from_file_location('c12gen', R/'scripts'/'generate-themes.py')
+_gen=importlib.util.module_from_spec(_spec); _spec.loader.exec_module(_gen)
+def _rgb(c, under=(1,1,1)):
+ if c.startswith('#'): return tuple(int(c[i:i+2],16)/255 for i in (1,3,5))
+ r,g,b,a=[float(x) for x in re.findall(r'[\d.]+',c)]
+ return tuple(a*v/255+(1-a)*u for v,u in zip((r,g,b),under))
+def _lum(c):
+ f=lambda v: v/12.92 if v<=0.03928 else ((v+0.055)/1.055)**2.4
+ r,g,b=map(f,c); return .2126*r+.7152*g+.0722*b
+def _ratio(a,b):
+ a,b=_lum(a),_lum(b); return (max(a,b)+.05)/(min(a,b)+.05)
+contrast_checks=0
+for v in ('light','dark'):
+ p=_gen.palette(v); popup=_rgb(p['popup'],(0.05,0.07,0.1))
+ for fg,bg in [('text','window'),('muted','window'),('text','card'),('muted','card'),('text','selected'),
+               ('on_accent','accent_fill'),('accent_fg','window'),('accent_fg','popup'),('muted','popup'),('panel_text','panel')]:
+  bgc=popup if bg=='popup' else _rgb(p[bg],(0.05,0.07,0.1))
+  r=_ratio(_rgb(p[fg]),bgc); contrast_checks+=1
+  assert_ok(r>=4.5,f'contrast {v}: {fg} on {bg} = {r:.2f} (< 4.5)')
+print('Validated icons:',count,'wallpapers:',3,'themes:',2,'optional applets:',len(list((R/'applets').iterdir())),'desklets:',len(list((R/'desklets').iterdir())),'contrast pairs:',contrast_checks)
 if errors:
  print('\n'.join(errors[:100]));raise SystemExit(1)
 print('Static validation passed. Cinnamon runtime compatibility must still be tested.')
