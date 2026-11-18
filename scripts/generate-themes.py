@@ -94,8 +94,9 @@ CINNAMON = Template(r'''/* Cinnamon12 Studio | $variant | Cinnamon shell theme.
  * are border-images too, inset to the visible bar. The actor still reaches the screen
  * edge, so the edge stays clickable (Fitts' law). */
 .panel-bottom, .panel-top, .panel-left, .panel-right { background-color: transparent; border: none; }
-.panel-bottom, .panel-top { border-image: url("assets/panel-float-h.svg") 20; padding: 0 14px; }
-.panel-left, .panel-right { border-image: url("assets/panel-float-v.svg") 20; padding: 14px 0; }
+.panel-bottom, .panel-top { border-image: url("assets/panel-float-h.svg") 20; padding: 0 0 0 14px; }
+.panel-bottom:rtl, .panel-top:rtl { padding: 0 14px 0 0; }
+.panel-left, .panel-right { border-image: url("assets/panel-float-v.svg") 20; padding: 14px 0 0 0; }
 #panel:highlight, .applet-box:highlight, .spacer-box:highlight { background-color: rgba(43,170,255,0.35); }
 .panel-dummy { background-color: rgba(43,170,255,0.18); }
 .panel-dummy:entered { background-color: rgba(43,170,255,0.40); }
@@ -114,13 +115,17 @@ CINNAMON = Template(r'''/* Cinnamon12 Studio | $variant | Cinnamon shell theme.
 .panel-button, .panel-status-button { color: $panel_text; }
 .panel-button:hover, .panel-status-button:hover { color: #ffffff; text-shadow: none; }
 .applet-separator-line { background: rgba(237,246,255,0.25); }
-/* "show desktop" corner: a short slim line centered in the visible bar (the stock
- * applet fills the full panel height, gap included) */
-.applet-cornerbar { background: rgba(237,246,255,0.20); width: 3px; border-radius: 2px; }
-.applet-cornerbar.vertical { width: auto; height: 3px; }
-.panel-bottom .applet-cornerbar-box, .panel-top .applet-cornerbar-box { padding: 18px 6px; }
-.panel-left .applet-cornerbar-box, .panel-right .applet-cornerbar-box { padding: 6px 18px; }
-.applet-cornerbar-box:hover > .applet-cornerbar { background: rgba(237,246,255,0.45); }
+/* "show desktop" = the rounded end of the bar. The panel has no end padding on that
+ * side, so the applet reaches the screen edge (throw the pointer into the corner); a
+ * short line marks it at rest and the whole rounded cap lights up on hover. Assumes
+ * the applet is the last one, as in the stock layout and our panel profile. */
+.applet-cornerbar { background: transparent; width: 0; height: 0; }
+.panel-bottom .applet-cornerbar-box, .panel-top .applet-cornerbar-box {
+  padding: 0; width: 22px; border-image: url("assets/cap-h.svg") 20 0; }
+.panel-bottom .applet-cornerbar-box:hover, .panel-top .applet-cornerbar-box:hover { border-image: url("assets/cap-h-hover.svg") 20 0; }
+.panel-left .applet-cornerbar-box, .panel-right .applet-cornerbar-box {
+  padding: 0; height: 22px; border-image: url("assets/cap-v.svg") 0 20; }
+.panel-left .applet-cornerbar-box:hover, .panel-right .applet-cornerbar-box:hover { border-image: url("assets/cap-v-hover.svg") 0 20; }
 
 /* window lists (grouped and classic): pills drawn as border-images inset to the bar */
 .grouped-window-list-item-box, .window-list-item-box {
@@ -811,6 +816,18 @@ def svg_assets(p):
     states = {'hover': ('#c2e0ff', 0.14, False), 'running': ('#c2e0ff', 0.08, False),
               'focus': ('#2baaff', 0.28, True), 'attention': ('#f17189', 0.55, False)}
     panels = {'panel-float-h.svg': bar(8.5, 6.5, 47, 51), 'panel-float-v.svg': bar(6.5, 8.5, 51, 47)}
+    # End caps for "show desktop": the bar's rounded end (r 12) plus the 8 px outer gap.
+    hov = '<path d="{d}" fill="#c2e0ff" fill-opacity="0.16"/>'
+    cap_h = 'M0 6.5H1.5A12 12 0 0 1 13.5 18.5V45.5A12 12 0 0 1 1.5 57.5H0Z'
+    cap_v = 'M6.5 0V1.5A12 12 0 0 0 18.5 13.5H45.5A12 12 0 0 0 57.5 1.5V0Z'
+    line_h = '<rect x="5" y="22" width="3" height="20" rx="1.5" fill="#edf6ff" fill-opacity="0.30"/>'
+    line_v = '<rect x="22" y="5" width="20" height="3" rx="1.5" fill="#edf6ff" fill-opacity="0.30"/>'
+    def cap(w, h, body):
+        return f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">{body}</svg>'
+    panels['cap-h.svg'] = cap(22, 64, line_h)
+    panels['cap-h-hover.svg'] = cap(22, 64, hov.format(d=cap_h) + line_h.replace('0.30', '0.70'))
+    panels['cap-v.svg'] = cap(64, 22, line_v)
+    panels['cap-v-hover.svg'] = cap(64, 22, hov.format(d=cap_v) + line_v.replace('0.30', '0.70'))
     for name, (col, op, ind) in states.items():
         line_h = '<rect x="12" y="49" width="40" height="3" rx="1.5" fill="#36ccf6"/>' if ind else ''
         line_v = '<rect x="49" y="12" width="3" height="40" rx="1.5" fill="#36ccf6"/>' if ind else ''
