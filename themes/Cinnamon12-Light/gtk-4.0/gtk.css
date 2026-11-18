@@ -10,9 +10,9 @@
 @define-color window_fg_color #162e4d;
 @define-color view_bg_color #f5faff;
 @define-color view_fg_color #162e4d;
-@define-color headerbar_bg_color #e2efff;
+@define-color headerbar_bg_color #c4e0fd;
 @define-color headerbar_fg_color #162e4d;
-@define-color headerbar_backdrop_color #edf5ff;
+@define-color headerbar_backdrop_color #dcebfd;
 @define-color sidebar_bg_color #d9eafa;
 @define-color sidebar_fg_color #162e4d;
 @define-color card_bg_color #f5faff;
@@ -33,8 +33,8 @@
 @define-color success_color #28b89a;
 
 window, .background { background-color: #edf5ff; color: #162e4d; }
-headerbar { background-image: none; background-color: #e2efff; color: #162e4d; box-shadow: inset 0 -1px #b6d0eb; }
-headerbar:backdrop { background-color: #edf5ff; }
+headerbar { background-image: none; background-color: #c4e0fd; color: #162e4d; box-shadow: inset 0 -1px #b6d0eb; }
+headerbar:backdrop { background-color: #dcebfd; }
 window.csd { border-radius: 7px; }
 button { border-radius: 6px; }
 button.suggested-action { background-color: #0571c4; color: #ffffff; }

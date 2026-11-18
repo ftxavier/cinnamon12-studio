@@ -73,10 +73,10 @@ scrolledwindow undershoot, scrolledwindow overshoot { background-image: none; ba
 /* ---------- title bars: CSD headerbars and Muffin server-side decorations ---------- */
 headerbar, .titlebar:not(headerbar), headerbar.titlebar.default-decoration,
 window.ssd headerbar.titlebar, .titlebar {
-  background-image: none; background-color: #1c334f; color: #e9f4ff;
-  border-color: #355474; box-shadow: inset 0 -1px #355474; text-shadow: none; }
+  background-image: linear-gradient(to right, #1c334f, #21395a); background-color: #1c334f; color: #e9f4ff;
+  border-color: #355474; box-shadow: inset 0 -1px rgba(255,255,255,0.06); text-shadow: none; }
 headerbar:backdrop, .titlebar:backdrop, headerbar.titlebar.default-decoration:backdrop {
-  background-image: none; background-color: #17283e; color: #a4bfdc; box-shadow: inset 0 -1px #355474; }
+  background-image: none; background-color: #17283e; color: #a4bfdc; box-shadow: inset 0 -1px rgba(255,255,255,0.06); }
 headerbar.titlebar.default-decoration { min-height: 30px; padding: 4px 8px; }
 .titlebar:not(headerbar), headerbar.titlebar, window:not(.tiled):not(.maximized):not(.fullscreen) headerbar.titlebar,
 window.csd > .titlebar:not(headerbar) { border-radius: 7px 7px 0 0; }
@@ -165,7 +165,7 @@ placessidebar row:selected:hover, .sidebar row:selected:hover { background-color
 .nemo-window treeview.view:selected:hover { background-color: #254d71; color: #e9f4ff; }
 .nemo-window .sidebar .view:selected:hover { background-color: #2baaff; color: #06203d; }
 .nemo-window toolbar, .nemo-window .primary-toolbar, .primary-toolbar {
-  background-image: none; background-color: #1c334f; border-color: #355474; box-shadow: inset 0 -1px #355474; }
+  background-image: none; background-color: #182c45; border-color: rgba(255,255,255,0.08); box-shadow: inset 0 -1px rgba(255,255,255,0.08); }
 .nemo-window statusbar, statusbar { background-color: #17283e; color: #a4bfdc; border-top: 1px solid #355474; }
 .nemo-window .nemo-inactive-pane .view, .nemo-window .nemo-inactive-pane iconview { background-color: #17283e; }
 .path-bar button { border-radius: 5px; }

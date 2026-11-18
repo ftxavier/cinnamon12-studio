@@ -33,8 +33,9 @@ EXTRA = {
         'entry_border': '#b6d0eb', 'osd_bg': 'rgba(235,246,255,0.96)',
         'dialog_bg': 'rgba(237,245,255,0.98)', 'danger': '#d9516a', 'success': '#28b89a',
         'warning': '#f3b34d', 'gtk_base': 'Adwaita/gtk-contained.css',
-        'gtk4_base': 'Default/Default-light.css', 'titlebar': '#e2efff',
-        'titlebar_backdrop': '#edf5ff', 'scroll': 'rgba(82,110,144,0.45)',
+        'gtk4_base': 'Default/Default-light.css', 'titlebar': '#c4e0fd', 'titlebar_hi': '#cde9fd',
+        'titlebar_backdrop': '#dcebfd', 'titlebar_edge': 'rgba(255,255,255,0.55)',
+        'toolbar': '#e4eefb', 'toolbar_line': '#cee0f5', 'scroll': 'rgba(82,110,144,0.45)',
         'tooltip_bg': 'rgba(22,46,77,0.95)', 'tooltip_fg': '#f2f8ff',
         # WCAG AA: accent as text on light surfaces (4.7:1 over the 97% popup) and as a fill under white text (5.0:1).
         'accent_fg': '#056bbb', 'accent_fill': '#0571c4', 'on_accent': '#ffffff',
@@ -46,8 +47,9 @@ EXTRA = {
         'entry_border': '#355474', 'osd_bg': 'rgba(23,40,60,0.96)',
         'dialog_bg': 'rgba(23,40,62,0.98)', 'danger': '#f17189', 'success': '#42d5ad',
         'warning': '#f6c262', 'gtk_base': 'Adwaita/gtk-contained-dark.css',
-        'gtk4_base': 'Default/Default-dark.css', 'titlebar': '#1c334f',
-        'titlebar_backdrop': '#17283e', 'scroll': 'rgba(164,191,220,0.40)',
+        'gtk4_base': 'Default/Default-dark.css', 'titlebar': '#1c334f', 'titlebar_hi': '#21395a',
+        'titlebar_backdrop': '#17283e', 'titlebar_edge': 'rgba(255,255,255,0.06)',
+        'toolbar': '#182c45', 'toolbar_line': 'rgba(255,255,255,0.08)', 'scroll': 'rgba(164,191,220,0.40)',
         'tooltip_bg': 'rgba(9,20,39,0.96)', 'tooltip_fg': '#eef6ff',
         # Bright accent keeps the look; text on it is dark navy (6.5:1) instead of white (2.5:1).
         'accent_fg': '#2baaff', 'accent_fill': '#2baaff', 'on_accent': '#06203d',
@@ -618,10 +620,10 @@ scrolledwindow undershoot, scrolledwindow overshoot { background-image: none; ba
 /* ---------- title bars: CSD headerbars and Muffin server-side decorations ---------- */
 headerbar, .titlebar:not(headerbar), headerbar.titlebar.default-decoration,
 window.ssd headerbar.titlebar, .titlebar {
-  background-image: none; background-color: $titlebar; color: $text;
-  border-color: $line; box-shadow: inset 0 -1px $line; text-shadow: none; }
+  background-image: linear-gradient(to right, $titlebar, $titlebar_hi); background-color: $titlebar; color: $text;
+  border-color: $line; box-shadow: inset 0 -1px $titlebar_edge; text-shadow: none; }
 headerbar:backdrop, .titlebar:backdrop, headerbar.titlebar.default-decoration:backdrop {
-  background-image: none; background-color: $titlebar_backdrop; color: $muted; box-shadow: inset 0 -1px $line; }
+  background-image: none; background-color: $titlebar_backdrop; color: $muted; box-shadow: inset 0 -1px $titlebar_edge; }
 headerbar.titlebar.default-decoration { min-height: 30px; padding: 4px 8px; }
 .titlebar:not(headerbar), headerbar.titlebar, window:not(.tiled):not(.maximized):not(.fullscreen) headerbar.titlebar,
 window.csd > .titlebar:not(headerbar) { border-radius: ${r_window}px ${r_window}px 0 0; }
@@ -710,7 +712,7 @@ placessidebar row:selected:hover, .sidebar row:selected:hover { background-color
 .nemo-window treeview.view:selected:hover { background-color: $item_active; color: $text; }
 .nemo-window .sidebar .view:selected:hover { background-color: $accent_fill; color: $on_accent; }
 .nemo-window toolbar, .nemo-window .primary-toolbar, .primary-toolbar {
-  background-image: none; background-color: $titlebar; border-color: $line; box-shadow: inset 0 -1px $line; }
+  background-image: none; background-color: $toolbar; border-color: $toolbar_line; box-shadow: inset 0 -1px $toolbar_line; }
 .nemo-window statusbar, statusbar { background-color: $window; color: $muted; border-top: 1px solid $line; }
 .nemo-window .nemo-inactive-pane .view, .nemo-window .nemo-inactive-pane iconview { background-color: $window; }
 .path-bar button { border-radius: 5px; }
