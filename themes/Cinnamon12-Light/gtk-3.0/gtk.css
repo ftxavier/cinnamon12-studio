@@ -167,6 +167,19 @@ placessidebar row:selected:hover, .sidebar row:selected:hover { background-color
 .nemo-window toolbar, .nemo-window .primary-toolbar, .primary-toolbar {
   background-image: none; background-color: #d8e8fb; border-color: #c2d6ef; box-shadow: inset 0 -1px #c2d6ef; }
 .nemo-window statusbar, statusbar { background-color: #edf5ff; color: #526e90; border-top: 1px solid #b6d0eb; }
+/* Nemo surfaces and selection colours (reference images, light and dark) */
+.nemo-window .view, .nemo-window iconview, .nemo-window treeview.view, .nemo-window .nemo-canvas-item,
+.nemo-window treeview.view header button { background-color: #f5faff; }
+.nemo-window .sidebar, .nemo-window .sidebar .view, .nemo-places-sidebar, .nemo-places-sidebar treeview.view {
+  background-color: #d9eafa; }
+.nemo-window statusbar { background-color: #edf5ff; border-top: 1px solid #b6d0eb; }
+/* the bottom bar's sidebar buttons and zoom slider sit on the window background */
+window.nemo-window.background, .nemo-window statusbar ~ * { background-color: #edf5ff; }
+.nemo-window paned > separator { background-color: #b6d0eb; }
+.nemo-window .sidebar .view:hover, .nemo-places-sidebar treeview.view:hover { background-color: #d6ecff; }
+.nemo-window .sidebar .view:selected, .nemo-places-sidebar treeview.view:selected,
+.nemo-window .sidebar .view:selected:hover, .nemo-places-sidebar treeview.view:selected:hover,
+.nemo-window .sidebar .view:selected:backdrop { background-color: #0571c4; color: #ffffff; }
 .nemo-window .nemo-inactive-pane .view, .nemo-window .nemo-inactive-pane iconview { background-color: #edf5ff; }
 .path-bar button { border-radius: 5px; }
 .path-bar button:checked { background-color: #c1e4ff; border-color: transparent; font-weight: bold; }

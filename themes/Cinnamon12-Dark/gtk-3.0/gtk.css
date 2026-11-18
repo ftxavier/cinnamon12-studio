@@ -31,15 +31,15 @@
 @define-color window_fg_color #e9f4ff;
 @define-color view_bg_color #203a56;
 @define-color view_fg_color #e9f4ff;
-@define-color headerbar_bg_color #1c334f;
+@define-color headerbar_bg_color #112b52;
 @define-color headerbar_fg_color #e9f4ff;
 @define-color sidebar_bg_color #14253b;
 @define-color card_bg_color #203a56;
 @define-color popover_bg_color #17283c;
 @define-color wm_title #e9f4ff;
 @define-color wm_unfocused_title #a4bfdc;
-@define-color wm_bg #1c334f;
-@define-color wm_bg_unfocused #17283e;
+@define-color wm_bg #112b52;
+@define-color wm_bg_unfocused #11233b;
 
 *:link, link, button.link:link { color: #2baaff; }
 *:visited, link:visited { color: #5dc2ff; }
@@ -60,9 +60,9 @@ flowboxchild:selected, row:selected, label selection, entry selection {
 /* icon view: Nemo's canvas paints only the label box; selected = light tile with an accent
  * ring (the canvas has no hover background, Nemo just brightens the icon) */
 .nemo-window .nemo-canvas-item:selected, .nemo-window .nemo-canvas-item:selected:focus {
-  background-color: #254d71; color: #e9f4ff; border-radius: 8px; box-shadow: inset 0 0 0 1px #2baaff; }
+  background-color: #0d3060; color: #e9f4ff; border-radius: 8px; box-shadow: inset 0 0 0 1px #1a8fe0; }
 .nemo-window toolbar button:checked, .nemo-window .primary-toolbar button:checked {
-  background-color: #254d71; color: #e9f4ff; border: 1px solid #2baaff; }
+  background-color: #1f4374; color: #e9f4ff; border: 1px solid #2f73c4; }
 treeview.view header button { background-image: none; background-color: #203a56; color: #a4bfdc;
   border-color: #355474; box-shadow: none; }
 treeview.view header button:hover { background-color: #21405f; color: #e9f4ff; }
@@ -73,10 +73,10 @@ scrolledwindow undershoot, scrolledwindow overshoot { background-image: none; ba
 /* ---------- title bars: CSD headerbars and Muffin server-side decorations ---------- */
 headerbar, .titlebar:not(headerbar), headerbar.titlebar.default-decoration,
 window.ssd headerbar.titlebar, .titlebar {
-  background-image: linear-gradient(to right, #1c334f, #21395a); background-color: #1c334f; color: #e9f4ff;
-  border-color: #355474; box-shadow: inset 0 -1px rgba(255,255,255,0.06); text-shadow: none; }
+  background-image: linear-gradient(to right, #112b52, #173d70); background-color: #112b52; color: #e9f4ff;
+  border-color: #355474; box-shadow: inset 0 -1px rgba(120,170,230,0.28); text-shadow: none; }
 headerbar:backdrop, .titlebar:backdrop, headerbar.titlebar.default-decoration:backdrop {
-  background-image: none; background-color: #17283e; color: #a4bfdc; box-shadow: inset 0 -1px rgba(255,255,255,0.06); }
+  background-image: none; background-color: #11233b; color: #a4bfdc; box-shadow: inset 0 -1px rgba(120,170,230,0.28); }
 headerbar.titlebar.default-decoration { min-height: 30px; padding: 4px 8px; }
 .titlebar:not(headerbar), headerbar.titlebar, window:not(.tiled):not(.maximized):not(.fullscreen) headerbar.titlebar,
 window.csd > .titlebar:not(headerbar) { border-radius: 7px 7px 0 0; }
@@ -165,8 +165,21 @@ placessidebar row:selected:hover, .sidebar row:selected:hover { background-color
 .nemo-window treeview.view:selected:hover { background-color: #254d71; color: #e9f4ff; }
 .nemo-window .sidebar .view:selected:hover { background-color: #2baaff; color: #06203d; }
 .nemo-window toolbar, .nemo-window .primary-toolbar, .primary-toolbar {
-  background-image: none; background-color: #182c45; border-color: rgba(255,255,255,0.08); box-shadow: inset 0 -1px rgba(255,255,255,0.08); }
+  background-image: none; background-color: #121f33; border-color: #2a3b58; box-shadow: inset 0 -1px #2a3b58; }
 .nemo-window statusbar, statusbar { background-color: #17283e; color: #a4bfdc; border-top: 1px solid #355474; }
+/* Nemo surfaces and selection colours (reference images, light and dark) */
+.nemo-window .view, .nemo-window iconview, .nemo-window treeview.view, .nemo-window .nemo-canvas-item,
+.nemo-window treeview.view header button { background-color: #122039; }
+.nemo-window .sidebar, .nemo-window .sidebar .view, .nemo-places-sidebar, .nemo-places-sidebar treeview.view {
+  background-color: #0f1b2b; }
+.nemo-window statusbar { background-color: #141d2f; border-top: 1px solid #24364f; }
+/* the bottom bar's sidebar buttons and zoom slider sit on the window background */
+window.nemo-window.background, .nemo-window statusbar ~ * { background-color: #141d2f; }
+.nemo-window paned > separator { background-color: #24364f; }
+.nemo-window .sidebar .view:hover, .nemo-places-sidebar treeview.view:hover { background-color: #2b3c57; }
+.nemo-window .sidebar .view:selected, .nemo-places-sidebar treeview.view:selected,
+.nemo-window .sidebar .view:selected:hover, .nemo-places-sidebar treeview.view:selected:hover,
+.nemo-window .sidebar .view:selected:backdrop { background-color: #0b6fd6; color: #ffffff; }
 .nemo-window .nemo-inactive-pane .view, .nemo-window .nemo-inactive-pane iconview { background-color: #17283e; }
 .path-bar button { border-radius: 5px; }
 .path-bar button:checked { background-color: #254d71; border-color: transparent; font-weight: bold; }
@@ -174,11 +187,11 @@ placessidebar row:selected:hover, .sidebar row:selected:hover { background-color
  * box (sliders are the first/last children) and each folder gets a trailing chevron */
 .nemo-window .path-bar button, .nemo-window .path-bar button:hover, .nemo-window .path-bar button:checked,
 .nemo-window .path-bar button:backdrop, .nemo-window .path-bar button:backdrop:checked, .nemo-window .path-bar button:disabled {
-  background-color: #213a5a; color: #e9f4ff; border: 1px solid #2f4d72; border-left-width: 0; border-right-width: 0;
-  border-radius: 0; box-shadow: inset 0 1px rgba(255,255,255,0.05); min-height: 30px; text-shadow: none;
+  background-color: #1a2d49; color: #e9f4ff; border: 1px solid #2a4068; border-left-width: 0; border-right-width: 0;
+  border-radius: 0; box-shadow: inset 0 1px rgba(255,255,255,0.04); min-height: 30px; text-shadow: none;
   background-image: url("assets/pathbar-chevron-dark.svg"); background-repeat: no-repeat; background-position: right center;
   padding: 0 22px 0 8px; }
-.nemo-window .path-bar button:hover { background-color: #28466b; }
+.nemo-window .path-bar button:hover { background-color: #22395b; }
 .nemo-window .path-bar button:checked { font-weight: bold; }
 .nemo-window .path-bar button:first-child, .nemo-window .path-bar button:last-child {
   background-image: none; padding: 0 4px; color: #a4bfdc; }

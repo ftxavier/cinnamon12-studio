@@ -36,7 +36,11 @@ EXTRA = {
         'gtk4_base': 'Default/Default-light.css', 'titlebar': '#c4e0fd', 'titlebar_hi': '#cde9fd',
         'titlebar_backdrop': '#dcebfd', 'titlebar_edge': 'rgba(255,255,255,0.55)',
         'toolbar': '#d8e8fb', 'toolbar_line': '#c2d6ef',
-        'crumb_bg': '#e9f2fe', 'crumb_hover': '#dcebfd', 'crumb_border': '#c8dcf3', 'crumb_hi': 'rgba(255,255,255,0.70)', 'scroll': 'rgba(82,110,144,0.45)',
+        'crumb_bg': '#e9f2fe', 'crumb_hover': '#dcebfd', 'crumb_border': '#c8dcf3', 'crumb_hi': 'rgba(255,255,255,0.70)',
+        # Nemo surfaces (file manager reference images)
+        'fm_view': '#f5faff', 'fm_side': '#d9eafa', 'fm_status': '#edf5ff', 'fm_line': '#b6d0eb',
+        'fm_sel': '#0571c4', 'fm_sel_fg': '#ffffff', 'fm_hover': '#d6ecff',
+        'fm_tile': '#c1e4ff', 'fm_tile_ring': '#078fe8', 'fm_checked': '#c1e4ff', 'fm_checked_ring': '#078fe8', 'scroll': 'rgba(82,110,144,0.45)',
         'tooltip_bg': 'rgba(22,46,77,0.95)', 'tooltip_fg': '#f2f8ff',
         # WCAG AA: accent as text on light surfaces (4.7:1 over the 97% popup) and as a fill under white text (5.0:1).
         'accent_fg': '#056bbb', 'accent_fill': '#0571c4', 'on_accent': '#ffffff',
@@ -48,10 +52,15 @@ EXTRA = {
         'entry_border': '#355474', 'osd_bg': 'rgba(23,40,60,0.96)',
         'dialog_bg': 'rgba(23,40,62,0.98)', 'danger': '#f17189', 'success': '#42d5ad',
         'warning': '#f6c262', 'gtk_base': 'Adwaita/gtk-contained-dark.css',
-        'gtk4_base': 'Default/Default-dark.css', 'titlebar': '#1c334f', 'titlebar_hi': '#21395a',
-        'titlebar_backdrop': '#17283e', 'titlebar_edge': 'rgba(255,255,255,0.06)',
-        'toolbar': '#182c45', 'toolbar_line': 'rgba(255,255,255,0.08)',
-        'crumb_bg': '#213a5a', 'crumb_hover': '#28466b', 'crumb_border': '#2f4d72', 'crumb_hi': 'rgba(255,255,255,0.05)', 'scroll': 'rgba(164,191,220,0.40)',
+        'gtk4_base': 'Default/Default-dark.css', 'titlebar': '#112b52', 'titlebar_hi': '#173d70',
+        'titlebar_backdrop': '#11233b', 'titlebar_edge': 'rgba(120,170,230,0.28)',
+        'toolbar': '#121f33', 'toolbar_line': '#2a3b58',
+        'crumb_bg': '#1a2d49', 'crumb_hover': '#22395b', 'crumb_border': '#2a4068', 'crumb_hi': 'rgba(255,255,255,0.04)',
+        # Nemo surfaces: deeper navy than the generic dark card; white text on the sidebar
+        # selection needs a deeper blue than the bright accent (4.9:1)
+        'fm_view': '#122039', 'fm_side': '#0f1b2b', 'fm_status': '#141d2f', 'fm_line': '#24364f',
+        'fm_sel': '#0b6fd6', 'fm_sel_fg': '#ffffff', 'fm_hover': '#2b3c57',
+        'fm_tile': '#0d3060', 'fm_tile_ring': '#1a8fe0', 'fm_checked': '#1f4374', 'fm_checked_ring': '#2f73c4', 'scroll': 'rgba(164,191,220,0.40)',
         'tooltip_bg': 'rgba(9,20,39,0.96)', 'tooltip_fg': '#eef6ff',
         # Bright accent keeps the look; text on it is dark navy (6.5:1) instead of white (2.5:1).
         'accent_fg': '#2baaff', 'accent_fill': '#2baaff', 'on_accent': '#06203d',
@@ -610,9 +619,9 @@ flowboxchild:selected, row:selected, label selection, entry selection {
 /* icon view: Nemo's canvas paints only the label box; selected = light tile with an accent
  * ring (the canvas has no hover background, Nemo just brightens the icon) */
 .nemo-window .nemo-canvas-item:selected, .nemo-window .nemo-canvas-item:selected:focus {
-  background-color: $item_active; color: $text; border-radius: 8px; box-shadow: inset 0 0 0 1px $accent; }
+  background-color: $fm_tile; color: $text; border-radius: 8px; box-shadow: inset 0 0 0 1px $fm_tile_ring; }
 .nemo-window toolbar button:checked, .nemo-window .primary-toolbar button:checked {
-  background-color: $item_active; color: $text; border: 1px solid $accent; }
+  background-color: $fm_checked; color: $text; border: 1px solid $fm_checked_ring; }
 treeview.view header button { background-image: none; background-color: $card; color: $muted;
   border-color: $line; box-shadow: none; }
 treeview.view header button:hover { background-color: $hover_bg; color: $text; }
@@ -717,6 +726,19 @@ placessidebar row:selected:hover, .sidebar row:selected:hover { background-color
 .nemo-window toolbar, .nemo-window .primary-toolbar, .primary-toolbar {
   background-image: none; background-color: $toolbar; border-color: $toolbar_line; box-shadow: inset 0 -1px $toolbar_line; }
 .nemo-window statusbar, statusbar { background-color: $window; color: $muted; border-top: 1px solid $line; }
+/* Nemo surfaces and selection colours (reference images, light and dark) */
+.nemo-window .view, .nemo-window iconview, .nemo-window treeview.view, .nemo-window .nemo-canvas-item,
+.nemo-window treeview.view header button { background-color: $fm_view; }
+.nemo-window .sidebar, .nemo-window .sidebar .view, .nemo-places-sidebar, .nemo-places-sidebar treeview.view {
+  background-color: $fm_side; }
+.nemo-window statusbar { background-color: $fm_status; border-top: 1px solid $fm_line; }
+/* the bottom bar's sidebar buttons and zoom slider sit on the window background */
+window.nemo-window.background, .nemo-window statusbar ~ * { background-color: $fm_status; }
+.nemo-window paned > separator { background-color: $fm_line; }
+.nemo-window .sidebar .view:hover, .nemo-places-sidebar treeview.view:hover { background-color: $fm_hover; }
+.nemo-window .sidebar .view:selected, .nemo-places-sidebar treeview.view:selected,
+.nemo-window .sidebar .view:selected:hover, .nemo-places-sidebar treeview.view:selected:hover,
+.nemo-window .sidebar .view:selected:backdrop { background-color: $fm_sel; color: $fm_sel_fg; }
 .nemo-window .nemo-inactive-pane .view, .nemo-window .nemo-inactive-pane iconview { background-color: $window; }
 .path-bar button { border-radius: 5px; }
 .path-bar button:checked { background-color: $item_active; border-color: transparent; font-weight: bold; }

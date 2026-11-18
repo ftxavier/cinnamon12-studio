@@ -2,6 +2,7 @@
 
 ## 0.4.0 (em desenvolvimento)
 
+- Nemo escuro no tom da referência: barra de título azul-marinho com brilho e filete claro, barra de ferramentas e breadcrumb mais escuros, área de arquivos #122039, barra lateral #0f1b2b, seleção azul com texto branco (4,9:1), hover acinzentado, item selecionado em ícones com contorno azul, barra inferior uniforme. Cores do Nemo viram tokens `fm_*` nas duas variantes.
 - Nemo: caminho em migalhas (breadcrumb) numa caixa arredondada única, pasta atual em negrito e seta › após cada pasta; barra de ferramentas no tom da referência (#d8e8fb). Ctrl+L continua abrindo o caminho em texto.
 - Barra de título em azul mais vivo com brilho suave e sem a linha escura de divisão; barra de ferramentas do Nemo em tom próprio, com linha inferior suave (variantes Light e Dark).
 - Nemo: barra lateral com linhas mais altas e seleção de borda a borda, seleção forte também sem foco; visualização em ícones com item selecionado em bloco claro com contorno de destaque; botão de visualização ativo com contorno. Cantos da seleção da barra lateral ficam retos: o GtkTreeView pinta a seleção por coluna.
