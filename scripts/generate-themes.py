@@ -602,6 +602,12 @@ flowboxchild:selected, row:selected, label selection, entry selection {
   background-color: $item_active; color: $text; border-radius: 5px; }
 .nemo-window .view:hover, .nemo-window iconview:hover { background-color: $subtle_bg; }
 .nemo-window .nemo-window-pane widget.entry { border-radius: 6px; }
+/* icon view: Nemo's canvas paints only the label box; selected = light tile with an accent
+ * ring (the canvas has no hover background, Nemo just brightens the icon) */
+.nemo-window .nemo-canvas-item:selected, .nemo-window .nemo-canvas-item:selected:focus {
+  background-color: $item_active; color: $text; border-radius: 8px; box-shadow: inset 0 0 0 1px $accent; }
+.nemo-window toolbar button:checked, .nemo-window .primary-toolbar button:checked {
+  background-color: $item_active; color: $text; border: 1px solid $accent; }
 treeview.view header button { background-image: none; background-color: $card; color: $muted;
   border-color: $line; box-shadow: none; }
 treeview.view header button:hover { background-color: $hover_bg; color: $text; }
@@ -682,7 +688,12 @@ combobox button.combo, combobox box.linked > button.combo { background-color: $c
 placessidebar row:selected, stacksidebar row:selected, .sidebar row:selected {
   background-color: $accent_fill; color: $on_accent; border-radius: 5px; }
 .nemo-window .sidebar .view:hover, placessidebar row:hover, .sidebar row:hover { background-color: $hover_bg; }
-.nemo-window .sidebar .view:selected:backdrop, placessidebar row:selected:backdrop { background-color: $item_active; color: $text; }
+placessidebar row:selected:backdrop { background-color: $item_active; color: $text; }
+.nemo-window .sidebar .view:selected:backdrop { background-color: $accent_fill; color: $on_accent; }
+/* Nemo places sidebar is a GtkTreeView: the selection can't be rounded (it is painted
+ * per column), so the list is inset from the sidebar edges and rows get more air */
+.nemo-places-sidebar { padding: 6px 8px; }
+.nemo-window .sidebar .view, .nemo-places-sidebar treeview.view { padding-top: 5px; padding-bottom: 5px; }
 placessidebar row { border-radius: 5px; margin: 1px 4px; }
 /* GtkTreeView paints the selection per cell (expander, icon, name, eject), so a radius
  * there draws a chain of separate bubbles: keep tree rows square. GtkListBox rows

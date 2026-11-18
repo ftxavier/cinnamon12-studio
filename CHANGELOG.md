@@ -2,6 +2,7 @@
 
 ## 0.4.0 (em desenvolvimento)
 
+- Nemo: barra lateral com respiro (lista recuada das bordas, linhas mais altas), seleção forte também sem foco; visualização em ícones com item selecionado em bloco claro com contorno de destaque; botão de visualização ativo com contorno. Cantos da seleção da barra lateral ficam retos: o GtkTreeView pinta a seleção por coluna.
 - **GTK, item selecionado com o mouse em cima**: a regra de hover (fundo claro) vencia a de seleção, que mantinha o texto branco; no tema claro o nome sumia. Seleção agora prevalece no hover (barra lateral do Nemo, listas, GtkListBox).
 - **Nemo**: a seleção na barra lateral (e na lista em modo detalhes) aparecia como uma corrente de bolhas arredondadas, porque o GtkTreeView pinta a seleção por célula. Linhas de árvore agora são retas e contínuas; itens de ícone e linhas de GtkListBox continuam arredondados.
 - **Barra de tarefas flutuante**: barra de 48 px com cantos de 8 px (`radii.panel` do tokens.json), 6 px livres acima e abaixo e 8 px nas pontas, desenhada como `border-image` 9-slice. O Cinnamon 6.0 ignora `margin` no painel e pinta o fundo sob bordas transparentes. Os destaques de hover, janela ativa (com indicador ciano), janela aberta e "pedindo atenção" viraram pílulas inset, sem encostar nas bordas. Funciona em painéis horizontais e verticais.
