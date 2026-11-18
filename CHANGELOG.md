@@ -3,6 +3,7 @@
 ## 0.4.0 (em desenvolvimento)
 
 - **Barra de tarefas flutuante**: barra de 48 px com cantos arredondados, 6 px livres acima e abaixo e 8 px nas pontas, desenhada como `border-image` 9-slice. O Cinnamon 6.0 ignora `margin` no painel e pinta o fundo sob bordas transparentes. Os destaques de hover, janela ativa (com indicador ciano), janela aberta e "pedindo atenção" viraram pílulas inset, sem encostar nas bordas. Funciona em painéis horizontais e verticais.
+- Pílulas da lista de janelas quadradas (40×40, via `min-width`, pois o applet zera o padding inline). O traço de "mostrar área de trabalho" agora é curto (24 px) e centralizado na barra, em vez de ocupar toda a altura do painel.
 - `panel apply`: altura padrão 60 px (48 visíveis) e ícones de 28 px nas zonas esquerda e central (`panel-zone-icon-sizes`, com backup e restore; backups antigos são completados).
 - **Launcher** abre 10 px acima da barra, flutuando como ela.
 - **Contraste WCAG AA** nas duas variantes: no Light, azul de destaque como texto `#056bbb` e preenchimento sob texto branco `#0571c4`; no Dark, o azul vivo é mantido e o texto sobre ele passa a ser azul-marinho `#06203d` (6,5:1 em vez de 2,5:1). Vale para shell, GTK3/GTK4 e para os SVG de checkbox, rádio e toggle. O `validate.py` agora reprova pares de texto abaixo de 4,5:1.

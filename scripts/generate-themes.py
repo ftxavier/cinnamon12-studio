@@ -114,8 +114,13 @@ CINNAMON = Template(r'''/* Cinnamon12 Studio | $variant | Cinnamon shell theme.
 .panel-button, .panel-status-button { color: $panel_text; }
 .panel-button:hover, .panel-status-button:hover { color: #ffffff; text-shadow: none; }
 .applet-separator-line { background: rgba(237,246,255,0.25); }
-.applet-cornerbar { background: rgba(237,246,255,0.20); }
-.applet-cornerbar-box:hover > .applet-cornerbar { background: rgba(237,246,255,0.35); }
+/* "show desktop" corner: a short slim line centered in the visible bar (the stock
+ * applet fills the full panel height, gap included) */
+.applet-cornerbar { background: rgba(237,246,255,0.20); width: 3px; border-radius: 2px; }
+.applet-cornerbar.vertical { width: auto; height: 3px; }
+.panel-bottom .applet-cornerbar-box, .panel-top .applet-cornerbar-box { padding: 18px 6px; }
+.panel-left .applet-cornerbar-box, .panel-right .applet-cornerbar-box { padding: 6px 18px; }
+.applet-cornerbar-box:hover > .applet-cornerbar { background: rgba(237,246,255,0.45); }
 
 /* window lists (grouped and classic): pills drawn as border-images inset to the bar */
 .grouped-window-list-item-box, .window-list-item-box {
@@ -125,6 +130,10 @@ CINNAMON = Template(r'''/* Cinnamon12 Studio | $variant | Cinnamon shell theme.
 }
 .panel-bottom .grouped-window-list-item-box, .panel-top .grouped-window-list-item-box,
 .panel-bottom .window-list-item-box, .panel-top .window-list-item-box { margin: 0 2px; }
+/* the stock applet zeroes the horizontal padding inline; min-width makes the pill square
+ * (40 x 40: 48 px bar minus a 4 px inset on each side) */
+.panel-bottom .grouped-window-list-item-box, .panel-top .grouped-window-list-item-box { min-width: 40px; }
+.panel-left .grouped-window-list-item-box, .panel-right .grouped-window-list-item-box { min-height: 40px; }
 .panel-left .grouped-window-list-item-box, .panel-right .grouped-window-list-item-box,
 .panel-left .window-list-item-box, .panel-right .window-list-item-box { margin: 2px 0; }
 .grouped-window-list-item-box:hover, .window-list-item-box:hover,
