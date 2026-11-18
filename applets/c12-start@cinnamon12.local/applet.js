@@ -44,6 +44,28 @@ function normalize(s) {
     return (s || '').normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase();
 }
 
+/* Popup that opens from the left edge of the button towards the right (RTL: from the
+ * right edge towards the left) on horizontal panels, instead of centered on it. */
+class C12Menu extends Applet.AppletPopupMenu {
+    constructor(launcher, orientation) {
+        super(launcher, orientation);
+        this._launcher = launcher;
+    }
+
+    _calculatePosition() {
+        let [x, y] = super._calculatePosition();
+        const horizontal = this._orientation === St.Side.TOP || this._orientation === St.Side.BOTTOM;
+        if (!horizontal || this._launcher.menuAlignment !== 'start') return [x, y];
+        const src = Cinnamon.util_get_transformed_allocation(this.sourceActor);
+        const [, , natWidth] = this.actor.get_preferred_size();
+        const monitor = Main.layoutManager.findMonitorForActor(this.sourceActor);
+        const rtl = Clutter.get_default_text_direction() === Clutter.TextDirection.RTL;
+        x = rtl ? src.x2 - natWidth : src.x1;
+        x = Math.max(monitor.x, Math.min(x, monitor.x + monitor.width - natWidth));
+        return [Math.round(x), y];
+    }
+}
+
 class C12StartApplet extends Applet.IconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
@@ -64,6 +86,7 @@ class C12StartApplet extends Applet.IconApplet {
         this.settings.bind('menu-height', 'menuHeight', () => this._applySize());
         this.settings.bind('grid-columns', 'gridColumns', () => this._rebuildRight());
         this.settings.bind('overlay-key', 'overlayKey', () => this._updateKeybinding());
+        this.settings.bind('menu-alignment', 'menuAlignment', null);
 
         const iconFile = Gio.File.new_for_path(metadata.path + '/icon.svg');
         if (iconFile.query_exists(null)) this.set_applet_icon_path(iconFile.get_path());
@@ -71,7 +94,7 @@ class C12StartApplet extends Applet.IconApplet {
         this.set_applet_tooltip(_('Start'));
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
-        this.menu = new Applet.AppletPopupMenu(this, orientation);
+        this.menu = new C12Menu(this, orientation);
         this.menuManager.addMenu(this.menu);
         this.menu.actor.add_style_class_name('c12-launcher-menu');
         this._buildUi();

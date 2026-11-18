@@ -1,14 +1,80 @@
 {
   "layout": {
     "type": "layout",
-    "pages": ["page-general"],
-    "page-general": {"type": "page", "title": "General", "sections": ["sec-look", "sec-behavior"]},
-    "sec-look": {"type": "section", "title": "Appearance", "keys": ["menu-width", "menu-height", "grid-columns"]},
-    "sec-behavior": {"type": "section", "title": "Behavior", "keys": ["show-recent", "overlay-key"]}
+    "pages": [
+      "page-general"
+    ],
+    "page-general": {
+      "type": "page",
+      "title": "General",
+      "sections": [
+        "sec-look",
+        "sec-behavior"
+      ]
+    },
+    "sec-look": {
+      "type": "section",
+      "title": "Appearance",
+      "keys": [
+        "menu-alignment",
+        "menu-width",
+        "menu-height",
+        "grid-columns"
+      ]
+    },
+    "sec-behavior": {
+      "type": "section",
+      "title": "Behavior",
+      "keys": [
+        "show-recent",
+        "overlay-key"
+      ]
+    }
   },
-  "menu-width": {"type": "spinbutton", "default": 640, "min": 480, "max": 1000, "step": 10, "units": "px", "description": "Menu width"},
-  "menu-height": {"type": "spinbutton", "default": 560, "min": 400, "max": 900, "step": 10, "units": "px", "description": "Menu height"},
-  "grid-columns": {"type": "spinbutton", "default": 5, "min": 3, "max": 8, "step": 1, "units": "", "description": "Columns in the pinned grid"},
-  "show-recent": {"type": "switch", "default": true, "description": "Show recent files (local GTK history)"},
-  "overlay-key": {"type": "keybinding", "default": "Super_L::Super_R", "description": "Keyboard shortcut to open the menu"}
+  "menu-width": {
+    "type": "spinbutton",
+    "default": 640,
+    "min": 480,
+    "max": 1000,
+    "step": 10,
+    "units": "px",
+    "description": "Menu width"
+  },
+  "menu-height": {
+    "type": "spinbutton",
+    "default": 560,
+    "min": 400,
+    "max": 900,
+    "step": 10,
+    "units": "px",
+    "description": "Menu height"
+  },
+  "grid-columns": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 3,
+    "max": 8,
+    "step": 1,
+    "units": "",
+    "description": "Columns in the pinned grid"
+  },
+  "show-recent": {
+    "type": "switch",
+    "default": true,
+    "description": "Show recent files (local GTK history)"
+  },
+  "overlay-key": {
+    "type": "keybinding",
+    "default": "Super_L::Super_R",
+    "description": "Keyboard shortcut to open the menu"
+  },
+  "menu-alignment": {
+    "type": "combobox",
+    "default": "start",
+    "options": {
+      "Aligned with the button (opens to the right)": "start",
+      "Centered on the button": "center"
+    },
+    "description": "Menu position"
+  }
 }

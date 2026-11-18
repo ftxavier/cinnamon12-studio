@@ -6,6 +6,7 @@
 - Atalho Super configurável, navegação por setas/Tab/Enter, `settings-schema.json` (largura, altura, colunas, recentes, atalho), tradução pt-BR (gettext).
 - `cinnamon12 panel apply --launcher cinnamon12` troca o menu nativo pelo Cinnamon12 Start (o `panel restore` devolve o menu original).
 - Estilo do launcher nos temas Light/Dark.
+- O menu abre alinhado à borda esquerda do botão e cresce para a direita (RTL: espelhado), sem sair da tela; opção "Centralizado no botão" nas configurações.
 
 ## 0.3.0 (validado em Ubuntu 24.04.5 + Cinnamon 6.0.4, X11)
 
