@@ -2,6 +2,7 @@
 
 ## 0.4.0 (em desenvolvimento)
 
+- **Nemo**: a seleção na barra lateral (e na lista em modo detalhes) aparecia como uma corrente de bolhas arredondadas, porque o GtkTreeView pinta a seleção por célula. Linhas de árvore agora são retas e contínuas; itens de ícone e linhas de GtkListBox continuam arredondados.
 - **Barra de tarefas flutuante**: barra de 48 px com cantos de 8 px (`radii.panel` do tokens.json), 6 px livres acima e abaixo e 8 px nas pontas, desenhada como `border-image` 9-slice. O Cinnamon 6.0 ignora `margin` no painel e pinta o fundo sob bordas transparentes. Os destaques de hover, janela ativa (com indicador ciano), janela aberta e "pedindo atenção" viraram pílulas inset, sem encostar nas bordas. Funciona em painéis horizontais e verticais.
 - Pílulas da lista de janelas quadradas (40×40, via `min-width`, pois o applet zera o padding inline). "Mostrar área de trabalho" virou a ponta arredondada da barra: área de clique de 22 px que vai até a borda da tela (basta jogar o mouse no canto), traço discreto em repouso e a ponta inteira acesa no hover. O painel não tem padding nesse lado; pressupõe o applet como o último, como no layout padrão e no perfil `panel apply`.
 - `panel apply`: altura padrão 60 px (48 visíveis), ícones de 28 px nas zonas esquerda e central (`panel-zone-icon-sizes`) e ícones de status (rede, som, energia, quick settings) de 16 para 20 px (`panel-zone-symbolic-icon-sizes`), com backup e restore; backups antigos são completados.

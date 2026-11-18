@@ -139,6 +139,12 @@ placessidebar row:selected, stacksidebar row:selected, .sidebar row:selected {
 .nemo-window .sidebar .view:hover, placessidebar row:hover, .sidebar row:hover { background-color: #d6ecff; }
 .nemo-window .sidebar .view:selected:backdrop, placessidebar row:selected:backdrop { background-color: #c1e4ff; color: #162e4d; }
 placessidebar row { border-radius: 5px; margin: 1px 4px; }
+/* GtkTreeView paints the selection per cell (expander, icon, name, eject), so a radius
+ * there draws a chain of separate bubbles: keep tree rows square. GtkListBox rows
+ * (placessidebar row) and icon view items stay rounded. */
+.nemo-window treeview.view:selected, .nemo-window .sidebar .view:selected,
+.nemo-window .sidebar .view:selected:backdrop, .nemo-places-sidebar treeview.view:selected,
+treeview.view:selected { border-radius: 0; }
 .nemo-window toolbar, .nemo-window .primary-toolbar, .primary-toolbar {
   background-image: none; background-color: #e2efff; border-color: #b6d0eb; box-shadow: inset 0 -1px #b6d0eb; }
 .nemo-window statusbar, statusbar { background-color: #edf5ff; color: #526e90; border-top: 1px solid #b6d0eb; }
