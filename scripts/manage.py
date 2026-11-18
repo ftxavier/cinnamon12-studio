@@ -154,6 +154,55 @@ def panel(args):
  atomic_json(PANEL_BACKUP,data)
  print('Painel aplicado. Para desfazer: ./cinnamon12 panel restore')
 
+WIDGETS_BACKUP=STATE/'desklets-original.json'
+
+def primary_monitor():
+ rc,out,_=command(['xrandr','--listmonitors'])
+ import re
+ if rc==0:
+  for line in out.splitlines():
+   m=re.search(r'\+\*?\S+\s+(\d+)/\d+x(\d+)/\d+\+(-?\d+)\+(-?\d+)',line)
+   if m and '*' in line:return tuple(int(v) for v in (m.group(3),m.group(4),m.group(1),m.group(2)))
+ return (0,0,1920,1080)
+
+def widgets(args):
+ schema='org.cinnamon'
+ keys=['enabled-desklets','next-desklet-id']
+ for k in keys:
+  if not can(schema,k):die('Chave '+schema+' '+k+' indisponível.')
+ if args.widgets_action=='restore':
+  if not WIDGETS_BACKUP.is_file():print('Não há backup de desklets. Nada a fazer.');return
+  data=json.loads(WIDGETS_BACKUP.read_text())
+  cur=value(schema,'enabled-desklets')
+  if not args.force and data['applied'] is not None and cur!=data['applied']:
+   print('PULADO: os desklets mudaram depois do perfil. Use --force.');return
+  set_value(schema,'enabled-desklets',data['original']['enabled-desklets'])
+  WIDGETS_BACKUP.unlink();print('Desklets restaurados.');return
+ cur=value(schema,'enabled-desklets')
+ items=gvar_list(cur)
+ ids=[int(i.split(':')[1]) for i in items if len(i.split(':'))>=4 and i.split(':')[1].isdigit()]
+ nxt=max(ids+[int(value(schema,'next-desklet-id').split()[-1])-1])+1
+ wanted=(['c12-weather@cinnamon12.local'] if args.weather else [])+['c12-calendar@cinnamon12.local','c12-performance@cinnamon12.local']
+ heights={'c12-weather@cinnamon12.local':215,'c12-calendar@cinnamon12.local':275,'c12-performance@cinnamon12.local':235}
+ mx,my,mw,mh=primary_monitor()
+ x,y=mx+20,my+20
+ new=[i for i in items if i.split(':')[0] not in wanted]
+ for uuid in wanted:
+  new.append(f'{uuid}:{nxt}:{x}:{y}');nxt+=1;y+=heights[uuid]+14
+ print('Desklets Cinnamon12 na coluna esquerda do monitor principal:')
+ for i in new:
+  if i not in items:print('  + ',i)
+ for i in items:
+  if i not in new:print('  - ',i)
+ if args.dry_run:print('(dry-run: nada foi alterado)');return
+ if not WIDGETS_BACKUP.exists():
+  atomic_json(WIDGETS_BACKUP,{'version':1,'created':time.strftime('%Y-%m-%dT%H:%M:%S'),'original':{'enabled-desklets':cur},'applied':None})
+  print('Backup dos desklets:',WIDGETS_BACKUP)
+ set_value(schema,'enabled-desklets',gvar_str(new))
+ set_value(schema,'next-desklet-id',str(nxt))
+ data=json.loads(WIDGETS_BACKUP.read_text());data['applied']=value(schema,'enabled-desklets');atomic_json(WIDGETS_BACKUP,data)
+ print('Pronto. Para desfazer: ./cinnamon12 widgets restore')
+
 def doctor(args):
  print('Cinnamon12 Studio | diagnóstico somente leitura')
  for label,cmd in [('Sistema',['lsb_release','-ds']),('Cinnamon',['cinnamon','--version']),
@@ -262,6 +311,8 @@ def uninstall(args):
  if BACKUP.exists():restore(args)
  if PANEL_BACKUP.exists():
   args.panel_action='restore';panel(args)
+ if WIDGETS_BACKUP.exists():
+  args.widgets_action='restore';widgets(args)
  for src,dst in targets():
   if not dst.is_dir():continue
   if not (dst/MARK).exists():
@@ -283,6 +334,7 @@ def main():
  q=sub.add_parser('restore',help='restaura as preferências anteriores, preservando mudanças manuais');q.add_argument('--force',action='store_true',help='reverter até as preferências alteradas manualmente')
  q=sub.add_parser('uninstall',help='restaura preferências e remove apenas pastas que instalamos');q.add_argument('--force',action='store_true');q.add_argument('--keep-files',action='store_true')
  q=sub.add_parser('panel',help='perfil de painel 48 px centralizado, com backup');q.add_argument('panel_action',choices=['apply','restore']);q.add_argument('--height',type=int,default=48);q.add_argument('--launcher',choices=['native','cinnamon12'],default='native',help='cinnamon12 troca o menu nativo pelo Cinnamon12 Start');q.add_argument('--quick-settings',action='store_true',help='adiciona o Cinnamon12 Quick Settings antes do relógio');q.add_argument('--dry-run',action='store_true');q.add_argument('--force',action='store_true')
+ q=sub.add_parser('widgets',help='desklets Cinnamon12 (calendário, monitor e, opcional, clima) na lateral esquerda, com backup');q.add_argument('widgets_action',choices=['apply','restore']);q.add_argument('--weather',action='store_true');q.add_argument('--dry-run',action='store_true');q.add_argument('--force',action='store_true')
  args=p.parse_args()
- {'doctor':doctor,'install':install,'apply':apply,'restore':restore,'uninstall':uninstall,'panel':panel}[args.action](args)
+ {'doctor':doctor,'install':install,'apply':apply,'restore':restore,'uninstall':uninstall,'panel':panel,'widgets':widgets}[args.action](args)
 if __name__=='__main__':main()

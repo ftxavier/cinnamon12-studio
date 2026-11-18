@@ -1,6 +1,12 @@
 {
   "uuid": "c12-performance@cinnamon12.local",
-  "name": "Cinnamon12 | Monitor (experimental)",
-  "description": "Mostra CPU e RAM com números calculados de /proc, sem rede e sem scripts externos.",
-  "version": "0.2.0"
+  "name": "Cinnamon12 System Monitor",
+  "description": "CPU, memory, disk and network with history graphs, read from /proc and the filesystem. No network access.",
+  "version": "0.4.0",
+  "prevent-decorations": true,
+  "cinnamon-version": [
+    "6.0",
+    "6.2",
+    "6.4"
+  ]
 }

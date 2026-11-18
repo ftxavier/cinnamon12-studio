@@ -82,3 +82,12 @@ Ambiente: Ubuntu 24.04.5 LTS, Cinnamon 6.0.4, X11, dois monitores (2560×1440 + 
 | Luz noturna | `org.cinnamon.settings-daemon.plugins.color night-light-enabled` | Chave inexistente no 6.0.4 → cartão oculto (correto) |
 | Modo de energia | power-profiles-daemon | Serviço ausente → cartão oculto (correto) |
 | Modo avião | NetworkManager + BlueZ | **Não executado** (derrubaria a sessão de teste) |
+
+### Desklets (0.4.0-dev, mesmo ambiente)
+
+| Desklet | Teste |
+|---|---|
+| Calendário | Mês atual, hoje destacado, semana iniciando no domingo (locale en_US) |
+| Monitor do sistema | CPU/RAM/disco/rede com valores reais; sem erros no log após correção da leitura de largura fora do palco |
+| Clima | Desligado por padrão (cartão "Desativado"). Teste único com a cidade "Brasília": geocodificação + previsão OK, cache gravado; depois revertido para desligado e cache apagado |
+| `widgets apply/restore` | Restore devolve `enabled-desklets` original (`[]`); reaplicação OK |

@@ -1,0 +1,17 @@
+{
+  "week-start": {
+    "type": "combobox",
+    "default": "auto",
+    "options": {
+      "Automatic (system setting)": "auto",
+      "Sunday": "sunday",
+      "Monday": "monday"
+    },
+    "description": "First day of the week"
+  },
+  "show-week-numbers": {
+    "type": "switch",
+    "default": false,
+    "description": "Show week numbers"
+  }
+}

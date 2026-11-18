@@ -46,6 +46,7 @@ Ou ative a versão escura:
 ./cinnamon12 panel restore           # volta o painel exatamente como estava
 ./cinnamon12 panel apply --launcher cinnamon12   # usa o menu Cinnamon12 Start no lugar do menu nativo
 ./cinnamon12 panel apply --launcher cinnamon12 --quick-settings   # + configurações rápidas antes do relógio
+./cinnamon12 widgets apply --weather   # calendário, monitor e clima na lateral esquerda (widgets restore desfaz)
 ```
 
 **Para restaurar as preferências anteriores:**

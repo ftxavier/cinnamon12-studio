@@ -358,6 +358,46 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-action { color: $text; background-color: $card; border: 1px solid $entry_border; border-radius: 6px; padding: 7px 10px; }
 .c12-action:hover { background-color: $hover_bg; }
 
+/* Cinnamon12 desklets (dark cards in both variants) */
+.c12-calendar, .c12-sysmon, .c12-weather { width: 252px; }
+.c12-calendar { spacing: 6px; }
+.c12-calendar-header { spacing: 4px; }
+.c12-calendar-title { color: #ffffff; font-weight: bold; border-radius: 5px; padding: 4px; }
+.c12-calendar-title:hover { background-color: rgba(255,255,255,0.10); }
+.c12-calendar-nav { color: #cfe6ff; padding: 4px 6px; border-radius: 5px; }
+.c12-calendar-nav:hover, .c12-calendar-nav:focus { background-color: rgba(255,255,255,0.12); }
+.c12-calendar-grid, .c12-calendar-row { spacing: 2px; }
+.c12-calendar-dayname { width: 30px; text-align: center; color: #9fc3e6; font-size: 8.5pt; padding-bottom: 2px; }
+.c12-calendar-day { width: 30px; padding: 4px 0; text-align: center; border-radius: 5px; color: #eef6ff; font-size: 9.5pt; }
+.c12-calendar-weekend { color: #b9d6f2; }
+.c12-calendar-other { color: rgba(185,214,242,0.38); }
+.c12-calendar-today { background-color: $accent; color: #ffffff; font-weight: bold; }
+.c12-calendar-weeknum { width: 22px; text-align: center; color: rgba(185,214,242,0.5); font-size: 8pt; padding: 4px 0; }
+.c12-sysmon { spacing: 10px; }
+.c12-sysmon-header, .c12-weather-top { spacing: 8px; }
+.c12-sysmon-header-icon, .c12-weather-pin { color: #9fc3e6; }
+.c12-sysmon-metric { spacing: 4px; }
+.c12-sysmon-top { spacing: 8px; }
+.c12-sysmon-label { width: 44px; color: #dff3ff; font-weight: bold; }
+.c12-sysmon-value { color: #eef6ff; }
+.c12-sysmon-graph { width: 92px; height: 22px; color: #36ccf6; }
+.c12-sysmon-ram .c12-sysmon-graph { color: #9a8cff; }
+.c12-sysmon-ram .c12-sysmon-bar-fill { background-color: #9a8cff; }
+.c12-sysmon-bar { height: 4px; background-color: rgba(255,255,255,0.12); border-radius: 2px; }
+.c12-sysmon-bar-fill { height: 4px; border-radius: 2px; background-color: #36ccf6; }
+.c12-sysmon-disk .c12-sysmon-bar-fill { background-color: #42d5ad; }
+.c12-sysmon-net { spacing: 10px; }
+.c12-sysmon-rate { color: #b9d6f2; font-size: 9pt; }
+.c12-weather { spacing: 8px; }
+.c12-weather-place { color: #dff3ff; font-weight: bold; }
+.c12-weather-now { spacing: 12px; }
+.c12-weather-range { color: #b9d6f2; font-size: 9pt; }
+.c12-weather-forecast { spacing: 4px; padding-top: 8px; border-top: 1px solid rgba(190,225,255,0.18); }
+.c12-weather-day { spacing: 3px; }
+.c12-weather-day-name { color: #9fc3e6; font-size: 8.5pt; }
+.c12-weather-day-temp { color: #eef6ff; font-size: 9pt; }
+.c12-weather-footer { color: rgba(185,214,242,0.65); font-size: 7.5pt; }
+
 /* Cinnamon12 Start (c12-start@cinnamon12.local) */
 .c12-launcher-menu .popup-menu-content { padding: 0; }
 .c12-launcher { padding: 14px 14px 0 14px; spacing: 12px; color: $text; }

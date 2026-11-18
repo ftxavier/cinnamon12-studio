@@ -1,0 +1,21 @@
+{
+  "interval": {
+    "type": "spinbutton",
+    "default": 2,
+    "min": 1,
+    "max": 5,
+    "step": 1,
+    "units": "s",
+    "description": "Update interval"
+  },
+  "mount-point": {
+    "type": "entry",
+    "default": "/",
+    "description": "Disk to monitor (mount point)"
+  },
+  "show-network": {
+    "type": "switch",
+    "default": true,
+    "description": "Show network speed"
+  }
+}

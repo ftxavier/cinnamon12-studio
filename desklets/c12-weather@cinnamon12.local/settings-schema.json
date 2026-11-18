@@ -1,0 +1,65 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": [
+      "p"
+    ],
+    "p": {
+      "type": "page",
+      "title": "Weather",
+      "sections": [
+        "s1",
+        "s2"
+      ]
+    },
+    "s1": {
+      "type": "section",
+      "title": "Location and privacy",
+      "keys": [
+        "city",
+        "allow-network",
+        "privacy-note"
+      ]
+    },
+    "s2": {
+      "type": "section",
+      "title": "Display",
+      "keys": [
+        "units",
+        "refresh-minutes"
+      ]
+    }
+  },
+  "city": {
+    "type": "entry",
+    "default": "",
+    "description": "City (typed by you, never detected automatically)"
+  },
+  "allow-network": {
+    "type": "switch",
+    "default": false,
+    "description": "Allow network access (Open-Meteo)"
+  },
+  "privacy-note": {
+    "type": "label",
+    "description": "The city name is sent once to the Open-Meteo geocoding API, then only its coordinates to the forecast API. Results are cached; no account or API key."
+  },
+  "units": {
+    "type": "combobox",
+    "default": "celsius",
+    "options": {
+      "Celsius (°C)": "celsius",
+      "Fahrenheit (°F)": "fahrenheit"
+    },
+    "description": "Temperature unit"
+  },
+  "refresh-minutes": {
+    "type": "spinbutton",
+    "default": 60,
+    "min": 30,
+    "max": 360,
+    "step": 30,
+    "units": "min",
+    "description": "Refresh every"
+  }
+}

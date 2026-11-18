@@ -2,6 +2,9 @@
 
 ## 0.4.0 (em desenvolvimento)
 
+- **Desklets**: `c12-calendar` (mês, navegação, hoje destacado, início da semana automático/domingo/segunda, números de semana opcionais), `c12-performance` reescrito como Monitor do sistema (CPU e RAM com gráfico de histórico, barras de CPU/RAM/disco, velocidade de rede; leitura de /proc e do sistema de arquivos; intervalo 1–5 s) e `c12-weather` (Open-Meteo, **desligado por padrão**: exige cidade digitada + permissão de rede; cache local, atualização mínima de 30 min, modo offline). Todos com configurações e tradução pt-BR.
+- `cinnamon12 widgets apply [--weather] | restore`: coloca os desklets na coluna esquerda do monitor principal, com backup de `enabled-desklets`; `uninstall` também restaura.
+- Cartões dos widgets mais opacos (tokens `widget`).
 - **Cinnamon12 Quick Settings** (`c12-quicksettings@cinnamon12.local`): cabeçalho com data/hora, cartões Wi-Fi (NetworkManager), Bluetooth (BlueZ), Modo escuro (alterna Cinnamon12 Light/Dark + `org.x.apps.portal color-scheme`), Não perturbe, Luz noturna (só onde o Cinnamon implementa, 6.2+) e Modo de energia (só com power-profiles-daemon); sliders de volume (Cvc) e brilho (csd-power); atalhos Tela, Modo avião (desliga Wi-Fi/WWAN/Bluetooth e restaura o estado anterior), Captura de tela e Configurações. Estados atualizados por sinais, sem polling; controles sem backend ficam ocultos. Tradução pt-BR.
 - `cinnamon12 panel apply --quick-settings` coloca o applet antes do relógio; `apply` também guarda/restaura `org.x.apps.portal color-scheme`; `restore` reconhece a troca Light/Dark feita pelo cartão.
 - `c12-quicklinks` permanece como alternativa simples (só atalhos).
