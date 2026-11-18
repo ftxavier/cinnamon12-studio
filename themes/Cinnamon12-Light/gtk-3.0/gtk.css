@@ -146,8 +146,8 @@ placessidebar row:selected, stacksidebar row:selected, .sidebar row:selected {
 placessidebar row:selected:backdrop { background-color: #c1e4ff; color: #162e4d; }
 .nemo-window .sidebar .view:selected:backdrop { background-color: #0571c4; color: #ffffff; }
 /* Nemo places sidebar is a GtkTreeView: the selection can't be rounded (it is painted
- * per column), so the list is inset from the sidebar edges and rows get more air */
-.nemo-places-sidebar { padding: 6px 8px; }
+ * per column), so it stays a full-width band and rows get more air */
+.nemo-places-sidebar { padding: 6px 0; }
 .nemo-window .sidebar .view, .nemo-places-sidebar treeview.view { padding-top: 5px; padding-bottom: 5px; }
 placessidebar row { border-radius: 5px; margin: 1px 4px; }
 /* GtkTreeView paints the selection per cell (expander, icon, name, eject), so a radius
