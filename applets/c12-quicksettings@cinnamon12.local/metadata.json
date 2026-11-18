@@ -1,0 +1,9 @@
+{
+  "uuid": "c12-quicksettings@cinnamon12.local",
+  "name": "Cinnamon12 Quick Settings",
+  "description": "Quick settings with real state: Wi-Fi, Bluetooth, dark mode, do not disturb, power mode, volume, brightness and airplane mode. Controls without a backend are hidden.",
+  "icon": "cinnamon12-control-center",
+  "version": "0.4.0",
+  "max-instances": "1",
+  "cinnamon-version": ["6.0", "6.2", "6.4"]
+}

@@ -68,3 +68,17 @@ Ambiente: Ubuntu 24.04.5 LTS, Cinnamon 6.0.4, X11, dois monitores (2560×1440 + 
 | `apply` → `restore` e `panel apply` → `panel restore` | Valores idênticos ao snapshot anterior (tema, GTK, ícones, wallpaper, applets, altura) |
 | `.deb` 0.3.0-1 | `dpkg-deb -I/-c` ok; lintian: 0 erros, 2 avisos (sem manpage; changelog sem bug) |
 | Instalação/remoção via APT | **Pendente** (requer sudo do usuário) |
+
+### Quick Settings (0.4.0-dev, mesmo ambiente)
+
+| Controle | Backend | Teste |
+|---|---|---|
+| Wi-Fi | libnm (`WirelessEnabled`, conexão ativa) | Estado e nome da conexão exibidos corretamente. **Alternância não executada** (derrubaria a sessão de teste); permissão via NetworkManager/polkit |
+| Bluetooth | BlueZ `Adapter1.Powered` | Estado exibido; `Set Powered` permitido ao usuário (verificado com `gdbus`). **Desligar não executado** (dispositivos do usuário) |
+| Modo escuro | GSettings (tema shell + GTK + portal) | Alternado 3× pelo cartão; menu reabre; `restore` reverte |
+| Não perturbe | `org.cinnamon.desktop.notifications display-notifications` | Alternado ida e volta |
+| Volume | Cvc (sink padrão) | Mudança externa via `pactl` refletida no slider |
+| Brilho | `org.cinnamon.SettingsDaemon.Power.Screen` | Mudança externa via D-Bus refletida no slider |
+| Luz noturna | `org.cinnamon.settings-daemon.plugins.color night-light-enabled` | Chave inexistente no 6.0.4 → cartão oculto (correto) |
+| Modo de energia | power-profiles-daemon | Serviço ausente → cartão oculto (correto) |
+| Modo avião | NetworkManager + BlueZ | **Não executado** (derrubaria a sessão de teste) |

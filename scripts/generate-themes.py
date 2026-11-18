@@ -395,6 +395,46 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-launcher-session { border-radius: 6px; padding: 8px; color: $text; }
 .c12-launcher-session:hover, .c12-launcher-session:focus { background-color: $hover_bg; color: $accent; }
 .c12-launcher-session-icon { color: $text; }
+
+/* Cinnamon12 Quick Settings (c12-quicksettings@cinnamon12.local) */
+.c12-qs-menu .popup-menu-content { padding: 0; }
+.c12-qs { width: 340px; padding: 14px; spacing: 12px; color: $text; }
+.c12-qs-header { spacing: 8px; padding: 0 2px; }
+.c12-qs-date { color: $text; font-weight: bold; }
+.c12-qs-time { color: $text; font-weight: bold; padding-right: 4px; }
+.c12-qs-grid { spacing: 8px; }
+.c12-qs-row { spacing: 8px; }
+.c12-qs-tile, .c12-qs-tile-spacer { width: 162px; }
+.c12-qs-tile { border-radius: 6px; background-color: $card; border: 1px solid $entry_border; }
+.c12-qs-tile:checked { background-color: $accent; border: 1px solid $accent; }
+.c12-qs-tile:insensitive { opacity: 0.55; }
+.c12-qs-tile-main { padding: 10px 10px 9px 12px; border-radius: 6px; color: $text; }
+.c12-qs-tile-main:hover, .c12-qs-tile-main:focus { background-color: $hover_bg; }
+.c12-qs-tile:checked .c12-qs-tile-main { color: #ffffff; }
+.c12-qs-tile:checked .c12-qs-tile-main:hover, .c12-qs-tile:checked .c12-qs-tile-main:focus { background-color: rgba(255,255,255,0.14); }
+.c12-qs-tile-box { spacing: 3px; }
+.c12-qs-tile-icon { color: $accent; }
+.c12-qs-tile:checked .c12-qs-tile-icon { color: #ffffff; }
+.c12-qs-tile-title { font-weight: bold; }
+.c12-qs-tile-subtitle { font-size: 8.5pt; color: $muted; }
+.c12-qs-tile:checked .c12-qs-tile-subtitle { color: rgba(255,255,255,0.85); }
+.c12-qs-tile-arrow { padding: 0 8px; border-radius: 0 6px 6px 0; color: $muted; border-left: 1px solid $entry_border; }
+.c12-qs-tile:checked .c12-qs-tile-arrow { color: #ffffff; border-left: 1px solid rgba(255,255,255,0.30); }
+.c12-qs-tile-arrow:hover, .c12-qs-tile-arrow:focus { background-color: $hover_bg; }
+.c12-qs-tile:checked .c12-qs-tile-arrow:hover { background-color: rgba(255,255,255,0.14); }
+.c12-qs-sliders { spacing: 6px; padding: 2px 0; }
+.c12-qs-slider-row { spacing: 8px; }
+.c12-qs-slider-icon { padding: 6px; border-radius: 6px; color: $text; }
+.c12-qs-slider-icon:hover, .c12-qs-slider-icon:focus { background-color: $hover_bg; color: $accent; }
+.c12-qs-slider { height: 20px; -slider-height: 4px; -slider-background-color: $line;
+  -slider-active-background-color: $accent; -slider-border-width: 0; -slider-handle-radius: 8px; }
+.c12-qs-slider-value { width: 44px; text-align: right; color: $muted; font-size: 9pt; }
+.c12-qs-actions { spacing: 8px; padding-top: 8px; border-top: 1px solid $popup_border; }
+.c12-qs-action { padding: 9px 14px; border-radius: 6px; color: $text; background-color: $card; border: 1px solid $entry_border; }
+.c12-qs-action:hover, .c12-qs-action:focus { background-color: $hover_bg; }
+.c12-qs-action:checked { background-color: $accent; border: 1px solid $accent; color: #ffffff; }
+.c12-qs-action-icon { color: $text; }
+.c12-qs-action:checked .c12-qs-action-icon { color: #ffffff; }
 .c12-launcher-session:hover .c12-launcher-session-icon, .c12-launcher-session:focus .c12-launcher-session-icon { color: $accent; }
 
 .cinnamon-link { color: $accent; }

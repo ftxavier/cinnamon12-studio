@@ -2,6 +2,9 @@
 
 ## 0.4.0 (em desenvolvimento)
 
+- **Cinnamon12 Quick Settings** (`c12-quicksettings@cinnamon12.local`): cabeçalho com data/hora, cartões Wi-Fi (NetworkManager), Bluetooth (BlueZ), Modo escuro (alterna Cinnamon12 Light/Dark + `org.x.apps.portal color-scheme`), Não perturbe, Luz noturna (só onde o Cinnamon implementa, 6.2+) e Modo de energia (só com power-profiles-daemon); sliders de volume (Cvc) e brilho (csd-power); atalhos Tela, Modo avião (desliga Wi-Fi/WWAN/Bluetooth e restaura o estado anterior), Captura de tela e Configurações. Estados atualizados por sinais, sem polling; controles sem backend ficam ocultos. Tradução pt-BR.
+- `cinnamon12 panel apply --quick-settings` coloca o applet antes do relógio; `apply` também guarda/restaura `org.x.apps.portal color-scheme`; `restore` reconhece a troca Light/Dark feita pelo cartão.
+- `c12-quicklinks` permanece como alternativa simples (só atalhos).
 - **Cinnamon12 Start** (`c12-start@cinnamon12.local`) reescrito: busca (nome, descrição, palavras-chave, executável, sem acento), categorias do menu do sistema, grade de fixados (favoritos do Cinnamon; clique direito fixa/desafixa), arquivos recentes (histórico local do GTK, desligável), Locais, usuário (AccountsService) e botões bloquear/sair/reiniciar/desligar com as confirmações do próprio Cinnamon.
 - Atalho Super configurável, navegação por setas/Tab/Enter, `settings-schema.json` (largura, altura, colunas, recentes, atalho), tradução pt-BR (gettext).
 - `cinnamon12 panel apply --launcher cinnamon12` troca o menu nativo pelo Cinnamon12 Start (o `panel restore` devolve o menu original).

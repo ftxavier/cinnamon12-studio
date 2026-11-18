@@ -82,7 +82,7 @@ def gvar_list(text):
 def gvar_str(items):
  return '['+', '.join("'"+i.replace("'","\\'")+"'" for i in items)+']'
 
-def panel_plan(applets,heights,height,launcher='native'):
+def panel_plan(applets,heights,height,launcher='native',quick=False):
  """Return new (applets, heights) for the 'balanced' profile, keeping instance ids."""
  rows=[a.split(':') for a in applets]
  if launcher=='cinnamon12':
@@ -96,6 +96,15 @@ def panel_plan(applets,heights,height,launcher='native'):
     continue
    swapped.append(r)
   rows=swapped
+ if quick and not any(len(r)>=5 and r[3]=='c12-quicksettings@cinnamon12.local' for r in rows):
+  ids=[int(r[4]) for r in rows if len(r)>=5 and r[4].isdigit()]
+  cal=[r for r in rows if len(r)>=5 and r[3]=='calendar@cinnamon.org']
+  panel_id=cal[0][0] if cal else (rows[0][0] if rows else 'panel1')
+  rights=[r for r in rows if len(r)>=5 and r[0]==panel_id and r[1]=='right']
+  pos=int(cal[0][2]) if cal else len(rights)
+  for r in rights:
+   if r[2].isdigit() and int(r[2])>=pos:r[2]=str(int(r[2])+1)
+  rows.append([panel_id,'right',str(pos),'c12-quicksettings@cinnamon12.local',str(max(ids+[0])+1)])
  out=[];center=[]
  for r in rows:
   if len(r)<5:out.append(r);continue
@@ -129,7 +138,7 @@ def panel(args):
   PANEL_BACKUP.unlink();print('Painel restaurado.');return
  cur={k:value(schema,k) for k in PANEL_KEYS}
  applets,heights=gvar_list(cur['enabled-applets']),gvar_list(cur['panels-height'])
- new_a,new_h=panel_plan(applets,heights,args.height,args.launcher)
+ new_a,new_h=panel_plan(applets,heights,args.height,args.launcher,args.quick_settings)
  plan={'enabled-applets':gvar_str(new_a),'panels-height':gvar_str(new_h)}
  print('Perfil de painel "balanced" (altura',args.height,'px, menu e janelas no centro):')
  for a in sorted(set(applets)-set(new_a)):print('  - ',a)
@@ -190,7 +199,8 @@ def apply(args):
   die('Tema de ícones não instalado.')
  settings=[('org.cinnamon.theme','name',name),
            ('org.cinnamon.desktop.interface','gtk-theme',name),
-           ('org.cinnamon.desktop.interface','icon-theme','Cinnamon12-Icons')]
+           ('org.cinnamon.desktop.interface','icon-theme','Cinnamon12-Icons'),
+           ('org.x.apps.portal','color-scheme',"'prefer-dark'" if args.variant=='dark' else "'default'")]
  if not args.no_wallpaper:
   w={'light':'c12-arctic','dark':'c12-midnight'}[args.variant]+'-'+wallpaper_size()+'.jpg'
   p=USER_BG/w
@@ -233,7 +243,8 @@ def restore(args):
    print('AVISO: chave não existe, mantida no backup:',key)
    remaining[key]=row;continue
   current=value(s,k)
-  if not args.force and row['applied'] is not None and current!=row['applied']:
+  ours=current.strip("'").startswith('Cinnamon12-') or (row['key']=='color-scheme' and current in ("'default'","'prefer-dark'"))
+  if not args.force and row['applied'] is not None and current!=row['applied'] and not ours:
    print('PULADO (modificado manualmente depois):',key,'Atual:',current)
    remaining[key]=row;continue
   set_value(s,k,row['original'])
@@ -271,7 +282,7 @@ def main():
  q=sub.add_parser('apply',help='faz backup das preferências antes de ativar');q.add_argument('variant',choices=['light','dark']);q.add_argument('--no-wallpaper',action='store_true')
  q=sub.add_parser('restore',help='restaura as preferências anteriores, preservando mudanças manuais');q.add_argument('--force',action='store_true',help='reverter até as preferências alteradas manualmente')
  q=sub.add_parser('uninstall',help='restaura preferências e remove apenas pastas que instalamos');q.add_argument('--force',action='store_true');q.add_argument('--keep-files',action='store_true')
- q=sub.add_parser('panel',help='perfil de painel 48 px centralizado, com backup');q.add_argument('panel_action',choices=['apply','restore']);q.add_argument('--height',type=int,default=48);q.add_argument('--launcher',choices=['native','cinnamon12'],default='native',help='cinnamon12 troca o menu nativo pelo Cinnamon12 Start');q.add_argument('--dry-run',action='store_true');q.add_argument('--force',action='store_true')
+ q=sub.add_parser('panel',help='perfil de painel 48 px centralizado, com backup');q.add_argument('panel_action',choices=['apply','restore']);q.add_argument('--height',type=int,default=48);q.add_argument('--launcher',choices=['native','cinnamon12'],default='native',help='cinnamon12 troca o menu nativo pelo Cinnamon12 Start');q.add_argument('--quick-settings',action='store_true',help='adiciona o Cinnamon12 Quick Settings antes do relógio');q.add_argument('--dry-run',action='store_true');q.add_argument('--force',action='store_true')
  args=p.parse_args()
  {'doctor':doctor,'install':install,'apply':apply,'restore':restore,'uninstall':uninstall,'panel':panel}[args.action](args)
 if __name__=='__main__':main()
