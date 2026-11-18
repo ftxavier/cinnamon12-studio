@@ -170,6 +170,20 @@ placessidebar row:selected:hover, .sidebar row:selected:hover { background-color
 .nemo-window .nemo-inactive-pane .view, .nemo-window .nemo-inactive-pane iconview { background-color: #17283e; }
 .path-bar button { border-radius: 5px; }
 .path-bar button:checked { background-color: #254d71; border-color: transparent; font-weight: bold; }
+/* Nemo breadcrumb: the path bar container draws nothing, so its buttons form one rounded
+ * box (sliders are the first/last children) and each folder gets a trailing chevron */
+.nemo-window .path-bar button, .nemo-window .path-bar button:hover, .nemo-window .path-bar button:checked,
+.nemo-window .path-bar button:backdrop, .nemo-window .path-bar button:backdrop:checked, .nemo-window .path-bar button:disabled {
+  background-color: #213a5a; color: #e9f4ff; border: 1px solid #2f4d72; border-left-width: 0; border-right-width: 0;
+  border-radius: 0; box-shadow: inset 0 1px rgba(255,255,255,0.05); min-height: 30px; text-shadow: none;
+  background-image: url("assets/pathbar-chevron-dark.svg"); background-repeat: no-repeat; background-position: right center;
+  padding: 0 22px 0 8px; }
+.nemo-window .path-bar button:hover { background-color: #28466b; }
+.nemo-window .path-bar button:checked { font-weight: bold; }
+.nemo-window .path-bar button:first-child, .nemo-window .path-bar button:last-child {
+  background-image: none; padding: 0 4px; color: #a4bfdc; }
+.nemo-window .path-bar button:first-child { border-left-width: 1px; border-radius: 6px 0 0 6px; }
+.nemo-window .path-bar button:last-child { border-right-width: 1px; border-radius: 0 6px 6px 0; }
 
 /* ---------- menus / popovers / tooltips ---------- */
 menu, .menu, .context-menu, popover.menu, popover, popover.background {

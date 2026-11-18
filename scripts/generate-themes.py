@@ -35,7 +35,8 @@ EXTRA = {
         'warning': '#f3b34d', 'gtk_base': 'Adwaita/gtk-contained.css',
         'gtk4_base': 'Default/Default-light.css', 'titlebar': '#c4e0fd', 'titlebar_hi': '#cde9fd',
         'titlebar_backdrop': '#dcebfd', 'titlebar_edge': 'rgba(255,255,255,0.55)',
-        'toolbar': '#e4eefb', 'toolbar_line': '#cee0f5', 'scroll': 'rgba(82,110,144,0.45)',
+        'toolbar': '#d8e8fb', 'toolbar_line': '#c2d6ef',
+        'crumb_bg': '#e9f2fe', 'crumb_hover': '#dcebfd', 'crumb_border': '#c8dcf3', 'crumb_hi': 'rgba(255,255,255,0.70)', 'scroll': 'rgba(82,110,144,0.45)',
         'tooltip_bg': 'rgba(22,46,77,0.95)', 'tooltip_fg': '#f2f8ff',
         # WCAG AA: accent as text on light surfaces (4.7:1 over the 97% popup) and as a fill under white text (5.0:1).
         'accent_fg': '#056bbb', 'accent_fill': '#0571c4', 'on_accent': '#ffffff',
@@ -49,7 +50,8 @@ EXTRA = {
         'warning': '#f6c262', 'gtk_base': 'Adwaita/gtk-contained-dark.css',
         'gtk4_base': 'Default/Default-dark.css', 'titlebar': '#1c334f', 'titlebar_hi': '#21395a',
         'titlebar_backdrop': '#17283e', 'titlebar_edge': 'rgba(255,255,255,0.06)',
-        'toolbar': '#182c45', 'toolbar_line': 'rgba(255,255,255,0.08)', 'scroll': 'rgba(164,191,220,0.40)',
+        'toolbar': '#182c45', 'toolbar_line': 'rgba(255,255,255,0.08)',
+        'crumb_bg': '#213a5a', 'crumb_hover': '#28466b', 'crumb_border': '#2f4d72', 'crumb_hi': 'rgba(255,255,255,0.05)', 'scroll': 'rgba(164,191,220,0.40)',
         'tooltip_bg': 'rgba(9,20,39,0.96)', 'tooltip_fg': '#eef6ff',
         # Bright accent keeps the look; text on it is dark navy (6.5:1) instead of white (2.5:1).
         'accent_fg': '#2baaff', 'accent_fill': '#2baaff', 'on_accent': '#06203d',
@@ -69,6 +71,7 @@ def palette(variant):
     p.update(PANEL)
     p.update({'r_' + k: str(v) for k, v in TOK['radii'].items()})
     p['variant'] = variant
+    p['chevron'] = 'assets/pathbar-chevron-%s.svg' % variant
     p['stock'] = STOCK_CINNAMON_CSS
     return p
 
@@ -717,6 +720,20 @@ placessidebar row:selected:hover, .sidebar row:selected:hover { background-color
 .nemo-window .nemo-inactive-pane .view, .nemo-window .nemo-inactive-pane iconview { background-color: $window; }
 .path-bar button { border-radius: 5px; }
 .path-bar button:checked { background-color: $item_active; border-color: transparent; font-weight: bold; }
+/* Nemo breadcrumb: the path bar container draws nothing, so its buttons form one rounded
+ * box (sliders are the first/last children) and each folder gets a trailing chevron */
+.nemo-window .path-bar button, .nemo-window .path-bar button:hover, .nemo-window .path-bar button:checked,
+.nemo-window .path-bar button:backdrop, .nemo-window .path-bar button:backdrop:checked, .nemo-window .path-bar button:disabled {
+  background-color: $crumb_bg; color: $text; border: 1px solid $crumb_border; border-left-width: 0; border-right-width: 0;
+  border-radius: 0; box-shadow: inset 0 1px $crumb_hi; min-height: 30px; text-shadow: none;
+  background-image: url("$chevron"); background-repeat: no-repeat; background-position: right center;
+  padding: 0 22px 0 8px; }
+.nemo-window .path-bar button:hover { background-color: $crumb_hover; }
+.nemo-window .path-bar button:checked { font-weight: bold; }
+.nemo-window .path-bar button:first-child, .nemo-window .path-bar button:last-child {
+  background-image: none; padding: 0 4px; color: $muted; }
+.nemo-window .path-bar button:first-child { border-left-width: 1px; border-radius: ${r_button}px 0 0 ${r_button}px; }
+.nemo-window .path-bar button:last-child { border-right-width: 1px; border-radius: 0 ${r_button}px ${r_button}px 0; }
 
 /* ---------- menus / popovers / tooltips ---------- */
 menu, .menu, .context-menu, popover.menu, popover, popover.background {
@@ -920,7 +937,12 @@ def main():
         name = 'Cinnamon12-' + variant.capitalize()
         base = ROOT / 'themes' / name
         (base / 'cinnamon' / 'assets').mkdir(parents=True, exist_ok=True)
-        (base / 'gtk-3.0').mkdir(parents=True, exist_ok=True)
+        (base / 'gtk-3.0' / 'assets').mkdir(parents=True, exist_ok=True)
+        for v in ('light', 'dark'):
+            (base / 'gtk-3.0' / 'assets' / ('pathbar-chevron-%s.svg' % v)).write_text(
+                '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">'
+                '<path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="%s" stroke-width="1.6" '
+                'stroke-linecap="round" stroke-linejoin="round"/></svg>\n' % palette(v)['text'])
         (base / 'gtk-4.0').mkdir(parents=True, exist_ok=True)
         (base / 'cinnamon' / 'cinnamon.css').write_text(CINNAMON.substitute(p))
         for fname, svg in svg_assets(p).items():

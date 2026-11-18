@@ -2,6 +2,7 @@
 
 ## 0.4.0 (em desenvolvimento)
 
+- Nemo: caminho em migalhas (breadcrumb) numa caixa arredondada única, pasta atual em negrito e seta › após cada pasta; barra de ferramentas no tom da referência (#d8e8fb). Ctrl+L continua abrindo o caminho em texto.
 - Barra de título em azul mais vivo com brilho suave e sem a linha escura de divisão; barra de ferramentas do Nemo em tom próprio, com linha inferior suave (variantes Light e Dark).
 - Nemo: barra lateral com linhas mais altas e seleção de borda a borda, seleção forte também sem foco; visualização em ícones com item selecionado em bloco claro com contorno de destaque; botão de visualização ativo com contorno. Cantos da seleção da barra lateral ficam retos: o GtkTreeView pinta a seleção por coluna.
 - **GTK, item selecionado com o mouse em cima**: a regra de hover (fundo claro) vencia a de seleção, que mantinha o texto branco; no tema claro o nome sumia. Seleção agora prevalece no hover (barra lateral do Nemo, listas, GtkListBox).
