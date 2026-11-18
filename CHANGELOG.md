@@ -2,6 +2,9 @@
 
 ## 0.4.0 (em desenvolvimento)
 
+- **Barra de tarefas flutuante**: barra de 48 px com cantos arredondados, 6 px livres acima e abaixo e 8 px nas pontas, desenhada como `border-image` 9-slice. O Cinnamon 6.0 ignora `margin` no painel e pinta o fundo sob bordas transparentes. Os destaques de hover, janela ativa (com indicador ciano), janela aberta e "pedindo atenção" viraram pílulas inset, sem encostar nas bordas. Funciona em painéis horizontais e verticais.
+- `panel apply`: altura padrão 60 px (48 visíveis) e ícones de 28 px nas zonas esquerda e central (`panel-zone-icon-sizes`, com backup e restore; backups antigos são completados).
+- **Launcher** abre 10 px acima da barra, flutuando como ela.
 - **Contraste WCAG AA** nas duas variantes: no Light, azul de destaque como texto `#056bbb` e preenchimento sob texto branco `#0571c4`; no Dark, o azul vivo é mantido e o texto sobre ele passa a ser azul-marinho `#06203d` (6,5:1 em vez de 2,5:1). Vale para shell, GTK3/GTK4 e para os SVG de checkbox, rádio e toggle. O `validate.py` agora reprova pares de texto abaixo de 4,5:1.
 - **Launcher**: barras de rolagem finas (8 px) no shell; categorias cabem sem rolagem. Categorias, variante Dark e botões de sessão verificados (sair, reiniciar e desligar sempre pedem confirmação).
 - **Desklets**: `c12-calendar` (mês, navegação, hoje destacado, início da semana automático/domingo/segunda, números de semana opcionais), `c12-performance` reescrito como Monitor do sistema (CPU e RAM com gráfico de histórico, barras de CPU/RAM/disco, velocidade de rede; leitura de /proc e do sistema de arquivos; intervalo 1–5 s) e `c12-weather` (Open-Meteo, **desligado por padrão**: exige cidade digitada + permissão de rede; cache local, atualização mínima de 30 min, modo offline). Todos com configurações e tradução pt-BR.

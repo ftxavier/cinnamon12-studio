@@ -17,6 +17,7 @@ Only literal values are emitted (St has no CSS variables).  Run:
 import json
 from pathlib import Path
 from string import Template
+import re
 
 ROOT = Path(__file__).resolve().parents[1]
 TOK = json.loads((ROOT / 'design' / 'tokens.json').read_text())
@@ -85,12 +86,16 @@ CINNAMON = Template(r'''/* Cinnamon12 Studio | $variant | Cinnamon shell theme.
   color: $panel_text;
   border: none;
 }
-/* Cinnamon 6.0 ignores margins on the panel actor (tested), so the panel spans the
- * monitor edge; a hairline on the inner edge gives the "floating glass" hint. */
-.panel-bottom { border-top: 1px solid $panel_border; }
-.panel-top { border-bottom: 1px solid $panel_border; }
-.panel-left { border-right: 1px solid $panel_border; }
-.panel-right { border-left: 1px solid $panel_border; }
+/* Floating panel. Cinnamon 6.0 ignores margins on the panel actor and paints the
+ * background under transparent borders (both tested), so the bar is a 9-slice
+ * border-image: a 48 px bar with a transparent 6 px gap above and below (panel height
+ * 60) and 8 px at the ends. The gap is symmetric because the stock window list forces
+ * its buttons to the full panel height and centers the icon there; hover/active pills
+ * are border-images too, inset to the visible bar. The actor still reaches the screen
+ * edge, so the edge stays clickable (Fitts' law). */
+.panel-bottom, .panel-top, .panel-left, .panel-right { background-color: transparent; border: none; }
+.panel-bottom, .panel-top { border-image: url("assets/panel-float-h.svg") 20; padding: 0 14px; }
+.panel-left, .panel-right { border-image: url("assets/panel-float-v.svg") 20; padding: 14px 0; }
 #panel:highlight, .applet-box:highlight, .spacer-box:highlight { background-color: rgba(43,170,255,0.35); }
 .panel-dummy { background-color: rgba(43,170,255,0.18); }
 .panel-dummy:entered { background-color: rgba(43,170,255,0.40); }
@@ -98,7 +103,11 @@ CINNAMON = Template(r'''/* Cinnamon12 Studio | $variant | Cinnamon shell theme.
   background-gradient-direction: none; background-color: rgba(43,170,255,0.12); }
 
 .applet-box { color: $panel_text; text-shadow: none; border-radius: 5px; }
-.applet-box:hover, .applet-box:checked { color: #ffffff; background-color: $panel_hover; }
+.applet-box:hover, .applet-box:checked { color: #ffffff; }
+.panel-bottom .applet-box:hover, .panel-bottom .applet-box:checked,
+.panel-top .applet-box:hover, .panel-top .applet-box:checked { border-image: url("assets/pill-h-hover.svg") 20 10; }
+.panel-left .applet-box:hover, .panel-left .applet-box:checked,
+.panel-right .applet-box:hover, .panel-right .applet-box:checked { border-image: url("assets/pill-v-hover.svg") 10 20; }
 .applet-box:checked > .applet-label, .applet-box:hover > .applet-label { color: #ffffff; text-shadow: none; }
 .applet-box:checked .applet-icon, .applet-box:hover .applet-icon { color: #ffffff; icon-shadow: none; }
 .applet-label, .applet-icon { color: $panel_text; }
@@ -108,25 +117,46 @@ CINNAMON = Template(r'''/* Cinnamon12 Studio | $variant | Cinnamon shell theme.
 .applet-cornerbar { background: rgba(237,246,255,0.20); }
 .applet-cornerbar-box:hover > .applet-cornerbar { background: rgba(237,246,255,0.35); }
 
-/* window lists (grouped and classic) */
+/* window lists (grouped and classic): pills drawn as border-images inset to the bar */
 .grouped-window-list-item-box, .window-list-item-box {
   color: $panel_text;
   background-gradient-direction: none; background-color: transparent;
-  box-shadow: none; border-radius: 5px;
+  box-shadow: none; border-radius: 8px;
 }
-.grouped-window-list-item-box:hover, .window-list-item-box:hover {
-  background-gradient-direction: none; background-color: $panel_hover; box-shadow: none; }
-.grouped-window-list-item-box:active, .window-list-item-box:active {
-  background-gradient-direction: none; background-color: rgba(194,224,255,0.08);
-  box-shadow: none; }
+.panel-bottom .grouped-window-list-item-box, .panel-top .grouped-window-list-item-box,
+.panel-bottom .window-list-item-box, .panel-top .window-list-item-box { margin: 0 2px; }
+.panel-left .grouped-window-list-item-box, .panel-right .grouped-window-list-item-box,
+.panel-left .window-list-item-box, .panel-right .window-list-item-box { margin: 2px 0; }
+.grouped-window-list-item-box:hover, .window-list-item-box:hover,
+.grouped-window-list-item-box:active, .window-list-item-box:active { background-color: transparent; box-shadow: none; }
+.panel-bottom .grouped-window-list-item-box:hover, .panel-top .grouped-window-list-item-box:hover,
+.panel-bottom .window-list-item-box:hover, .panel-top .window-list-item-box:hover { border-image: url("assets/pill-h-hover.svg") 20 10; }
+.panel-left .grouped-window-list-item-box:hover, .panel-right .grouped-window-list-item-box:hover,
+.panel-left .window-list-item-box:hover, .panel-right .window-list-item-box:hover { border-image: url("assets/pill-v-hover.svg") 10 20; }
+.panel-bottom .grouped-window-list-item-box:active, .panel-top .grouped-window-list-item-box:active,
+.panel-bottom .window-list-item-box:active, .panel-top .window-list-item-box:active { border-image: url("assets/pill-h-running.svg") 20 10; }
+.panel-left .grouped-window-list-item-box:active, .panel-right .grouped-window-list-item-box:active,
+.panel-left .window-list-item-box:active, .panel-right .window-list-item-box:active { border-image: url("assets/pill-v-running.svg") 10 20; }
 .grouped-window-list-item-box:checked, .grouped-window-list-item-box:focus,
 .grouped-window-list-item-box:active:hover, .grouped-window-list-item-box:focus:hover,
 .grouped-window-list-item-box:active:focus:hover,
 .window-list-item-box:checked, .window-list-item-box:focus {
-  background-gradient-direction: none; background-color: $panel_active;
-  box-shadow: inset 0 -2px 0 0 $panel_indicator; }
+  background-gradient-direction: none; background-color: transparent; box-shadow: none; }
+.panel-bottom .grouped-window-list-item-box:checked, .panel-bottom .grouped-window-list-item-box:focus,
+.panel-bottom .grouped-window-list-item-box:active:hover, .panel-bottom .grouped-window-list-item-box:focus:hover,
+.panel-bottom .window-list-item-box:checked, .panel-bottom .window-list-item-box:focus,
+.panel-top .grouped-window-list-item-box:checked, .panel-top .grouped-window-list-item-box:focus,
+.panel-top .grouped-window-list-item-box:active:hover, .panel-top .grouped-window-list-item-box:focus:hover,
+.panel-top .window-list-item-box:checked, .panel-top .window-list-item-box:focus { border-image: url("assets/pill-h-focus.svg") 20 10; }
+.panel-left .grouped-window-list-item-box:checked, .panel-left .grouped-window-list-item-box:focus,
+.panel-left .grouped-window-list-item-box:active:hover, .panel-left .grouped-window-list-item-box:focus:hover,
+.panel-right .grouped-window-list-item-box:checked, .panel-right .grouped-window-list-item-box:focus,
+.panel-right .grouped-window-list-item-box:active:hover, .panel-right .grouped-window-list-item-box:focus:hover { border-image: url("assets/pill-v-focus.svg") 10 20; }
 .grouped-window-list-item-demands-attention, .window-list-item-demands-attention {
-  background-gradient-direction: none; background-color: rgba(241,113,137,0.55); }
+  background-gradient-direction: none; background-color: transparent; }
+.panel-bottom .grouped-window-list-item-demands-attention, .panel-top .grouped-window-list-item-demands-attention,
+.panel-bottom .window-list-item-demands-attention, .panel-top .window-list-item-demands-attention { border-image: url("assets/pill-h-attention.svg") 20 10; }
+.panel-left .grouped-window-list-item-demands-attention, .panel-right .grouped-window-list-item-demands-attention { border-image: url("assets/pill-v-attention.svg") 10 20; }
 .grouped-window-list-item-box .progress, .window-list-item-box .progress {
   background-gradient-direction: none; background-color: rgba(54,204,246,0.55); box-shadow: none; }
 .grouped-window-list-badge { background-color: $accent; border-radius: 6px; }
@@ -761,7 +791,24 @@ def svg_assets(p):
     acc, line, entry, text, muted = p['accent_fill'], p['line'], p['entry'], p['text'], p['muted']
     on = p['on_accent']
     border = p['entry_border']
+    m = re.match(r'rgba\((\d+),(\d+),(\d+),([\d.]+)\)', p['panel'].replace(' ', ''))
+    pfill, pop = '#%02x%02x%02x' % tuple(int(v) for v in m.groups()[:3]), m.group(4)
+    def svg(body):
+        return f'<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">{body}</svg>'
+    def bar(x, y, w, h):
+        return svg(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="12" fill="{pfill}" fill-opacity="{pop}" '
+                   f'stroke="#9dccfc" stroke-opacity="0.22" stroke-width="1"/>')
+    # Pills: 6 px panel gap + 4 px inset on the cross axis. (fill, opacity, indicator?)
+    states = {'hover': ('#c2e0ff', 0.14, False), 'running': ('#c2e0ff', 0.08, False),
+              'focus': ('#2baaff', 0.28, True), 'attention': ('#f17189', 0.55, False)}
+    panels = {'panel-float-h.svg': bar(8.5, 6.5, 47, 51), 'panel-float-v.svg': bar(6.5, 8.5, 51, 47)}
+    for name, (col, op, ind) in states.items():
+        line_h = '<rect x="12" y="49" width="40" height="3" rx="1.5" fill="#36ccf6"/>' if ind else ''
+        line_v = '<rect x="49" y="12" width="3" height="40" rx="1.5" fill="#36ccf6"/>' if ind else ''
+        panels[f'pill-h-{name}.svg'] = svg(f'<rect x="0" y="10" width="64" height="44" rx="8" fill="{col}" fill-opacity="{op}"/>{line_h}')
+        panels[f'pill-v-{name}.svg'] = svg(f'<rect x="10" y="0" width="44" height="64" rx="8" fill="{col}" fill-opacity="{op}"/>{line_v}')
     return {
+        **panels,
         'toggle-on.svg': f'''<svg xmlns="http://www.w3.org/2000/svg" width="64" height="22" viewBox="0 0 64 22">
 <rect x="14" y="2" width="36" height="18" rx="9" fill="{acc}"/><circle cx="41" cy="11" r="6.5" fill="{on}"/></svg>''',
         'toggle-off.svg': f'''<svg xmlns="http://www.w3.org/2000/svg" width="64" height="22" viewBox="0 0 64 22">

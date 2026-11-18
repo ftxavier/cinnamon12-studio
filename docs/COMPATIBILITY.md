@@ -39,7 +39,7 @@
 
 - Menu próprio com layout 2 colunas e busca fluida sem limitações, acessibilidade e gerenciamento de favoritos.
 - Quick settings com estados e ações reais via NetworkManager, Bluetooth, áudio e brilho, com permissões e acessibilidade.
-- Translucidez do painel com geometria flutuante testada; Cinnamon não garante blur real.
+- Blur real atrás do painel (Cinnamon não oferece); a geometria flutuante já está implementada via `border-image`.
 - Implementação e documentação de sinalizações de brilho e energia em ambientes com diferentes backends.
 - Tela de login/lockscreen opcional, testada sem alterar o login manager.
 - Verificação de GTK 4/libadwaita, apps Flatpak e instalação de terceiros.
@@ -100,3 +100,14 @@ Ambiente: Ubuntu 24.04.5 LTS, Cinnamon 6.0.4, X11, dois monitores (2560×1440 + 
 | Launcher na variante Dark | Conferido por captura de tela |
 | Sair / Reiniciar / Desligar | Mesmas chamadas do menu oficial (`LogoutRemote(0)`, `ShutdownRemote()`) e `cinnamon-session-quit --reboot` sem `--no-prompt`: todas pedem confirmação. Não acionados na sessão de teste |
 | Contraste de texto (20 pares, Light e Dark) | Todos ≥ 4,5:1; verificado a cada `validate.py` |
+
+### Barra flutuante (0.4.0-dev)
+
+| Verificação | Resultado |
+|---|---|
+| `margin` no ator do painel | Ignorada (já constatado em 0.3.0) |
+| `border` transparente + `border-radius` no painel | Cantos arredondam, mas o fundo é pintado sob a borda: não cria espaço |
+| `border-image` 9-slice com margem transparente | **Funciona**; padding do painel respeitado nas laterais |
+| Padding vertical no painel | Não serve: o `grouped-window-list` força os botões à altura total do painel e centraliza o ícone nela; por isso o espaço é simétrico (6 px acima e abaixo) |
+| Pílulas de hover/ativo | `border-image` com fatias laterais de 10 px; com 20 px as fatias se sobrepunham em botões de ~33 px (faixa clara no meio) |
+| Light e Dark, launcher aberto | Conferido por captura; sem erros no log |

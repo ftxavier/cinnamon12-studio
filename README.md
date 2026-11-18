@@ -38,7 +38,7 @@ Ou ative a versão escura:
 ./cinnamon12 apply dark
 ```
 
-**Painel no estilo da referência (opcional, 48 px, menu e janelas no centro, com backup):**
+**Painel no estilo da referência (opcional, barra flutuante de 48 px, ícones de 28 px, menu e janelas no centro, com backup):**
 
 ```bash
 ./cinnamon12 panel apply --dry-run   # mostra o que muda

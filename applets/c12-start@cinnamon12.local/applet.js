@@ -54,6 +54,14 @@ class C12Menu extends Applet.AppletPopupMenu {
 
     _calculatePosition() {
         let [x, y] = super._calculatePosition();
+        // Float the popup a little away from the panel, like the panel floats off the edge.
+        const GAP = 4;  // plus the 6 px transparent gap of the floating panel
+        switch (this._orientation) {
+            case St.Side.BOTTOM: y -= GAP; break;
+            case St.Side.TOP: y += GAP; break;
+            case St.Side.LEFT: x += GAP; break;
+            case St.Side.RIGHT: x -= GAP; break;
+        }
         const horizontal = this._orientation === St.Side.TOP || this._orientation === St.Side.BOTTOM;
         if (!horizontal || this._launcher.menuAlignment !== 'start') return [x, y];
         const src = Cinnamon.util_get_transformed_allocation(this.sourceActor);
