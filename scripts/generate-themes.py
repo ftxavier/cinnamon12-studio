@@ -809,17 +809,18 @@ def svg_assets(p):
     pfill, pop = '#%02x%02x%02x' % tuple(int(v) for v in m.groups()[:3]), m.group(4)
     def svg(body):
         return f'<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">{body}</svg>'
+    R = TOK['radii']['panel']  # bar corner radius (reference: 8 px)
     def bar(x, y, w, h):
-        return svg(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="12" fill="{pfill}" fill-opacity="{pop}" '
+        return svg(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{R}" fill="{pfill}" fill-opacity="{pop}" '
                    f'stroke="#9dccfc" stroke-opacity="0.22" stroke-width="1"/>')
     # Pills: 6 px panel gap + 4 px inset on the cross axis. (fill, opacity, indicator?)
     states = {'hover': ('#c2e0ff', 0.14, False), 'running': ('#c2e0ff', 0.08, False),
               'focus': ('#2baaff', 0.28, True), 'attention': ('#f17189', 0.55, False)}
     panels = {'panel-float-h.svg': bar(8.5, 6.5, 47, 51), 'panel-float-v.svg': bar(6.5, 8.5, 51, 47)}
-    # End caps for "show desktop": the bar's rounded end (r 12) plus the 8 px outer gap.
+    # End caps for "show desktop": the bar's rounded end (radius R) plus the 8 px outer gap.
     hov = '<path d="{d}" fill="#c2e0ff" fill-opacity="0.16"/>'
-    cap_h = 'M0 6.5H1.5A12 12 0 0 1 13.5 18.5V45.5A12 12 0 0 1 1.5 57.5H0Z'
-    cap_v = 'M6.5 0V1.5A12 12 0 0 0 18.5 13.5H45.5A12 12 0 0 0 57.5 1.5V0Z'
+    cap_h = f'M0 6.5H{13.5-R}A{R} {R} 0 0 1 13.5 {6.5+R}V{57.5-R}A{R} {R} 0 0 1 {13.5-R} 57.5H0Z'
+    cap_v = f'M6.5 0V{13.5-R}A{R} {R} 0 0 0 {6.5+R} 13.5H{57.5-R}A{R} {R} 0 0 0 57.5 {13.5-R}V0Z'
     line_h = '<rect x="5" y="22" width="3" height="20" rx="1.5" fill="#edf6ff" fill-opacity="0.30"/>'
     line_v = '<rect x="22" y="5" width="20" height="3" rx="1.5" fill="#edf6ff" fill-opacity="0.30"/>'
     def cap(w, h, body):
