@@ -123,6 +123,8 @@
 .radiobutton StBin, .radiobutton:focus StBin { background-image: url("assets/radio-off.svg"); }
 .radiobutton:checked StBin, .radiobutton:focus:checked StBin { background-image: url("assets/radio-on.svg"); }
 
+/* Slim overlay-style scrollbars (base theme uses 16 px). */
+StScrollView StScrollBar { min-width: 8px; min-height: 8px; padding: 1px; }
 StScrollBar StBin#trough { background-color: transparent; border: none; }
 StScrollBar StButton#vhandle, StScrollBar StButton#hhandle {
   background-image: none; background-color: rgba(82,110,144,0.45); border: none; border-radius: 4px; }
@@ -341,7 +343,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-launcher-search-icon { icon-size: 16px; color: #526e90; padding-right: 6px; }
 .c12-launcher-body { spacing: 12px; }
 .c12-launcher-categories { width: 196px; padding-right: 10px; border-right: 1px solid #b6d0eb; }
-.c12-launcher-category { color: #162e4d; border-radius: 5px; padding: 7px 10px; margin-bottom: 1px; }
+.c12-launcher-category { color: #162e4d; border-radius: 5px; padding: 6px 10px; margin-bottom: 1px; }
 .c12-launcher-category-box { spacing: 10px; }
 .c12-launcher-category:hover, .c12-launcher-category:focus { background-color: #d6ecff; }
 .c12-launcher-category:checked { background-color: #078fe8; color: #ffffff; }

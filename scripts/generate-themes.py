@@ -191,6 +191,8 @@ CINNAMON = Template(r'''/* Cinnamon12 Studio | $variant | Cinnamon shell theme.
 .radiobutton StBin, .radiobutton:focus StBin { background-image: url("assets/radio-off.svg"); }
 .radiobutton:checked StBin, .radiobutton:focus:checked StBin { background-image: url("assets/radio-on.svg"); }
 
+/* Slim overlay-style scrollbars (base theme uses 16 px). */
+StScrollView StScrollBar { min-width: 8px; min-height: 8px; padding: 1px; }
 StScrollBar StBin#trough { background-color: transparent; border: none; }
 StScrollBar StButton#vhandle, StScrollBar StButton#hhandle {
   background-image: none; background-color: $scroll; border: none; border-radius: 4px; }
@@ -409,7 +411,7 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-launcher-search-icon { icon-size: 16px; color: $muted; padding-right: 6px; }
 .c12-launcher-body { spacing: 12px; }
 .c12-launcher-categories { width: 196px; padding-right: 10px; border-right: 1px solid $popup_border; }
-.c12-launcher-category { color: $text; border-radius: 5px; padding: 7px 10px; margin-bottom: 1px; }
+.c12-launcher-category { color: $text; border-radius: 5px; padding: 6px 10px; margin-bottom: 1px; }
 .c12-launcher-category-box { spacing: 10px; }
 .c12-launcher-category:hover, .c12-launcher-category:focus { background-color: $hover_bg; }
 .c12-launcher-category:checked { background-color: $accent; color: #ffffff; }
