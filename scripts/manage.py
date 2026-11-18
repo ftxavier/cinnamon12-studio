@@ -60,8 +60,9 @@ def targets():
 PANEL_BACKUP=STATE/'panel-original.json'
 PANEL_KEYS=['enabled-applets','panels-height']
 # Optional: icon size per zone (JSON string). Absent on very old Cinnamon -> skipped.
-PANEL_OPT_KEYS=['panel-zone-icon-sizes']
+PANEL_OPT_KEYS=['panel-zone-icon-sizes','panel-zone-symbolic-icon-sizes']
 PANEL_ICON_SIZE=28  # icons with breathing room inside the 48 px visible bar
+PANEL_SYMBOLIC_SIZE=20  # status icons (network, sound, power...) next to 24 px tray icons
 CENTER_UUIDS=['menu@cinnamon.org','c12-start@cinnamon12.local','grouped-window-list@cinnamon.org','panel-launchers@cinnamon.org']
 DROP_UUIDS=['separator@cinnamon.org']
 
@@ -149,6 +150,10 @@ def panel(args):
   ids=[h.split(':')[0] for h in new_h]
   sizes=[{'panelId':int(i),'left':PANEL_ICON_SIZE,'center':PANEL_ICON_SIZE,'right':24} for i in ids]
   plan['panel-zone-icon-sizes']="'"+json.dumps(sizes)+"'"
+ if 'panel-zone-symbolic-icon-sizes' in keys:
+  ids=[h.split(':')[0] for h in new_h]
+  sizes=[{'panelId':int(i),'left':PANEL_SYMBOLIC_SIZE,'center':PANEL_SYMBOLIC_SIZE,'right':PANEL_SYMBOLIC_SIZE} for i in ids]
+  plan['panel-zone-symbolic-icon-sizes']="'"+json.dumps(sizes)+"'"
  print('Perfil de painel "balanced" (altura',args.height,'px, menu e janelas no centro):')
  for a in sorted(set(applets)-set(new_a)):print('  - ',a)
  for a in sorted(set(new_a)-set(applets)):print('  + ',a)

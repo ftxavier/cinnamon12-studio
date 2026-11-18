@@ -30,10 +30,18 @@
 
 .applet-box { color: #edf6ff; text-shadow: none; border-radius: 5px; }
 .applet-box:hover, .applet-box:checked { color: #ffffff; }
+/* Applet pills: symmetric padding keeps the icon centered and the pill square-ish:
+ * 20 px status icon + 16 = 36 x 36 at the ends; 28 px start icon + 12 = 40 x 40 in the
+ * center, like the window list. */
+.panel-bottom .applet-box, .panel-top .applet-box { padding: 0 8px; }
+.panel-left .applet-box, .panel-right .applet-box { padding: 8px 0; }
 .panel-bottom .applet-box:hover, .panel-bottom .applet-box:checked,
-.panel-top .applet-box:hover, .panel-top .applet-box:checked { border-image: url("assets/pill-h-hover.svg") 20 10; }
+.panel-top .applet-box:hover, .panel-top .applet-box:checked { border-image: url("assets/pill-h-hover-sm.svg") 20 10; }
 .panel-left .applet-box:hover, .panel-left .applet-box:checked,
-.panel-right .applet-box:hover, .panel-right .applet-box:checked { border-image: url("assets/pill-v-hover.svg") 10 20; }
+.panel-right .applet-box:hover, .panel-right .applet-box:checked { border-image: url("assets/pill-v-hover-sm.svg") 10 20; }
+.panel-bottom .panelCenter .applet-box, .panel-top .panelCenter .applet-box { padding: 0 6px; }
+.panel-bottom .panelCenter .applet-box:hover, .panel-bottom .panelCenter .applet-box:checked,
+.panel-top .panelCenter .applet-box:hover, .panel-top .panelCenter .applet-box:checked { border-image: url("assets/pill-h-hover.svg") 20 10; }
 .applet-box:checked > .applet-label, .applet-box:hover > .applet-label { color: #ffffff; text-shadow: none; }
 .applet-box:checked .applet-icon, .applet-box:hover .applet-icon { color: #ffffff; icon-shadow: none; }
 .applet-label, .applet-icon { color: #edf6ff; }
