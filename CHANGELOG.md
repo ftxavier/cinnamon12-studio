@@ -1,5 +1,12 @@
 # Histórico
 
+## 0.4.0 (em desenvolvimento)
+
+- **Cinnamon12 Start** (`c12-start@cinnamon12.local`) reescrito: busca (nome, descrição, palavras-chave, executável, sem acento), categorias do menu do sistema, grade de fixados (favoritos do Cinnamon; clique direito fixa/desafixa), arquivos recentes (histórico local do GTK, desligável), Locais, usuário (AccountsService) e botões bloquear/sair/reiniciar/desligar com as confirmações do próprio Cinnamon.
+- Atalho Super configurável, navegação por setas/Tab/Enter, `settings-schema.json` (largura, altura, colunas, recentes, atalho), tradução pt-BR (gettext).
+- `cinnamon12 panel apply --launcher cinnamon12` troca o menu nativo pelo Cinnamon12 Start (o `panel restore` devolve o menu original).
+- Estilo do launcher nos temas Light/Dark.
+
 ## 0.3.0 (validado em Ubuntu 24.04.5 + Cinnamon 6.0.4, X11)
 
 - Tema do shell passa a importar o `cinnamon.css` instalado no sistema e sobrepor só as cores/geometria Cinnamon12: cobertura completa de Alt-Tab, Expo, OSD, calendário, notificações, som, teclado virtual e desklets. Toggle, checkbox, radio e setas do calendário redesenhados em `cinnamon/assets/`.

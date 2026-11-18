@@ -358,6 +358,45 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-action { color: $text; background-color: $card; border: 1px solid $entry_border; border-radius: 6px; padding: 7px 10px; }
 .c12-action:hover { background-color: $hover_bg; }
 
+/* Cinnamon12 Start (c12-start@cinnamon12.local) */
+.c12-launcher-menu .popup-menu-content { padding: 0; }
+.c12-launcher { padding: 14px 14px 0 14px; spacing: 12px; color: $text; }
+.c12-launcher-search {
+  color: $text; caret-color: $accent; selected-color: #ffffff; selection-background-color: $accent;
+  background-color: $entry; border: 1px solid $entry_border; border-radius: 6px; padding: 8px 10px; }
+.c12-launcher-search:focus { border: 1px solid $accent; box-shadow: inset 0 0 0 1px $accent; }
+.c12-launcher-search StLabel.hint-text { color: $muted; }
+.c12-launcher-search-icon { icon-size: 16px; color: $muted; padding-right: 6px; }
+.c12-launcher-body { spacing: 12px; }
+.c12-launcher-categories { width: 196px; padding-right: 10px; border-right: 1px solid $popup_border; }
+.c12-launcher-category { color: $text; border-radius: 5px; padding: 7px 10px; margin-bottom: 1px; }
+.c12-launcher-category-box { spacing: 10px; }
+.c12-launcher-category:hover, .c12-launcher-category:focus { background-color: $hover_bg; }
+.c12-launcher-category:checked { background-color: $accent; color: #ffffff; }
+.c12-launcher-content { padding-right: 4px; }
+.c12-launcher-section-title { font-weight: bold; color: $text; padding: 2px 4px 8px 4px; }
+.c12-launcher-grid-row { spacing: 4px; padding-bottom: 6px; }
+.c12-launcher-tile { width: 82px; padding: 8px 2px 6px 2px; border-radius: 6px; color: $text; }
+.c12-launcher-tile:hover, .c12-launcher-tile:focus { background-color: $hover_bg; }
+.c12-launcher-tile-box { spacing: 6px; }
+.c12-launcher-tile-label { font-size: 9pt; text-align: center; max-width: 78px; }
+.c12-launcher-row { border-radius: 6px; padding: 6px 8px; color: $text; }
+.c12-launcher-row:hover, .c12-launcher-row:focus { background-color: $hover_bg; }
+.c12-launcher-row-box { spacing: 12px; }
+.c12-launcher-row-title { color: $text; }
+.c12-launcher-row-subtitle { color: $muted; font-size: 8.5pt; }
+.c12-launcher-empty { color: $muted; padding: 8px 4px; }
+.c12-launcher-footer {
+  border-top: 1px solid $popup_border; padding: 10px 0 12px 0; spacing: 4px; }
+.c12-launcher-user { border-radius: 6px; padding: 4px 10px 4px 4px; color: $text; }
+.c12-launcher-user:hover, .c12-launcher-user:focus { background-color: $hover_bg; }
+.c12-launcher-user-box { spacing: 10px; }
+.c12-launcher-avatar { border-radius: 14px; color: $accent; }
+.c12-launcher-session { border-radius: 6px; padding: 8px; color: $text; }
+.c12-launcher-session:hover, .c12-launcher-session:focus { background-color: $hover_bg; color: $accent; }
+.c12-launcher-session-icon { color: $text; }
+.c12-launcher-session:hover .c12-launcher-session-icon, .c12-launcher-session:focus .c12-launcher-session-icon { color: $accent; }
+
 .cinnamon-link { color: $accent; }
 .cinnamon-link:hover { color: $hover; }
 ''')

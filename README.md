@@ -44,6 +44,7 @@ Ou ative a versão escura:
 ./cinnamon12 panel apply --dry-run   # mostra o que muda
 ./cinnamon12 panel apply
 ./cinnamon12 panel restore           # volta o painel exatamente como estava
+./cinnamon12 panel apply --launcher cinnamon12   # usa o menu Cinnamon12 Start no lugar do menu nativo
 ```
 
 **Para restaurar as preferências anteriores:**

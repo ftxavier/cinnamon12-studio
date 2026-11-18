@@ -82,9 +82,20 @@ def gvar_list(text):
 def gvar_str(items):
  return '['+', '.join("'"+i.replace("'","\\'")+"'" for i in items)+']'
 
-def panel_plan(applets,heights,height):
+def panel_plan(applets,heights,height,launcher='native'):
  """Return new (applets, heights) for the 'balanced' profile, keeping instance ids."""
  rows=[a.split(':') for a in applets]
+ if launcher=='cinnamon12':
+  ids=[int(r[4]) for r in rows if len(r)>=5 and r[4].isdigit()]
+  nxt=max(ids+[0])+1
+  has=any(len(r)>=5 and r[3]=='c12-start@cinnamon12.local' for r in rows)
+  swapped=[]
+  for r in rows:
+   if len(r)>=5 and r[3]=='menu@cinnamon.org':
+    if not has:swapped.append([r[0],r[1],r[2],'c12-start@cinnamon12.local',str(nxt)]);has=True
+    continue
+   swapped.append(r)
+  rows=swapped
  out=[];center=[]
  for r in rows:
   if len(r)<5:out.append(r);continue
@@ -118,7 +129,7 @@ def panel(args):
   PANEL_BACKUP.unlink();print('Painel restaurado.');return
  cur={k:value(schema,k) for k in PANEL_KEYS}
  applets,heights=gvar_list(cur['enabled-applets']),gvar_list(cur['panels-height'])
- new_a,new_h=panel_plan(applets,heights,args.height)
+ new_a,new_h=panel_plan(applets,heights,args.height,args.launcher)
  plan={'enabled-applets':gvar_str(new_a),'panels-height':gvar_str(new_h)}
  print('Perfil de painel "balanced" (altura',args.height,'px, menu e janelas no centro):')
  for a in sorted(set(applets)-set(new_a)):print('  - ',a)
@@ -260,7 +271,7 @@ def main():
  q=sub.add_parser('apply',help='faz backup das preferências antes de ativar');q.add_argument('variant',choices=['light','dark']);q.add_argument('--no-wallpaper',action='store_true')
  q=sub.add_parser('restore',help='restaura as preferências anteriores, preservando mudanças manuais');q.add_argument('--force',action='store_true',help='reverter até as preferências alteradas manualmente')
  q=sub.add_parser('uninstall',help='restaura preferências e remove apenas pastas que instalamos');q.add_argument('--force',action='store_true');q.add_argument('--keep-files',action='store_true')
- q=sub.add_parser('panel',help='perfil de painel 48 px centralizado, com backup');q.add_argument('panel_action',choices=['apply','restore']);q.add_argument('--height',type=int,default=48);q.add_argument('--dry-run',action='store_true');q.add_argument('--force',action='store_true')
+ q=sub.add_parser('panel',help='perfil de painel 48 px centralizado, com backup');q.add_argument('panel_action',choices=['apply','restore']);q.add_argument('--height',type=int,default=48);q.add_argument('--launcher',choices=['native','cinnamon12'],default='native',help='cinnamon12 troca o menu nativo pelo Cinnamon12 Start');q.add_argument('--dry-run',action='store_true');q.add_argument('--force',action='store_true')
  args=p.parse_args()
  {'doctor':doctor,'install':install,'apply':apply,'restore':restore,'uninstall':uninstall,'panel':panel}[args.action](args)
 if __name__=='__main__':main()
