@@ -1,0 +1,8 @@
+{
+  "uuid": "c12-quicklinks@cinnamon12.local",
+  "name": "Cinnamon12 | Acesso rápido (experimental)",
+  "description": "Atalhos reais para as configurações do Cinnamon; NÃO simula ou altera o estado de Wi-Fi, Bluetooth ou brilho.",
+  "icon": "cinnamon12-control-center",
+  "version": "0.2.0",
+  "max-instances": "1"
+}

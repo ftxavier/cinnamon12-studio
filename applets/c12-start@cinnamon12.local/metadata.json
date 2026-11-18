@@ -1,0 +1,8 @@
+{
+  "uuid": "c12-start@cinnamon12.local",
+  "name": "Cinnamon12 | Início (experimental)",
+  "description": "Menu de aplicativos com busca local e atalhos, feito para Cinnamon 6.0.4. Não substitui automaticamente o menu original.",
+  "icon": "cinnamon12-start",
+  "version": "0.2.0",
+  "max-instances": "1"
+}

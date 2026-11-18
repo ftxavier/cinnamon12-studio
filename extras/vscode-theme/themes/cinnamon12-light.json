@@ -1,0 +1,80 @@
+{
+  "name": "Cinnamon12 Light",
+  "type": "light",
+  "colors": {
+    "editor.background": "#f1f8ff",
+    "editor.foreground": "#203b5d",
+    "editorCursor.foreground": "#078fe8",
+    "activityBar.background": "#dfebfa",
+    "activityBar.foreground": "#203b5d",
+    "sideBar.background": "#f1f8ff",
+    "sideBar.foreground": "#203b5d",
+    "sideBarTitle.foreground": "#078fe8",
+    "statusBar.background": "#dfebfa",
+    "statusBar.foreground": "#203b5d",
+    "titleBar.activeBackground": "#dfebfa",
+    "titleBar.activeForeground": "#203b5d",
+    "tab.activeBackground": "#f1f8ff",
+    "tab.activeForeground": "#203b5d",
+    "editor.lineHighlightBackground": "#00000008",
+    "editor.selectionBackground": "#3c7baa77",
+    "editorWhitespace.foreground": "#90adce55",
+    "panel.background": "#f1f8ff",
+    "terminal.background": "#f1f8ff",
+    "terminal.foreground": "#203b5d",
+    "terminalCursor.foreground": "#078fe8",
+    "focusBorder": "#078fe8",
+    "input.background": "#dfebfa",
+    "input.foreground": "#203b5d",
+    "button.background": "#078fe8",
+    "button.foreground": "#ffffff"
+  },
+  "tokenColors": [
+    {
+      "scope": [
+        "keyword",
+        "storage",
+        "storage.type"
+      ],
+      "settings": {
+        "foreground": "#7059c6"
+      }
+    },
+    {
+      "scope": [
+        "string",
+        "string.quoted"
+      ],
+      "settings": {
+        "foreground": "#148568"
+      }
+    },
+    {
+      "scope": [
+        "comment",
+        "punctuation.definition.comment"
+      ],
+      "settings": {
+        "foreground": "#6d93b4",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": [
+        "entity.name.function",
+        "support.function"
+      ],
+      "settings": {
+        "foreground": "#1179c9"
+      }
+    },
+    {
+      "scope": [
+        "constant.numeric"
+      ],
+      "settings": {
+        "foreground": "#b57c2c"
+      }
+    }
+  ]
+}

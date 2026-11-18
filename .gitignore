@@ -1,0 +1,8 @@
+# build output (the .deb is published as a GitHub release asset)
+dist/
+__pycache__/
+*.pyc
+# mockup with third-party logos: kept locally, not redistributed (see LICENSE.md)
+assets/previews/conceito-original.png
+# marker written by the local installer
+.cinnamon12-studio-owned

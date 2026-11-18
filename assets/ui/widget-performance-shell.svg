@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 180" width="380" height="180"><defs>
+ <linearGradient id="blue" x2="1" y2="1"><stop stop-color="#60ddff"/><stop offset="1" stop-color="#0579e2"/></linearGradient>
+ <linearGradient id="purple" x2="1" y2="1"><stop stop-color="#a3a4ff"/><stop offset="1" stop-color="#6255db"/></linearGradient>
+ <linearGradient id="glass" x2="0" y2="1"><stop stop-color="#f9fdff" stop-opacity=".97"/><stop offset="1" stop-color="#c8e4ff" stop-opacity=".95"/></linearGradient>
+ <linearGradient id="night" x2="0" y2="1"><stop stop-color="#213d67"/><stop offset="1" stop-color="#071c38"/></linearGradient>
+ </defs>
+   <rect x="3" y="3" width="374" height="174" rx="7" fill="url(#night)" stroke="#72b9fc" stroke-opacity=".6"/>
+   <path d="M21 83h48l16-22 21 37 25-26 22 18 17-37 23 32 28-10 20-28 27 34 28-12 26 14" fill="none" stroke="#25caff" stroke-width="5" stroke-linecap="round"/>
+   <rect x="23" y="130" width="334" height="9" rx="4" fill="#4d6d92"/>
+   <rect x="23" y="130" width="151" height="9" rx="4" fill="#31c7fb"/>
+   <rect x="23" y="149" width="334" height="9" rx="4" fill="#4d6d92"/>
+   <rect x="23" y="149" width="230" height="9" rx="4" fill="#9c91f5"/>
+  </svg>

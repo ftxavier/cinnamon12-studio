@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Cinnamon12-Light
+Comment=Cinnamon12 Studio theme (light): blue accents, small radius
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Cinnamon12-Light
+IconTheme=Cinnamon12-Icons
+CursorTheme=Yaru

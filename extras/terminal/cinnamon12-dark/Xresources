@@ -1,0 +1,20 @@
+! Cinnamon12 Studio colors; import manually.
+*.background: #0b1c34
+*.foreground: #e8f4ff
+*.cursorColor: #5cd5ff
+*.color0: #10223a
+*.color1: #ee6b8b
+*.color2: #3fceaa
+*.color3: #e9c06e
+*.color4: #51aaf5
+*.color5: #a698ff
+*.color6: #55cce9
+*.color7: #acc6e2
+*.color8: #476582
+*.color9: #ff8fa7
+*.color10: #70e6c4
+*.color11: #ffdf93
+*.color12: #82c7ff
+*.color13: #c3b7ff
+*.color14: #8ae6f3
+*.color15: #ffffff

@@ -1,0 +1,6 @@
+{
+  "uuid": "c12-performance@cinnamon12.local",
+  "name": "Cinnamon12 | Monitor (experimental)",
+  "description": "Mostra CPU e RAM com números calculados de /proc, sem rede e sem scripts externos.",
+  "version": "0.2.0"
+}

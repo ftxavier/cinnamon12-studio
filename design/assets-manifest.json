@@ -1,0 +1,24 @@
+{
+  "icon_count": 202,
+  "count_by_category": {
+    "apps": 53,
+    "places": 26,
+    "devices": 13,
+    "mimetypes": 15,
+    "actions": 52,
+    "status": 43
+  },
+  "png_sizes": [
+    16,
+    24,
+    32,
+    48,
+    64,
+    128
+  ],
+  "format": [
+    "SVG",
+    "PNG"
+  ],
+  "original_design": true
+}
