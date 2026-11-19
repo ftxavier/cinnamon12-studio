@@ -22,7 +22,7 @@ for c in ['apps','places','devices','mimetypes','actions','status']:
   count+=1
   try: ET.parse(src)
   except Exception as ex:errors.append(f'malformed SVG {src}: {ex}')
-  for size in ([16,24,32,48] if c=='status' else [16,24,32,48,64,128]):
+  for size in ([] if c=='status' else [16,24,32,48,64,128]):  # symbolic: SVG only
    f=icons/f'{size}x{size}'/c/(src.stem+'.png')
    if not f.is_file():errors.append('missing '+str(f));continue
    try:

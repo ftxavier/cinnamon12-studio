@@ -1,12 +1,12 @@
 {
-  "icon_count": 202,
+  "icon_count": 164,
   "count_by_category": {
     "apps": 53,
     "places": 26,
     "devices": 13,
     "mimetypes": 15,
     "actions": 52,
-    "status": 43
+    "status": 5
   },
   "png_sizes": [
     16,

@@ -6,7 +6,7 @@ Você recebeu os recursos **Cinnamon12 Studio** criados para um usuário com **U
 
 1. `design/tokens.json`: fonte única de cores e raios.
 2. `scripts/generate-themes.py`: CSS do Cinnamon e GTK, claro e escuro; compile sem CSS variables JS/browser.
-3. `icons/Cinnamon12-Icons`: **202 nomes** de ícones e seus PNG/SVG em layout freedesktop, com `index.theme` e herança Yaru, Adwaita e hicolor.
+3. `icons/Cinnamon12-Icons`: **164 nomes** de ícones e seus PNG/SVG (ícones de status simbólicos só nossos, em SVG; os padrão vêm do Yaru) em layout freedesktop, com `index.theme` e herança Yaru, Adwaita e hicolor.
 4. `scripts/generate-assets.py`: fontes vetoriais geradas por caminhos SVG editáveis no próprio script.
 5. `assets/wallpapers`: três papéis de parede originais, mais 3 resoluções JPEG por variante.
 6. `assets/ui`: 11 elementos de interface SVG e raster, para uso nos menus, widgets e materiais gráficos.

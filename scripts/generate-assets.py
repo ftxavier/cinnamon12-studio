@@ -182,35 +182,20 @@ ACTIONS={
  'insert-link':'link','mark-location':'star','share':'share',
  'network-connect':'ethernet','network-disconnect':'wifi-off',
 }
-STATUS={
- 'network-wireless-signal-excellent-symbolic':'wifi',
- 'network-wireless-signal-good-symbolic':'wifi',
- 'network-wireless-signal-ok-symbolic':'wifi',
- 'network-wireless-signal-weak-symbolic':'wifi',
- 'network-wireless-signal-none-symbolic':'wifi-off',
- 'network-wireless-offline-symbolic':'wifi-off',
- 'network-wired-symbolic':'ethernet',
- 'bluetooth-active-symbolic':'bluetooth','bluetooth-disabled-symbolic':'bluetooth',
- 'audio-volume-high-symbolic':'volume','audio-volume-medium-symbolic':'volume',
- 'audio-volume-low-symbolic':'volume','audio-volume-muted-symbolic':'volume-off',
- 'microphone-sensitivity-high-symbolic':'mic','microphone-sensitivity-muted-symbolic':'mic',
- 'battery-full-symbolic':'battery','battery-good-symbolic':'battery',
- 'battery-medium-symbolic':'battery','battery-low-symbolic':'battery',
- 'battery-caution-symbolic':'battery','battery-empty-symbolic':'battery',
- 'battery-full-charging-symbolic':'lightning',
- 'display-brightness-symbolic':'sun', 'weather-clear-symbolic':'sun',
- 'weather-clear-night-symbolic':'moon', 'weather-few-clouds-symbolic':'cloud',
- 'airplane-mode-symbolic':'airplane', 'notifications-symbolic':'bell',
- 'notifications-disabled-symbolic':'bell',
- 'system-search-symbolic':'search', 'system-lock-screen-symbolic':'lock',
- 'system-shutdown-symbolic':'power','system-reboot-symbolic':'refresh',
- 'system-log-out-symbolic':'logout', 'security-high-symbolic':'shield',
- 'emblem-ok-symbolic':'check','dialog-warning-symbolic':'warning',
- 'dialog-information-symbolic':'info',
- 'cinnamon12-menu-symbolic':'grid','cinnamon12-toggles-symbolic':'settings-sliders',
- 'cinnamon12-night-light-symbolic':'moon', 'cinnamon12-performance-symbolic':'chart',
- 'cinnamon12-calendar-symbolic':'calendar',
+# Symbolic icons: only our own names. GTK recolors a symbolic SVG by forcing `fill` on
+# every rect/circle/path, so these glyphs are drawn with filled shapes only (a stroked
+# outline turns into a blob and currentColor renders black), and ship as SVG only (a PNG
+# can't be recolored and would win at its size). Standard status names (network,
+# bluetooth, volume, battery, weather...) are NOT overridden: they come from
+# Yaru/Adwaita through Inherits=, which are drawn for recoloring.
+SYMBOLIC={
+ 'cinnamon12-menu-symbolic':'<rect x="8" y="8" width="21" height="21" rx="4"/><rect x="35" y="8" width="21" height="21" rx="4"/><rect x="8" y="35" width="21" height="21" rx="4"/><rect x="35" y="35" width="21" height="21" rx="4"/>',
+ 'cinnamon12-toggles-symbolic':'<rect x="6" y="14" width="52" height="4.5" rx="2.25"/><rect x="6" y="30" width="52" height="4.5" rx="2.25"/><rect x="6" y="46" width="52" height="4.5" rx="2.25"/><circle cx="22" cy="16.25" r="7"/><circle cx="43" cy="32.25" r="7"/><circle cx="25" cy="48.25" r="7"/>',
+ 'cinnamon12-night-light-symbolic':'<path d="M50 46A26 26 0 0 1 18 14 26 26 0 1 0 50 46Z"/>',
+ 'cinnamon12-performance-symbolic':'<rect x="7" y="7" width="5" height="50" rx="2.5"/><rect x="7" y="52" width="51" height="5" rx="2.5"/><rect x="17" y="30" width="7" height="18" rx="2"/><rect x="29" y="16" width="7" height="32" rx="2"/><rect x="41" y="25" width="7" height="23" rx="2"/><rect x="53" y="11" width="5" height="37" rx="2"/>',
+ 'cinnamon12-calendar-symbolic':'<path fill-rule="evenodd" d="M13 11h38a6 6 0 0 1 6 6v35a6 6 0 0 1-6 6H13a6 6 0 0 1-6-6V17a6 6 0 0 1 6-6Zm-1 17v23a2 2 0 0 0 2 2h36a2 2 0 0 0 2-2V28Z"/><rect x="18" y="5" width="5" height="12" rx="2.5"/><rect x="41" y="5" width="5" height="12" rx="2.5"/><rect x="18" y="34" width="8" height="6" rx="1.5"/><rect x="31" y="34" width="8" height="6" rx="1.5"/><rect x="18" y="44" width="8" height="6" rx="1.5"/>',
 }
+STATUS=SYMBOLIC
 
 SIZES=[16,24,32,48,64,128]
 
@@ -240,8 +225,8 @@ def icon_svg(name, glyph, pal, tile=True, folder=False):
    <g transform="translate(48 47) scale(.86) translate(-32 -32)" stroke="white" stroke-width="4.3" fill="none" stroke-linecap="round" stroke-linejoin="round">{PATHS[glyph]}</g></svg>'''
  return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">{defs}<g transform="translate(16 16)" stroke="{c2}" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round">{PATHS[glyph]}</g></svg>'''
 
-def glyph_svg(glyph):
- return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><g fill="none" stroke="#bebebe" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round">{PATHS[glyph]}</g></svg>'''
+def glyph_svg(body):
+ return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="16" height="16"><g fill="#bebebe">{body}</g></svg>'''
 
 def save_icon(category,name,glyph,pal='blue',folder=False,symbolic=False):
  data = glyph_svg(glyph) if symbolic else icon_svg(name,glyph,pal,folder=folder)
@@ -249,7 +234,7 @@ def save_icon(category,name,glyph,pal='blue',folder=False,symbolic=False):
  p.parent.mkdir(parents=True,exist_ok=True)
  p.write_text(data,encoding='utf8')
  # PNGs are generated for high compatibility; scalable originals remain editable.
- for size in ([16,24,32,48,64,128] if not symbolic else [16,24,32,48]):
+ for size in ([16,24,32,48,64,128] if not symbolic else []):
   out=ICONS/f'{size}x{size}'/category/f'{name}.png'
   out.parent.mkdir(parents=True,exist_ok=True)
   png=cairosvg.svg2png(bytestring=data.encode(),output_width=size,output_height=size)
@@ -260,7 +245,7 @@ for name,(glyph,color) in PLACE_ICONS.items():save_icon('places',name,glyph,colo
 for name,(glyph,color) in DEVICE_ICONS.items():save_icon('devices',name,glyph,color)
 for name,(glyph,color) in MIME_ICONS.items():save_icon('mimetypes',name,glyph,color)
 for name,glyph in ACTIONS.items():save_icon('actions',name,glyph,symbolic=False)
-for name,glyph in STATUS.items():save_icon('status',name,glyph,symbolic=True)
+for name,body in SYMBOLIC.items():save_icon('status',name,body,symbolic=True)
 
 sections=[]
 for s in SIZES:
@@ -293,8 +278,11 @@ for i,(cat,n) in enumerate(items):
  x=28+(i%C)*CELL_W;y=102+(i//C)*CELL_H
  d.rounded_rectangle((x,y,x+CELL_W-10,y+CELL_H-10),radius=8,fill='#f5f9ff',outline='#c6d8ec')
  src=ICONS/'64x64'/cat/(n+'.png')
- if not src.exists():src=ICONS/'48x48'/cat/(n+'.png')
- icon=Image.open(src).convert('RGBA').resize((60,60),Image.Resampling.LANCZOS)
+ if cat=='status':  # SVG only: render the glyph darker so it shows on the light sheet
+  svg=(ICONS/'scalable'/cat/(n+'.svg')).read_text().replace('#bebebe','#29456b')
+  icon=Image.open(io.BytesIO(cairosvg.svg2png(bytestring=svg.encode(),output_width=60,output_height=60))).convert('RGBA')
+ else:
+  icon=Image.open(src).convert('RGBA').resize((60,60),Image.Resampling.LANCZOS)
  im.paste(icon,(x+43,y+7),icon)
  text=n[:19]
  box=d.textbbox((0,0),text,font=f(10))

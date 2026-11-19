@@ -431,7 +431,7 @@ class C12QuickSettings extends Applet.IconApplet {
         this._addTile('dnd', dnd);
         const updDnd = () => {
             const on = !this._notifSettings.get_boolean('display-notifications');
-            dnd.set(on, on ? _('On') : _('Off'), on ? 'notifications-disabled-symbolic' : 'notifications-symbolic');
+            dnd.set(on, on ? _('On') : _('Off'), on ? 'notifications-disabled-symbolic' : 'preferences-system-notifications-symbolic');
         };
         this._connect(this._notifSettings, 'changed::display-notifications', updDnd);
         updDnd();
