@@ -63,7 +63,7 @@ PANEL_KEYS=['enabled-applets','panels-height']
 PANEL_OPT_KEYS=['panel-zone-icon-sizes','panel-zone-symbolic-icon-sizes']
 PANEL_ICON_SIZE=28  # icons with breathing room inside the 48 px bar
 PANEL_SYMBOLIC_SIZE=20  # status icons (network, sound, power...) next to 24 px tray icons
-CENTER_UUIDS=['menu@cinnamon.org','c12-start@cinnamon12.local','grouped-window-list@cinnamon.org','panel-launchers@cinnamon.org']
+CENTER_UUIDS=['menu@cinnamon.org','c12-start@cinnamon12.local','c12-search@cinnamon12.local','grouped-window-list@cinnamon.org','panel-launchers@cinnamon.org']
 DROP_UUIDS=['separator@cinnamon.org']
 
 def wallpaper_size():
@@ -86,7 +86,7 @@ def gvar_list(text):
 def gvar_str(items):
  return '['+', '.join("'"+i.replace("'","\\'")+"'" for i in items)+']'
 
-def panel_plan(applets,heights,height,launcher='native',quick=False):
+def panel_plan(applets,heights,height,launcher='native',quick=False,search=False):
  """Return new (applets, heights) for the 'balanced' profile, keeping instance ids."""
  rows=[a.split(':') for a in applets]
  if launcher=='cinnamon12':
@@ -109,6 +109,11 @@ def panel_plan(applets,heights,height,launcher='native',quick=False):
   for r in rights:
    if r[2].isdigit() and int(r[2])>=pos:r[2]=str(int(r[2])+1)
   rows.append([panel_id,'right',str(pos),'c12-quicksettings@cinnamon12.local',str(max(ids+[0])+1)])
+ if search and not any(len(r)>=5 and r[3]=='c12-search@cinnamon12.local' for r in rows):
+  ids=[int(r[4]) for r in rows if len(r)>=5 and r[4].isdigit()]
+  starts=[r for r in rows if len(r)>=5 and r[3] in ('c12-start@cinnamon12.local','menu@cinnamon.org')]
+  panel_id=starts[0][0] if starts else (rows[0][0] if rows else 'panel1')
+  rows.append([panel_id,'center','0','c12-search@cinnamon12.local',str(max(ids+[0])+1)])
  out=[];center=[]
  for r in rows:
   if len(r)<5:out.append(r);continue
@@ -144,7 +149,7 @@ def panel(args):
   PANEL_BACKUP.unlink();print('Painel restaurado.');return
  cur={k:value(schema,k) for k in keys}
  applets,heights=gvar_list(cur['enabled-applets']),gvar_list(cur['panels-height'])
- new_a,new_h=panel_plan(applets,heights,args.height,args.launcher,args.quick_settings)
+ new_a,new_h=panel_plan(applets,heights,args.height,args.launcher,args.quick_settings,args.search)
  plan={'enabled-applets':gvar_str(new_a),'panels-height':gvar_str(new_h)}
  if 'panel-zone-icon-sizes' in keys:
   ids=[h.split(':')[0] for h in new_h]
@@ -349,7 +354,7 @@ def main():
  q=sub.add_parser('apply',help='faz backup das preferências antes de ativar');q.add_argument('variant',choices=['light','dark']);q.add_argument('--no-wallpaper',action='store_true')
  q=sub.add_parser('restore',help='restaura as preferências anteriores, preservando mudanças manuais');q.add_argument('--force',action='store_true',help='reverter até as preferências alteradas manualmente')
  q=sub.add_parser('uninstall',help='restaura preferências e remove apenas pastas que instalamos');q.add_argument('--force',action='store_true');q.add_argument('--keep-files',action='store_true')
- q=sub.add_parser('panel',help='perfil de painel de largura total (48 px) centralizado, com backup');q.add_argument('panel_action',choices=['apply','restore']);q.add_argument('--height',type=int,default=48,help='altura do painel em px');q.add_argument('--launcher',choices=['native','cinnamon12'],default='native',help='cinnamon12 troca o menu nativo pelo Cinnamon12 Start');q.add_argument('--quick-settings',action='store_true',help='adiciona o Cinnamon12 Quick Settings antes do relógio');q.add_argument('--dry-run',action='store_true');q.add_argument('--force',action='store_true')
+ q=sub.add_parser('panel',help='perfil de painel de largura total (48 px) centralizado, com backup');q.add_argument('panel_action',choices=['apply','restore']);q.add_argument('--height',type=int,default=48,help='altura do painel em px');q.add_argument('--launcher',choices=['native','cinnamon12'],default='native',help='cinnamon12 troca o menu nativo pelo Cinnamon12 Start');q.add_argument('--quick-settings',action='store_true',help='adiciona o Cinnamon12 Quick Settings antes do relógio');q.add_argument('--search',action='store_true',help='adiciona o Cinnamon12 Search logo depois do menu');q.add_argument('--dry-run',action='store_true');q.add_argument('--force',action='store_true')
  q=sub.add_parser('widgets',help='desklets Cinnamon12 (calendário, monitor e, opcional, clima) na lateral esquerda, com backup');q.add_argument('widgets_action',choices=['apply','restore']);q.add_argument('--weather',action='store_true');q.add_argument('--dry-run',action='store_true');q.add_argument('--force',action='store_true')
  args=p.parse_args()
  {'doctor':doctor,'install':install,'apply':apply,'restore':restore,'uninstall':uninstall,'panel':panel,'widgets':widgets}[args.action](args)

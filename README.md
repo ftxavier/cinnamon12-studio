@@ -8,12 +8,13 @@ Tema conceitual **original**, inspirado por interfaces modernas de desktop, para
 
 | Componente | Conteúdo | Status |
 |---|---|---|
-| Ícones freedesktop | 202 nomes; SVG vetorial + PNGs de 16, 24, 32, 48, 64 e 128 px (symbolic até 48 px) | Gerado, verificar ícones dos apps específicos |
+| Ícones freedesktop | 164 nomes; SVG vetorial + PNGs de 16, 24, 32, 48, 64 e 128 px (symbolic só SVG, com formas preenchidas; status padrão vêm do Yaru) | Gerado, verificar ícones dos apps específicos |
 | Wallpapers originais | 3 designs; originais PNG, JPEG 1920×1080, 2560×1440, 3840×2160 | Prontos (4K é redimensionado do original gerado, não render nativo 4K) |
 | Temas Cinnamon | `Cinnamon12-Light` e `Cinnamon12-Dark` em `cinnamon/cinnamon.css` | Base implementada, testar visualmente |
 | Temas GTK | GTK3 e GTK4 CSS com paletas e variantes | GTK3 base pronta; GTK4 pode ser ignorado por libadwaita |
 | Material UI | 11 SVGs de componentes + PNG 1x/2x | Recursos de apoio ao agente (não substituem controles funcionais) |
 | Menu personalizado | Applet `c12-start@cinnamon12.local` com busca no inventário local | Protótipo, opt-in |
+| Busca no painel | Applet `c12-search@cinnamon12.local`: campo/ícone/atalho, apps, configurações e arquivos da home, painel de ações | Protótipo, opt-in |
 | Centro de atalhos | Applet `c12-quicklinks@cinnamon12.local`, abre configurações reais | Protótipo, **não** são toggles de Wi-Fi etc. |
 | Desklets | Relógio local e medidor CPU/RAM lendo `/proc` | Protótipos, opt-in |
 | Aparência do terminal | Exemplos Kitty, Alacritty e Xresources (claro/escuro) | Opcional, configuração manual |
@@ -98,7 +99,7 @@ O pacote não tem scripts de instalação/remoção: ele nunca altera preferênc
 Cinnamon12-Studio/
 ├── themes/Cinnamon12-Light/          # Cinnamon CSS + GTK CSS
 ├── themes/Cinnamon12-Dark/
-├── icons/Cinnamon12-Icons/            # 202 SVG + variações PNG + index.theme
+├── icons/Cinnamon12-Icons/            # 164 SVG + variações PNG + index.theme
 ├── assets/wallpapers/                # 3 fundos, 3 resoluções + originais
 ├── assets/ui/                        # componentes visuais SVG e PNG
 ├── assets/previews/                  # galerias e conceito aprovado

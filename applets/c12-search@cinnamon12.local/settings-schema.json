@@ -1,0 +1,73 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": ["page-general"],
+    "page-general": {
+      "type": "page",
+      "title": "General",
+      "sections": ["sec-look", "sec-files", "sec-keys"]
+    },
+    "sec-look": {
+      "type": "section",
+      "title": "Appearance",
+      "keys": ["display-mode", "entry-width"]
+    },
+    "sec-files": {
+      "type": "section",
+      "title": "Files",
+      "keys": ["search-files", "excluded-folders", "max-files"]
+    },
+    "sec-keys": {
+      "type": "section",
+      "title": "Keyboard",
+      "keys": ["hotkey"]
+    }
+  },
+  "display-mode": {
+    "type": "combobox",
+    "default": "entry",
+    "options": {
+      "Search field": "entry",
+      "Search icon": "icon",
+      "Hidden (keyboard shortcut only)": "hidden"
+    },
+    "description": "Show in the panel as"
+  },
+  "entry-width": {
+    "type": "spinbutton",
+    "default": 220,
+    "min": 140,
+    "max": 400,
+    "step": 10,
+    "units": "px",
+    "description": "Search field width",
+    "dependency": "display-mode=entry"
+  },
+  "search-files": {
+    "type": "switch",
+    "default": true,
+    "description": "Search files and folders in my home folder"
+  },
+  "excluded-folders": {
+    "type": "entry",
+    "default": "go, snap",
+    "description": "Folders to skip (relative to home, comma-separated)",
+    "tooltip": "Hidden folders, node_modules, vendor, target, __pycache__ and virtualenvs are always skipped.",
+    "dependency": "search-files"
+  },
+  "max-files": {
+    "type": "spinbutton",
+    "default": 12,
+    "min": 4,
+    "max": 50,
+    "step": 1,
+    "units": "",
+    "description": "Maximum file results",
+    "dependency": "search-files"
+  },
+  "hotkey": {
+    "type": "keybinding",
+    "default": "<Super>f",
+    "description": "Keyboard shortcut to open the search"
+  }
+}

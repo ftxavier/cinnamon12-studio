@@ -261,3 +261,60 @@ calendar.header { background-color: #d9eafa; border-color: #b6d0eb; }
 toolbar, .inline-toolbar { background-color: #edf5ff; }
 .dim-label, label.separator { color: #526e90; opacity: 1; }
 .cinnamon-settings-window .sidebar, .cs-category-view { background-color: #d9eafa; }
+
+/* ---------- inactive windows (:backdrop) ----------
+ * Adwaita paints backdrop states with hard-coded greys (#353535, #303030, #f6f5f4...)
+ * instead of the named colors, and its :backdrop selectors outrank the plain rules
+ * above, so an unfocused window fell back to grey. Same surfaces as the focused
+ * window; only text and controls are a little dimmer. */
+.background:backdrop, window.background:backdrop, dialog:backdrop, messagedialog.background:backdrop {
+  background-color: #edf5ff; color: #162e4d; }
+.view:backdrop, iconview:backdrop, .view text:backdrop, iconview text:backdrop, textview text:backdrop,
+list:backdrop, listview:backdrop, viewport.frame:backdrop, .content-view:backdrop {
+  background-color: #f5faff; color: #162e4d; border-color: #b6d0eb; }
+.content-view .tile:backdrop { background-color: #d9eafa; }
+.sidebar:backdrop, placessidebar:backdrop, placessidebar list:backdrop, stacksidebar list:backdrop,
+assistant .sidebar:backdrop, .nemo-window .sidebar:backdrop, .nemo-window .sidebar .view:backdrop,
+.nemo-places-sidebar treeview.view:backdrop {
+  background-color: #d9eafa; color: #162e4d; border-color: #b6d0eb; }
+separator.sidebar:backdrop, separator:backdrop { background-color: #b6d0eb; }
+spinbutton:backdrop:not(.vertical), entry:backdrop {
+  background-color: #ffffff; color: #162e4d; border-color: #b6d0eb; box-shadow: none; }
+spinbutton:backdrop:disabled:not(.vertical), entry:backdrop:disabled { background-color: #d9eafa; color: #526e90; border-color: #b6d0eb; }
+.inline-toolbar:backdrop, searchbar > revealer > box:backdrop, .location-bar:backdrop, toolbar:backdrop, .toolbar:backdrop {
+  background-color: #d9eafa; border-color: #b6d0eb; box-shadow: none; }
+menubar:backdrop, .menubar:backdrop { background-color: #edf5ff; }
+menu:backdrop, .menu:backdrop, .context-menu:backdrop, menu > arrow:backdrop, .menu > arrow:backdrop,
+.context-menu > arrow:backdrop, popover:backdrop, popover.background:backdrop {
+  background-color: #ebf6ff; box-shadow: none; }
+notebook > header:backdrop { background-color: #d9eafa; border-color: #b6d0eb; }
+notebook > header tab:backdrop:checked, notebook > header tab:backdrop:checked.reorderable-page {
+  background-color: #f5faff; border-color: #b6d0eb; }
+notebook > stack:not(:only-child):backdrop { background-color: #f5faff; }
+treeview.view header button:backdrop { background-image: none; background-color: #f5faff; color: #526e90; border-color: #b6d0eb; }
+scrollbar:backdrop, scrolledwindow junction:backdrop { background-color: transparent; border-color: transparent; }
+switch:backdrop { background-image: none; background-color: #b6d0eb; border-color: #b6d0eb; }
+switch:backdrop:checked { background-color: #078fe8; border-color: #078fe8; }
+switch:backdrop:disabled { background-color: #d9eafa; }
+progressbar trough:backdrop, scale trough:backdrop, levelbar trough:backdrop {
+  background-image: none; background-color: #b6d0eb; border-color: transparent; }
+scale fill:backdrop { background-color: #b6d0eb; }
+paned > separator:backdrop, paned > separator.wide:backdrop { background-color: #b6d0eb; background-image: none; }
+frame > border:backdrop, .frame:backdrop { border-color: #b6d0eb; }
+label:backdrop { color: inherit; }
+/* Adwaita paints buttons with background-image: image(<grey>), so every backdrop
+ * button state needs background-image: none as well */
+button:backdrop:checked, button:backdrop:active, button:backdrop.flat:checked, button:backdrop.flat:active {
+  background-image: none; background-color: #c1e4ff; color: #162e4d; border-color: #b6d0eb; }
+button:disabled, button:backdrop:disabled, button:backdrop.flat:disabled,
+button:backdrop:disabled:checked, button:backdrop:disabled:active {
+  background-image: none; background-color: #d9eafa; color: #526e90; border-color: #b6d0eb; }
+button.suggested-action:backdrop, button.default:not(.flat):backdrop {
+  background-image: none; background-color: #0571c4; color: rgba(255,255,255,0.85); border-color: #0571c4; }
+button.suggested-action:disabled, button.suggested-action:backdrop:disabled {
+  background-image: none; background-color: #d9eafa; color: #526e90; border-color: #b6d0eb; }
+switch:backdrop slider, switch:backdrop:disabled slider {
+  background-image: none; background-color: #ffffff; border-color: #b6d0eb; box-shadow: none; }
+switch:backdrop:checked > slider { border-color: #078fe8; }
+scale slider:backdrop, scale slider:backdrop:disabled { background-image: none; background-color: #ffffff; border-color: #078fe8; }
+scrollbar slider:backdrop { background-color: rgba(82,110,144,0.45); }

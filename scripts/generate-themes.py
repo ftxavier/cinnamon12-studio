@@ -511,6 +511,47 @@ StScrollBar StButton#vhandle:hover, StScrollBar StButton#hhandle:hover { backgro
 .c12-launcher-session:hover, .c12-launcher-session:focus { background-color: $hover_bg; color: $accent_fg; }
 .c12-launcher-session-icon { color: $text; }
 
+/* Cinnamon12 Search (c12-search@cinnamon12.local); rows reuse the launcher styles */
+.c12-search-menu .popup-menu-content { padding: 0; }
+.c12-search { padding: 14px; spacing: 12px; color: $text; }
+.c12-search-body { spacing: 12px; }
+.c12-search-results { padding-right: 0; }
+/* gap between the rows (and the selected outline) and the scrollbar */
+.c12-search-results-box { padding-right: 10px; }
+.c12-search-section { padding-top: 6px; }
+.c12-search .c12-launcher-row:checked { background-color: $hover_bg; }
+.c12-search-best { padding: 10px 8px; }
+.c12-search-best:checked { box-shadow: inset 0 0 0 1px $accent; }
+.c12-search-chevron { border-radius: 5px; padding: 6px; color: $muted; }
+.c12-search-chevron:hover { background-color: $popup_border; color: $accent_fg; }
+/* detail pane: card beside the results */
+.c12-search-detail { width: 300px; padding: 16px 12px; border-radius: 8px;
+  background-color: $card; border: 1px solid $popup_border; }
+.c12-search-detail-head { spacing: 6px; padding: 8px 0 4px 0; }
+.c12-search-detail-title { font-size: 13pt; font-weight: bold; color: $text; text-align: center; }
+.c12-search-detail-kind { color: $muted; }
+.c12-search-detail-separator { height: 1px; background-color: $popup_border; margin: 10px 4px; }
+.c12-search-detail-section { font-weight: bold; color: $text; padding: 2px 8px 6px 8px; }
+.c12-search-action { border-radius: 6px; padding: 7px 8px; color: $text; }
+.c12-search-action:hover, .c12-search-action:focus { background-color: $hover_bg; }
+.c12-search-action-box { spacing: 12px; }
+.c12-search-info { padding: 3px 8px; spacing: 1px; }
+.c12-search-info-key { color: $muted; font-size: 8.5pt; }
+.c12-search-info-value { color: $text; }
+/* panel field: a real entry, lighter than the bar, no applet pill around it */
+.c12-search-panel-entry {
+  height: 32px; padding: 0 12px; border-radius: 6px; color: $panel_text;
+  caret-color: $panel_indicator; selected-color: #06203d; selection-background-color: #2baaff;
+  background-color: rgba(194,224,255,0.10); border: 1px solid rgba(157,204,252,0.22); }
+.c12-search-panel-entry StLabel.hint-text { color: rgba(237,246,255,0.70); }
+.c12-search-panel-icon { icon-size: 16px; color: $panel_text; padding-right: 8px; }
+#panel .applet-box.c12-search-applet-entry:hover, #panel .applet-box.c12-search-applet-entry:checked { border-image: none; }
+#panel .applet-box.c12-search-applet-entry:hover .c12-search-panel-entry {
+  background-color: rgba(194,224,255,0.18); border: 1px solid rgba(157,204,252,0.40); }
+#panel .applet-box.c12-search-applet-entry .c12-search-panel-entry:focus {
+  background-color: rgba(194,224,255,0.18); border: 1px solid $panel_indicator; }
+#panel .applet-box.c12-search-applet-hidden { width: 0; padding: 0; border-image: none; }
+
 /* Cinnamon12 Quick Settings (c12-quicksettings@cinnamon12.local) */
 .c12-qs-menu .popup-menu-content { padding: 0; }
 .c12-qs { width: 340px; padding: 14px; spacing: 12px; color: $text; }
@@ -821,6 +862,63 @@ calendar.header { background-color: $side; border-color: $line; }
 toolbar, .inline-toolbar { background-color: $window; }
 .dim-label, label.separator { color: $muted; opacity: 1; }
 .cinnamon-settings-window .sidebar, .cs-category-view { background-color: $side; }
+
+/* ---------- inactive windows (:backdrop) ----------
+ * Adwaita paints backdrop states with hard-coded greys (#353535, #303030, #f6f5f4...)
+ * instead of the named colors, and its :backdrop selectors outrank the plain rules
+ * above, so an unfocused window fell back to grey. Same surfaces as the focused
+ * window; only text and controls are a little dimmer. */
+.background:backdrop, window.background:backdrop, dialog:backdrop, messagedialog.background:backdrop {
+  background-color: $window; color: $text; }
+.view:backdrop, iconview:backdrop, .view text:backdrop, iconview text:backdrop, textview text:backdrop,
+list:backdrop, listview:backdrop, viewport.frame:backdrop, .content-view:backdrop {
+  background-color: $card; color: $text; border-color: $line; }
+.content-view .tile:backdrop { background-color: $side; }
+.sidebar:backdrop, placessidebar:backdrop, placessidebar list:backdrop, stacksidebar list:backdrop,
+assistant .sidebar:backdrop, .nemo-window .sidebar:backdrop, .nemo-window .sidebar .view:backdrop,
+.nemo-places-sidebar treeview.view:backdrop {
+  background-color: $side; color: $text; border-color: $line; }
+separator.sidebar:backdrop, separator:backdrop { background-color: $line; }
+spinbutton:backdrop:not(.vertical), entry:backdrop {
+  background-color: $entry; color: $text; border-color: $entry_border; box-shadow: none; }
+spinbutton:backdrop:disabled:not(.vertical), entry:backdrop:disabled { background-color: $side; color: $muted; border-color: $line; }
+.inline-toolbar:backdrop, searchbar > revealer > box:backdrop, .location-bar:backdrop, toolbar:backdrop, .toolbar:backdrop {
+  background-color: $side; border-color: $line; box-shadow: none; }
+menubar:backdrop, .menubar:backdrop { background-color: $window; }
+menu:backdrop, .menu:backdrop, .context-menu:backdrop, menu > arrow:backdrop, .menu > arrow:backdrop,
+.context-menu > arrow:backdrop, popover:backdrop, popover.background:backdrop {
+  background-color: $popup_solid; box-shadow: none; }
+notebook > header:backdrop { background-color: $side; border-color: $line; }
+notebook > header tab:backdrop:checked, notebook > header tab:backdrop:checked.reorderable-page {
+  background-color: $card; border-color: $line; }
+notebook > stack:not(:only-child):backdrop { background-color: $card; }
+treeview.view header button:backdrop { background-image: none; background-color: $card; color: $muted; border-color: $line; }
+scrollbar:backdrop, scrolledwindow junction:backdrop { background-color: transparent; border-color: transparent; }
+switch:backdrop { background-image: none; background-color: $line; border-color: $line; }
+switch:backdrop:checked { background-color: $accent; border-color: $accent; }
+switch:backdrop:disabled { background-color: $side; }
+progressbar trough:backdrop, scale trough:backdrop, levelbar trough:backdrop {
+  background-image: none; background-color: $line; border-color: transparent; }
+scale fill:backdrop { background-color: $line; }
+paned > separator:backdrop, paned > separator.wide:backdrop { background-color: $line; background-image: none; }
+frame > border:backdrop, .frame:backdrop { border-color: $line; }
+label:backdrop { color: inherit; }
+/* Adwaita paints buttons with background-image: image(<grey>), so every backdrop
+ * button state needs background-image: none as well */
+button:backdrop:checked, button:backdrop:active, button:backdrop.flat:checked, button:backdrop.flat:active {
+  background-image: none; background-color: $item_active; color: $text; border-color: $line; }
+button:disabled, button:backdrop:disabled, button:backdrop.flat:disabled,
+button:backdrop:disabled:checked, button:backdrop:disabled:active {
+  background-image: none; background-color: $side; color: $muted; border-color: $line; }
+button.suggested-action:backdrop, button.default:not(.flat):backdrop {
+  background-image: none; background-color: $accent_fill; color: $on_accent_muted; border-color: $accent_fill; }
+button.suggested-action:disabled, button.suggested-action:backdrop:disabled {
+  background-image: none; background-color: $side; color: $muted; border-color: $line; }
+switch:backdrop slider, switch:backdrop:disabled slider {
+  background-image: none; background-color: #ffffff; border-color: $line; box-shadow: none; }
+switch:backdrop:checked > slider { border-color: $accent; }
+scale slider:backdrop, scale slider:backdrop:disabled { background-image: none; background-color: #ffffff; border-color: $accent; }
+scrollbar slider:backdrop { background-color: $scroll; }
 ''')
 
 # ======================================================================================
