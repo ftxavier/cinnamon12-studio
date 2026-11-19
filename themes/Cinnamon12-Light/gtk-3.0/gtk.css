@@ -108,6 +108,13 @@ button:active, button:checked { background-image: none; background-color: #c1e4f
 button:disabled { background-image: none; background-color: #d9eafa; color: #526e90; border-color: #b6d0eb; }
 button:backdrop { background-image: none; background-color: #f5faff; color: #526e90; border-color: #b6d0eb; }
 button:backdrop:checked { background-color: #c1e4ff; color: #162e4d; }
+/* cinnamon-settings picture choosers (theme, icons, cursor) add .gtkstyle-fallback,
+ * which Adwaita paints with fixed greys and outranks the plain button rules */
+button.gtkstyle-fallback, button.gtkstyle-fallback:backdrop {
+  background-image: none; background-color: #f5faff; color: #162e4d; border-color: #b6d0eb; }
+button.gtkstyle-fallback:hover { background-color: #d6ecff; }
+button.gtkstyle-fallback:active, button.gtkstyle-fallback:checked { background-color: #c1e4ff; border-color: #078fe8; }
+button.gtkstyle-fallback:disabled { background-color: #d9eafa; color: #526e90; }
 button.flat, button.flat:backdrop, button.image-button.flat, .toolbar button, headerbar button.flat, .path-bar button.flat {
   background-color: transparent; border-color: transparent; }
 button.flat:hover, headerbar button.flat:hover, .toolbar button:hover { background-color: #d6ecff; border-color: transparent; }

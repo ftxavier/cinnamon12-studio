@@ -709,6 +709,13 @@ button:active, button:checked { background-image: none; background-color: $item_
 button:disabled { background-image: none; background-color: $side; color: $muted; border-color: $line; }
 button:backdrop { background-image: none; background-color: $card; color: $muted; border-color: $line; }
 button:backdrop:checked { background-color: $item_active; color: $text; }
+/* cinnamon-settings picture choosers (theme, icons, cursor) add .gtkstyle-fallback,
+ * which Adwaita paints with fixed greys and outranks the plain button rules */
+button.gtkstyle-fallback, button.gtkstyle-fallback:backdrop {
+  background-image: none; background-color: $card; color: $text; border-color: $line; }
+button.gtkstyle-fallback:hover { background-color: $hover_bg; }
+button.gtkstyle-fallback:active, button.gtkstyle-fallback:checked { background-color: $item_active; border-color: $accent; }
+button.gtkstyle-fallback:disabled { background-color: $side; color: $muted; }
 button.flat, button.flat:backdrop, button.image-button.flat, .toolbar button, headerbar button.flat, .path-bar button.flat {
   background-color: transparent; border-color: transparent; }
 button.flat:hover, headerbar button.flat:hover, .toolbar button:hover { background-color: $hover_bg; border-color: transparent; }
