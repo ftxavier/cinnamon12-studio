@@ -61,7 +61,7 @@ PANEL_BACKUP=STATE/'panel-original.json'
 PANEL_KEYS=['enabled-applets','panels-height']
 # Optional: icon size per zone (JSON string). Absent on very old Cinnamon -> skipped.
 PANEL_OPT_KEYS=['panel-zone-icon-sizes','panel-zone-symbolic-icon-sizes']
-PANEL_ICON_SIZE=28  # icons with breathing room inside the 48 px visible bar
+PANEL_ICON_SIZE=28  # icons with breathing room inside the 48 px bar
 PANEL_SYMBOLIC_SIZE=20  # status icons (network, sound, power...) next to 24 px tray icons
 CENTER_UUIDS=['menu@cinnamon.org','c12-start@cinnamon12.local','grouped-window-list@cinnamon.org','panel-launchers@cinnamon.org']
 DROP_UUIDS=['separator@cinnamon.org']
@@ -349,7 +349,7 @@ def main():
  q=sub.add_parser('apply',help='faz backup das preferências antes de ativar');q.add_argument('variant',choices=['light','dark']);q.add_argument('--no-wallpaper',action='store_true')
  q=sub.add_parser('restore',help='restaura as preferências anteriores, preservando mudanças manuais');q.add_argument('--force',action='store_true',help='reverter até as preferências alteradas manualmente')
  q=sub.add_parser('uninstall',help='restaura preferências e remove apenas pastas que instalamos');q.add_argument('--force',action='store_true');q.add_argument('--keep-files',action='store_true')
- q=sub.add_parser('panel',help='perfil de painel flutuante (48 px visíveis) centralizado, com backup');q.add_argument('panel_action',choices=['apply','restore']);q.add_argument('--height',type=int,default=60,help='altura total; o tema Cinnamon12 desenha uma barra de 48 px com 6 px livres acima e abaixo');q.add_argument('--launcher',choices=['native','cinnamon12'],default='native',help='cinnamon12 troca o menu nativo pelo Cinnamon12 Start');q.add_argument('--quick-settings',action='store_true',help='adiciona o Cinnamon12 Quick Settings antes do relógio');q.add_argument('--dry-run',action='store_true');q.add_argument('--force',action='store_true')
+ q=sub.add_parser('panel',help='perfil de painel de largura total (48 px) centralizado, com backup');q.add_argument('panel_action',choices=['apply','restore']);q.add_argument('--height',type=int,default=48,help='altura do painel em px');q.add_argument('--launcher',choices=['native','cinnamon12'],default='native',help='cinnamon12 troca o menu nativo pelo Cinnamon12 Start');q.add_argument('--quick-settings',action='store_true',help='adiciona o Cinnamon12 Quick Settings antes do relógio');q.add_argument('--dry-run',action='store_true');q.add_argument('--force',action='store_true')
  q=sub.add_parser('widgets',help='desklets Cinnamon12 (calendário, monitor e, opcional, clima) na lateral esquerda, com backup');q.add_argument('widgets_action',choices=['apply','restore']);q.add_argument('--weather',action='store_true');q.add_argument('--dry-run',action='store_true');q.add_argument('--force',action='store_true')
  args=p.parse_args()
  {'doctor':doctor,'install':install,'apply':apply,'restore':restore,'uninstall':uninstall,'panel':panel,'widgets':widgets}[args.action](args)

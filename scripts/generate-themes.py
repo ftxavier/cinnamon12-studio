@@ -100,17 +100,18 @@ CINNAMON = Template(r'''/* Cinnamon12 Studio | $variant | Cinnamon shell theme.
   color: $panel_text;
   border: none;
 }
-/* Floating panel. Cinnamon 6.0 ignores margins on the panel actor and paints the
- * background under transparent borders (both tested), so the bar is a 9-slice
- * border-image: a 48 px bar with a transparent 6 px gap above and below (panel height
- * 60) and 8 px at the ends. The gap is symmetric because the stock window list forces
- * its buttons to the full panel height and centers the icon there; hover/active pills
- * are border-images too, inset to the visible bar. The actor still reaches the screen
- * edge, so the edge stays clickable (Fitts' law). */
-.panel-bottom, .panel-top, .panel-left, .panel-right { background-color: transparent; border: none; }
-.panel-bottom, .panel-top { border-image: url("assets/panel-float-h.svg") 20; padding: 0 0 0 14px; }
-.panel-bottom:rtl, .panel-top:rtl { padding: 0 14px 0 0; }
-.panel-left, .panel-right { border-image: url("assets/panel-float-v.svg") 20; padding: 14px 0 0 0; }
+/* Full-width panel, edge to edge like the Windows taskbar: solid translucent navy with
+ * a hairline on the side facing the desktop. Hover/active pills are border-images
+ * inset 4 px from the bar edges. */
+.panel-bottom, .panel-top, .panel-left, .panel-right {
+  background-color: $panel; background-gradient-direction: none; border: none; border-image: none; }
+.panel-bottom { border-top: 1px solid $panel_border; }
+.panel-top { border-bottom: 1px solid $panel_border; }
+.panel-left { border-right: 1px solid $panel_border; }
+.panel-right { border-left: 1px solid $panel_border; }
+.panel-bottom, .panel-top { padding: 0 0 0 6px; }
+.panel-bottom:rtl, .panel-top:rtl { padding: 0 6px 0 0; }
+.panel-left, .panel-right { padding: 6px 0 0 0; }
 #panel:highlight, .applet-box:highlight, .spacer-box:highlight { background-color: rgba(43,170,255,0.35); }
 .panel-dummy { background-color: rgba(43,170,255,0.18); }
 .panel-dummy:entered { background-color: rgba(43,170,255,0.40); }
@@ -137,17 +138,17 @@ CINNAMON = Template(r'''/* Cinnamon12 Studio | $variant | Cinnamon shell theme.
 .panel-button, .panel-status-button { color: $panel_text; }
 .panel-button:hover, .panel-status-button:hover { color: #ffffff; text-shadow: none; }
 .applet-separator-line { background: rgba(237,246,255,0.25); }
-/* "show desktop" = the rounded end of the bar. The panel has no end padding on that
- * side, so the applet reaches the screen edge (throw the pointer into the corner); a
- * short line marks it at rest and the whole rounded cap lights up on hover. Assumes
- * the applet is the last one, as in the stock layout and our panel profile. */
+/* "show desktop": a 14 px strip in the corner, Windows style. The panel has no end
+ * padding on that side, so the strip reaches the screen edge (throw the pointer into
+ * the corner); it is a bit lighter than the bar and lights up more on hover.
+ * Assumes the applet is the last one, as in the stock layout and our panel profile. */
 .applet-cornerbar { background: transparent; width: 0; height: 0; }
 .panel-bottom .applet-cornerbar-box, .panel-top .applet-cornerbar-box {
-  padding: 0; width: 22px; border-image: url("assets/cap-h.svg") 20 0; }
-.panel-bottom .applet-cornerbar-box:hover, .panel-top .applet-cornerbar-box:hover { border-image: url("assets/cap-h-hover.svg") 20 0; }
+  padding: 0; margin-left: 8px; width: 14px; border-image: url("assets/cap-h.svg") 0; }
+.panel-bottom .applet-cornerbar-box:hover, .panel-top .applet-cornerbar-box:hover { border-image: url("assets/cap-h-hover.svg") 0; }
 .panel-left .applet-cornerbar-box, .panel-right .applet-cornerbar-box {
-  padding: 0; height: 22px; border-image: url("assets/cap-v.svg") 0 20; }
-.panel-left .applet-cornerbar-box:hover, .panel-right .applet-cornerbar-box:hover { border-image: url("assets/cap-v-hover.svg") 0 20; }
+  padding: 0; margin-top: 8px; height: 14px; border-image: url("assets/cap-v.svg") 0; }
+.panel-left .applet-cornerbar-box:hover, .panel-right .applet-cornerbar-box:hover { border-image: url("assets/cap-v-hover.svg") 0; }
 
 /* window lists (grouped and classic): pills drawn as border-images inset to the bar */
 .grouped-window-list-item-box, .window-list-item-box {
@@ -158,7 +159,7 @@ CINNAMON = Template(r'''/* Cinnamon12 Studio | $variant | Cinnamon shell theme.
 .panel-bottom .grouped-window-list-item-box, .panel-top .grouped-window-list-item-box,
 .panel-bottom .window-list-item-box, .panel-top .window-list-item-box { margin: 0 2px; }
 /* the stock applet zeroes the horizontal padding inline; min-width makes the pill square
- * (40 x 40: 48 px bar minus a 4 px inset on each side) */
+ * (40 x 40: 48 px panel minus a 4 px inset on each side) */
 .panel-bottom .grouped-window-list-item-box, .panel-top .grouped-window-list-item-box { min-width: 40px; }
 .panel-left .grouped-window-list-item-box, .panel-right .grouped-window-list-item-box { min-height: 40px; }
 .panel-left .grouped-window-list-item-box, .panel-right .grouped-window-list-item-box,
@@ -883,34 +884,27 @@ def svg_assets(p):
     pfill, pop = '#%02x%02x%02x' % tuple(int(v) for v in m.groups()[:3]), m.group(4)
     def svg(body):
         return f'<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">{body}</svg>'
-    R = TOK['radii']['panel']  # bar corner radius (reference: 8 px)
-    def bar(x, y, w, h):
-        return svg(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{R}" fill="{pfill}" fill-opacity="{pop}" '
-                   f'stroke="#9dccfc" stroke-opacity="0.22" stroke-width="1"/>')
-    # Pills: 6 px panel gap + 4 px inset on the cross axis. (fill, opacity, indicator?)
+    # Pills: 4 px inset on the cross axis. (fill, opacity, indicator?)
     states = {'hover': ('#c2e0ff', 0.14, False), 'running': ('#c2e0ff', 0.08, False),
               'focus': ('#2baaff', 0.28, True), 'attention': ('#f17189', 0.55, False)}
-    panels = {'panel-float-h.svg': bar(8.5, 6.5, 47, 51), 'panel-float-v.svg': bar(6.5, 8.5, 51, 47)}
-    # End caps for "show desktop": the bar's rounded end (radius R) plus the 8 px outer gap.
-    hov = '<path d="{d}" fill="#c2e0ff" fill-opacity="0.16"/>'
-    cap_h = f'M0 6.5H{13.5-R}A{R} {R} 0 0 1 13.5 {6.5+R}V{57.5-R}A{R} {R} 0 0 1 {13.5-R} 57.5H0Z'
-    cap_v = f'M6.5 0V{13.5-R}A{R} {R} 0 0 0 {6.5+R} 13.5H{57.5-R}A{R} {R} 0 0 0 57.5 {13.5-R}V0Z'
-    line_h = '<rect x="5" y="22" width="3" height="20" rx="1.5" fill="#edf6ff" fill-opacity="0.30"/>'
-    line_v = '<rect x="22" y="5" width="20" height="3" rx="1.5" fill="#edf6ff" fill-opacity="0.30"/>'
+    panels = {}
+    # "Show desktop" strip: hairline separator at rest, whole strip lit on hover.
     def cap(w, h, body):
         return f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">{body}</svg>'
-    panels['cap-h.svg'] = cap(22, 64, line_h)
-    panels['cap-h-hover.svg'] = cap(22, 64, hov.format(d=cap_h) + line_h.replace('0.30', '0.70'))
-    panels['cap-v.svg'] = cap(64, 22, line_v)
-    panels['cap-v-hover.svg'] = cap(64, 22, hov.format(d=cap_v) + line_v.replace('0.30', '0.70'))
+    # Solid strip over the whole click area, a little lighter than the bar; stronger on hover.
+    strip = '<rect width="{w}" height="{h}" fill="#c2e0ff" fill-opacity="{o}"/>'
+    panels['cap-h.svg'] = cap(14, 48, strip.format(w=14, h=48, o=0.10))
+    panels['cap-h-hover.svg'] = cap(14, 48, strip.format(w=14, h=48, o=0.22))
+    panels['cap-v.svg'] = cap(48, 14, strip.format(w=48, h=14, o=0.10))
+    panels['cap-v-hover.svg'] = cap(48, 14, strip.format(w=48, h=14, o=0.22))
     for name, (col, op, ind) in states.items():
-        line_h = '<rect x="12" y="49" width="40" height="3" rx="1.5" fill="#36ccf6"/>' if ind else ''
-        line_v = '<rect x="49" y="12" width="3" height="40" rx="1.5" fill="#36ccf6"/>' if ind else ''
-        panels[f'pill-h-{name}.svg'] = svg(f'<rect x="0" y="10" width="64" height="44" rx="8" fill="{col}" fill-opacity="{op}"/>{line_h}')
-        panels[f'pill-v-{name}.svg'] = svg(f'<rect x="10" y="0" width="44" height="64" rx="8" fill="{col}" fill-opacity="{op}"/>{line_v}')
-    # smaller pills (32 px: 6 px gap + 8 px inset) for applets at the ends of the bar
-    panels['pill-h-hover-sm.svg'] = svg('<rect x="0" y="14" width="64" height="36" rx="7" fill="#c2e0ff" fill-opacity="0.14"/>')
-    panels['pill-v-hover-sm.svg'] = svg('<rect x="14" y="0" width="36" height="64" rx="7" fill="#c2e0ff" fill-opacity="0.14"/>')
+        line_h = '<rect x="16" y="56" width="32" height="3" rx="1.5" fill="#36ccf6"/>' if ind else ''
+        line_v = '<rect x="56" y="16" width="3" height="32" rx="1.5" fill="#36ccf6"/>' if ind else ''
+        panels[f'pill-h-{name}.svg'] = svg(f'<rect x="0" y="4" width="64" height="56" rx="8" fill="{col}" fill-opacity="{op}"/>{line_h}')
+        panels[f'pill-v-{name}.svg'] = svg(f'<rect x="4" y="0" width="56" height="64" rx="8" fill="{col}" fill-opacity="{op}"/>{line_v}')
+    # smaller pills (32 px: 8 px inset) for applets at the ends of the bar
+    panels['pill-h-hover-sm.svg'] = svg('<rect x="0" y="8" width="64" height="48" rx="7" fill="#c2e0ff" fill-opacity="0.14"/>')
+    panels['pill-v-hover-sm.svg'] = svg('<rect x="8" y="0" width="48" height="64" rx="7" fill="#c2e0ff" fill-opacity="0.14"/>')
     return {
         **panels,
         'toggle-on.svg': f'''<svg xmlns="http://www.w3.org/2000/svg" width="64" height="22" viewBox="0 0 64 22">

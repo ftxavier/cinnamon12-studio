@@ -11,17 +11,18 @@
   color: #eef6ff;
   border: none;
 }
-/* Floating panel. Cinnamon 6.0 ignores margins on the panel actor and paints the
- * background under transparent borders (both tested), so the bar is a 9-slice
- * border-image: a 48 px bar with a transparent 6 px gap above and below (panel height
- * 60) and 8 px at the ends. The gap is symmetric because the stock window list forces
- * its buttons to the full panel height and centers the icon there; hover/active pills
- * are border-images too, inset to the visible bar. The actor still reaches the screen
- * edge, so the edge stays clickable (Fitts' law). */
-.panel-bottom, .panel-top, .panel-left, .panel-right { background-color: transparent; border: none; }
-.panel-bottom, .panel-top { border-image: url("assets/panel-float-h.svg") 20; padding: 0 0 0 14px; }
-.panel-bottom:rtl, .panel-top:rtl { padding: 0 14px 0 0; }
-.panel-left, .panel-right { border-image: url("assets/panel-float-v.svg") 20; padding: 14px 0 0 0; }
+/* Full-width panel, edge to edge like the Windows taskbar: solid translucent navy with
+ * a hairline on the side facing the desktop. Hover/active pills are border-images
+ * inset 4 px from the bar edges. */
+.panel-bottom, .panel-top, .panel-left, .panel-right {
+  background-color: rgba(8,20,39,0.94); background-gradient-direction: none; border: none; border-image: none; }
+.panel-bottom { border-top: 1px solid rgba(157,204,252,0.22); }
+.panel-top { border-bottom: 1px solid rgba(157,204,252,0.22); }
+.panel-left { border-right: 1px solid rgba(157,204,252,0.22); }
+.panel-right { border-left: 1px solid rgba(157,204,252,0.22); }
+.panel-bottom, .panel-top { padding: 0 0 0 6px; }
+.panel-bottom:rtl, .panel-top:rtl { padding: 0 6px 0 0; }
+.panel-left, .panel-right { padding: 6px 0 0 0; }
 #panel:highlight, .applet-box:highlight, .spacer-box:highlight { background-color: rgba(43,170,255,0.35); }
 .panel-dummy { background-color: rgba(43,170,255,0.18); }
 .panel-dummy:entered { background-color: rgba(43,170,255,0.40); }
@@ -48,17 +49,17 @@
 .panel-button, .panel-status-button { color: #eef6ff; }
 .panel-button:hover, .panel-status-button:hover { color: #ffffff; text-shadow: none; }
 .applet-separator-line { background: rgba(237,246,255,0.25); }
-/* "show desktop" = the rounded end of the bar. The panel has no end padding on that
- * side, so the applet reaches the screen edge (throw the pointer into the corner); a
- * short line marks it at rest and the whole rounded cap lights up on hover. Assumes
- * the applet is the last one, as in the stock layout and our panel profile. */
+/* "show desktop": a 14 px strip in the corner, Windows style. The panel has no end
+ * padding on that side, so the strip reaches the screen edge (throw the pointer into
+ * the corner); it is a bit lighter than the bar and lights up more on hover.
+ * Assumes the applet is the last one, as in the stock layout and our panel profile. */
 .applet-cornerbar { background: transparent; width: 0; height: 0; }
 .panel-bottom .applet-cornerbar-box, .panel-top .applet-cornerbar-box {
-  padding: 0; width: 22px; border-image: url("assets/cap-h.svg") 20 0; }
-.panel-bottom .applet-cornerbar-box:hover, .panel-top .applet-cornerbar-box:hover { border-image: url("assets/cap-h-hover.svg") 20 0; }
+  padding: 0; margin-left: 8px; width: 14px; border-image: url("assets/cap-h.svg") 0; }
+.panel-bottom .applet-cornerbar-box:hover, .panel-top .applet-cornerbar-box:hover { border-image: url("assets/cap-h-hover.svg") 0; }
 .panel-left .applet-cornerbar-box, .panel-right .applet-cornerbar-box {
-  padding: 0; height: 22px; border-image: url("assets/cap-v.svg") 0 20; }
-.panel-left .applet-cornerbar-box:hover, .panel-right .applet-cornerbar-box:hover { border-image: url("assets/cap-v-hover.svg") 0 20; }
+  padding: 0; margin-top: 8px; height: 14px; border-image: url("assets/cap-v.svg") 0; }
+.panel-left .applet-cornerbar-box:hover, .panel-right .applet-cornerbar-box:hover { border-image: url("assets/cap-v-hover.svg") 0; }
 
 /* window lists (grouped and classic): pills drawn as border-images inset to the bar */
 .grouped-window-list-item-box, .window-list-item-box {
@@ -69,7 +70,7 @@
 .panel-bottom .grouped-window-list-item-box, .panel-top .grouped-window-list-item-box,
 .panel-bottom .window-list-item-box, .panel-top .window-list-item-box { margin: 0 2px; }
 /* the stock applet zeroes the horizontal padding inline; min-width makes the pill square
- * (40 x 40: 48 px bar minus a 4 px inset on each side) */
+ * (40 x 40: 48 px panel minus a 4 px inset on each side) */
 .panel-bottom .grouped-window-list-item-box, .panel-top .grouped-window-list-item-box { min-width: 40px; }
 .panel-left .grouped-window-list-item-box, .panel-right .grouped-window-list-item-box { min-height: 40px; }
 .panel-left .grouped-window-list-item-box, .panel-right .grouped-window-list-item-box,

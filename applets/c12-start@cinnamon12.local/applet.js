@@ -54,8 +54,8 @@ class C12Menu extends Applet.AppletPopupMenu {
 
     _calculatePosition() {
         let [x, y] = super._calculatePosition();
-        // Float the popup a little away from the panel, like the panel floats off the edge.
-        const GAP = 4;  // plus the 6 px transparent gap of the floating panel
+        // Float the popup a little away from the panel, like the Windows start menu.
+        const GAP = 10;
         switch (this._orientation) {
             case St.Side.BOTTOM: y -= GAP; break;
             case St.Side.TOP: y += GAP; break;
