@@ -1,0 +1,92 @@
+# Release automática: a cada push na main, se a versão de scripts/build-deb.py
+# (UPSTREAM) ainda não tem release v<versão>, valida o projeto, gera o .deb e
+# publica a release com o .deb, o SHA-256 e as notas da seção da versão no
+# CHANGELOG.md. Sem mudança de versão, o job termina sem fazer nada.
+name: Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ler versão
+        id: version
+        run: |
+          upstream=$(sed -n "s/^UPSTREAM = '\(.*\)'/\1/p" scripts/build-deb.py)
+          revision=$(sed -n "s/^REVISION = '\(.*\)'/\1/p" scripts/build-deb.py)
+          test -n "$upstream" && test -n "$revision"
+          echo "version=$upstream" >> "$GITHUB_OUTPUT"
+          echo "tag=v$upstream" >> "$GITHUB_OUTPUT"
+          echo "deb=cinnamon12-studio_${upstream}-${revision}_all.deb" >> "$GITHUB_OUTPUT"
+          if gh release view "v$upstream" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "Release v$upstream já existe; nada a fazer."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Dependências
+        if: steps.version.outputs.exists == 'false'
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq python3-pil lintian
+
+      - name: Validar
+        if: steps.version.outputs.exists == 'false'
+        run: |
+          python3 scripts/validate.py
+          # os temas commitados precisam estar em dia com o gerador
+          python3 scripts/generate-themes.py
+          git diff --exit-code -- themes || { echo "::error::themes/ desatualizado: rode scripts/generate-themes.py e commite"; exit 1; }
+
+      - name: Gerar .deb
+        if: steps.version.outputs.exists == 'false'
+        run: |
+          python3 scripts/build-deb.py
+          deb="dist/${{ steps.version.outputs.deb }}"
+          test -f "$deb"
+          dpkg-deb --info "$deb"
+          lintian --fail-on error "$deb"
+          (cd dist && sha256sum "${{ steps.version.outputs.deb }}" > SHA256SUMS)
+
+      - name: Notas da release
+        if: steps.version.outputs.exists == 'false'
+        run: |
+          v='${{ steps.version.outputs.version }}'
+          awk -v v="$v" 'index($0, "## " v) == 1 { f = 1; next } /^## / && f { exit } f' CHANGELOG.md > notes.md
+          {
+            echo
+            echo "## Instalação"
+            echo
+            echo '```bash'
+            echo "sudo apt install ./${{ steps.version.outputs.deb }}"
+            echo "cinnamon12 apply dark   # ou light"
+            echo "cinnamon12 panel apply --launcher cinnamon12 --quick-settings --search"
+            echo '```'
+            echo
+            echo "Nada muda na aparência até cada usuário rodar \`cinnamon12 apply\`; \`cinnamon12 restore\` desfaz."
+          } >> notes.md
+          test -s notes.md
+
+      - name: Publicar release
+        if: steps.version.outputs.exists == 'false'
+        run: |
+          gh release create '${{ steps.version.outputs.tag }}' \
+            "dist/${{ steps.version.outputs.deb }}" dist/SHA256SUMS \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "Cinnamon12 Studio ${{ steps.version.outputs.version }}" \
+            --notes-file notes.md

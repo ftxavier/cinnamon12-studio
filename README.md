@@ -97,6 +97,8 @@ python3 scripts/validate.py          # checagem estática, inclusive contraste W
 python3 scripts/build-deb.py         # gera dist/cinnamon12-studio_<versão>_all.deb
 ```
 
+**Releases são automáticas**: ao subir `UPSTREAM` em `scripts/build-deb.py` (e adicionar a seção `## <versão>` no CHANGELOG), o merge na `main` dispara `.github/workflows/release.yml`, que valida, gera o `.deb` e publica a release `v<versão>` com as notas do CHANGELOG. Merge sem mudar a versão não gera release.
+
 `generate-assets.py` (ícones) precisa de Pillow e CairoSVG. Estrutura principal:
 
 ```text
