@@ -1,151 +1,112 @@
-# Cinnamon12 Studio | v0.3.0
+# Cinnamon12 Studio
 
-Tema conceitual **original**, inspirado por interfaces modernas de desktop, para **Ubuntu 24.04 LTS + Cinnamon 6.0.4**. Não tem relação com a Microsoft, nem é uma versão real de Windows. Ícones de aplicativos de terceiros **não** são copiados ou falsificados.
+**E se existisse um Windows 12? Este projeto imagina como ele seria, e faz isso funcionar de verdade no Linux, sobre o desktop Cinnamon.**
 
-> **Status: BETA (assets + temas reais, extensões opcionais em protótipo).** Os SVG, PNG e wallpapers são artefatos prontos. Os arquivos CSS e o instalador passaram por testes estáticos e testes locais de empacotamento; **não** houve teste gráfico numa sessão real de Cinnamon 6.0.4. Alguns seletores exigirão pequenos ajustes após abrir no seu Ubuntu. Os applets/desklets são experimentais, não são ativados automaticamente e devem ser validados in situ. A imagem de referência é um mockup e nem todos os seus elementos já estão implementados.
+Barra de tarefas centralizada, busca integrada ao painel, menu Iniciar novo, configurações rápidas, widgets, ícones e janelas em azul-marinho, nas variantes clara e escura. É tudo tema e applets do Cinnamon: nada de máquina virtual, nada de mockup.
 
-## O que há neste pacote
+![Cinnamon12 Studio no tema escuro: janelas de configurações, busca do painel com painel de ações, widgets de clima, calendário e monitor do sistema](assets/previews/cinnamon12-desktop.png)
 
-| Componente | Conteúdo | Status |
-|---|---|---|
-| Ícones freedesktop | 164 nomes; SVG vetorial + PNGs de 16, 24, 32, 48, 64 e 128 px (symbolic só SVG, com formas preenchidas; status padrão vêm do Yaru) | Gerado, verificar ícones dos apps específicos |
-| Wallpapers originais | 3 designs; originais PNG, JPEG 1920×1080, 2560×1440, 3840×2160 | Prontos (4K é redimensionado do original gerado, não render nativo 4K) |
-| Temas Cinnamon | `Cinnamon12-Light` e `Cinnamon12-Dark` em `cinnamon/cinnamon.css` | Base implementada, testar visualmente |
-| Temas GTK | GTK3 e GTK4 CSS com paletas e variantes | GTK3 base pronta; GTK4 pode ser ignorado por libadwaita |
-| Material UI | 11 SVGs de componentes + PNG 1x/2x | Recursos de apoio ao agente (não substituem controles funcionais) |
-| Menu personalizado | Applet `c12-start@cinnamon12.local` com busca no inventário local | Protótipo, opt-in |
-| Busca no painel | Applet `c12-search@cinnamon12.local`: campo/ícone/atalho, apps, configurações e arquivos da home, painel de ações | Protótipo, opt-in |
-| Centro de atalhos | Applet `c12-quicklinks@cinnamon12.local`, abre configurações reais | Protótipo, **não** são toggles de Wi-Fi etc. |
-| Desklets | Relógio local e medidor CPU/RAM lendo `/proc` | Protótipos, opt-in |
-| Aparência do terminal | Exemplos Kitty, Alacritty e Xresources (claro/escuro) | Opcional, configuração manual |
-| VS Code | Extensão local de tema de cores claro/escuro | Opcional, NÃO instalada automaticamente |
-| Instalador | CLI Python, backup e restauração seletiva de GSettings | Implementado; verificar na máquina do usuário |
-| `.deb` | Pacote passivo `cinnamon12-studio_0.3.0-1_all.deb` | Empacotado, sem mudar preferências automaticamente |
-| Documentação | Spec original + instruções para agente e checklist de QA | Incluída |
+> **Conceito de fã, não oficial.** O Cinnamon12 Studio não tem relação com a Microsoft e não é uma versão do Windows. "Windows" é marca registrada da Microsoft Corporation. Todos os ícones, wallpapers e o código deste projeto são originais; logotipos de aplicativos de terceiros não são copiados.
 
-## Instalação recomendada no seu Ubuntu (reversível, sem sudo)
+## Destaques
 
-Descompacte o **ZIP completo** em uma pasta. Execute no terminal dentro dela:
+- **Barra de tarefas de borda a borda**: 48 px, apps no centro, "mostrar área de trabalho" no canto, como no Windows.
+- **Busca no painel** (`Cinnamon12 Search`): digite direto no campo da barra e os resultados aparecem acima.
+  - Melhor correspondência, aplicativos, configurações, arquivos e pastas da sua pasta pessoal.
+  - Painel de ações ao lado: abrir, abrir com outro app, abrir local do arquivo, fixar na barra e no Iniciar, copiar caminho, abrir no terminal.
+  - Também pode ficar como ícone de lupa ou só no atalho (Super+F).
+  - Tudo local: o índice de nomes é feito num processo separado de baixa prioridade, sem rede.
+- **Menu Iniciar** (`Cinnamon12 Start`): busca, categorias, apps fixados, arquivos recentes e botões de sessão.
+- **Configurações rápidas** (`Cinnamon12 Quick Settings`): Wi-Fi, Bluetooth, modo escuro, não perturbe, volume, brilho e modo avião, com estados reais do sistema.
+- **Widgets**: calendário, monitor do sistema (CPU, RAM, disco, rede) e clima (desligado por padrão, só com sua permissão).
+- **Temas Light e Dark** para o shell do Cinnamon, GTK 3 e GTK 4, inclusive barras de título, Nemo e janelas sem foco. Contraste de texto WCAG AA nas duas variantes.
+- **Ícones e wallpapers originais**, com 3 papéis de parede em até 4K.
+- **Tudo reversível**: nada muda até você ativar, e um comando desfaz.
+
+## Instalação
+
+Testado no **Ubuntu 24.04 LTS com Cinnamon 6.0.4 (X11)**. Outras versões 6.x do Cinnamon devem funcionar, mas não foram testadas.
+
+### Pacote `.deb` (recomendado)
+
+Baixe o `.deb` da [última release](https://github.com/ftxavier/cinnamon12-studio/releases/latest) e instale:
 
 ```bash
-./cinnamon12 doctor
-./cinnamon12 install
-./cinnamon12 apply light
+sudo apt install ./cinnamon12-studio_0.4.0-1_all.deb
 ```
 
-Ou ative a versão escura:
+O pacote só copia arquivos para `/usr/share`. Ele não roda scripts de instalação nem muda a aparência de ninguém. Cada usuário ativa no seu próprio login, sem sudo:
 
 ```bash
+cinnamon12 apply dark          # ou: cinnamon12 apply light
+cinnamon12 panel apply --launcher cinnamon12 --quick-settings --search
+cinnamon12 widgets apply       # calendário e monitor; --weather inclui o clima
+```
+
+### Sem sudo, direto do repositório
+
+```bash
+git clone https://github.com/ftxavier/cinnamon12-studio.git
+cd cinnamon12-studio
+./cinnamon12 doctor            # confere o ambiente
+./cinnamon12 install           # copia temas, ícones e applets para a sua home
 ./cinnamon12 apply dark
+./cinnamon12 panel apply --launcher cinnamon12 --quick-settings --search
 ```
 
-**Painel no estilo da referência (opcional, barra flutuante de 48 px, ícones de 28 px, menu e janelas no centro, com backup):**
+## Comandos
+
+| Comando | O que faz |
+|---|---|
+| `cinnamon12 apply light\|dark` | Ativa o tema (shell, GTK, ícones e wallpaper), guardando suas preferências antes |
+| `cinnamon12 restore` | Volta as preferências que estavam antes do `apply` |
+| `cinnamon12 panel apply [opções]` | Barra de 48 px com menu e janelas no centro, com backup do painel |
+| `--launcher cinnamon12` | Troca o menu nativo pelo Cinnamon12 Start |
+| `--quick-settings` | Adiciona as configurações rápidas antes do relógio |
+| `--search` | Adiciona a busca logo depois do menu |
+| `--dry-run` | Mostra o que mudaria, sem aplicar |
+| `cinnamon12 panel restore` | Devolve o painel exatamente como estava |
+| `cinnamon12 widgets apply [--weather] \| restore` | Coloca ou retira os widgets da lateral |
+| `cinnamon12 doctor` | Diagnóstico do ambiente |
+| `cinnamon12 uninstall` | Restaura tudo e remove o que a instalação local copiou (instalação sem sudo) |
+
+Ao ativar, reinicie o Cinnamon uma vez (**Ctrl+Alt+Esc**) para ele carregar as imagens novas do tema.
+
+## Desinstalar
 
 ```bash
-./cinnamon12 panel apply --dry-run   # mostra o que muda
-./cinnamon12 panel apply
-./cinnamon12 panel restore           # volta o painel exatamente como estava
-./cinnamon12 panel apply --launcher cinnamon12   # usa o menu Cinnamon12 Start no lugar do menu nativo
-./cinnamon12 panel apply --launcher cinnamon12 --quick-settings   # + configurações rápidas antes do relógio
-./cinnamon12 widgets apply --weather   # calendário, monitor e clima na lateral esquerda (widgets restore desfaz)
+cinnamon12 widgets restore; cinnamon12 panel restore; cinnamon12 restore
+sudo apt remove cinnamon12-studio      # se instalou pelo .deb
+./cinnamon12 uninstall                  # se instalou sem sudo
 ```
 
-**Para restaurar as preferências anteriores:**
+## Limitações conhecidas
+
+- O Cinnamon não tem desfoque real atrás de painéis e menus; a transparência é só transparência.
+- Apps GTK 4 com libadwaita, Qt, Electron e navegadores podem ignorar parte do tema GTK.
+- O arranjo de monitores em Configurações > Tela continua cinza: a cor vem do próprio programa e tem prioridade sobre o tema.
+- Os applets e widgets são novos; se algo der errado, `cinnamon12 panel restore` e `cinnamon12 widgets restore` desfazem.
+
+## Para desenvolvedores
+
+As cores e raios saem de `design/tokens.json`; o CSS de todos os temas é gerado por scripts:
 
 ```bash
-./cinnamon12 restore
+python3 scripts/generate-themes.py   # temas Cinnamon, GTK 3 e GTK 4
+python3 scripts/validate.py          # checagem estática, inclusive contraste WCAG
+python3 scripts/build-deb.py         # gera dist/cinnamon12-studio_<versão>_all.deb
 ```
 
-**Para remover o pacote local (os temas instalados por este script):**
-
-```bash
-./cinnamon12 uninstall
-```
-
-- O instalador **não precisa de `sudo`** e só escreve em sua pasta pessoal.
-- `install` **não ativa nada**. Só `apply` muda GSettings (tema Cinnamon, GTK, ícones e wallpaper, se disponível).
-- Na primeira ativação, grava o valor original de cada preferência em `~/.local/state/cinnamon12-studio/gsettings-original.json`.
-- `restore` ignora preferências alteradas manualmente após `apply`; `restore --force` as reverte de qualquer modo.
-- `install` não substitui diretórios existentes sem `--force`; forçando, o conteúdo anterior é arquivado no diretório de estado.
-- O layout do painel, o menu original, as extensões existentes, os programas instalados e a sessão **não** são modificados pelo instalador.
-- A transparência do painel não produz automaticamente desfoque real atrás das janelas.
-
-## Alternativa `.deb`
-
-O arquivo `cinnamon12-studio_0.3.0-1_all.deb` pode ser instalado via:
-
-```bash
-sudo apt install ./cinnamon12-studio_0.3.0-1_all.deb
-```
-
-Isso instala os recursos para todos os usuários em `/usr/share/...` e **não ativa** o tema. Ative em **Configurações do Sistema → Temas**, selecionando os itens Cinnamon, Controles/Aplicativos e Ícones. Você também pode executar `./cinnamon12 apply light` **a partir do ZIP extraído** após instalar o `.deb`.
-
-Com o `.deb` instalado, cada usuário ativa sem sudo com `cinnamon12 apply light` (ou `dark`) e `cinnamon12 panel apply`.
-
-Para remover o `.deb` (primeiro desfaça a ativação no seu usuário, depois remova):
-
-```bash
-cinnamon12 panel restore; cinnamon12 restore
-sudo apt remove cinnamon12-studio
-```
-
-O pacote não tem scripts de instalação/remoção: ele nunca altera preferências de usuários. Se o tema ainda estiver ativo quando o pacote for removido, o Cinnamon e o GTK voltam aos temas padrão no próximo login.
-
-**Não misture instalação local e `.deb` ao testar:** arquivos locais normalmente têm precedência. Prefira começar pelo ZIP e só depois instalar o pacote do sistema.
-
-## Estrutura
+`generate-assets.py` (ícones) precisa de Pillow e CairoSVG. Estrutura principal:
 
 ```text
-Cinnamon12-Studio/
-├── themes/Cinnamon12-Light/          # Cinnamon CSS + GTK CSS
-├── themes/Cinnamon12-Dark/
-├── icons/Cinnamon12-Icons/            # 164 SVG + variações PNG + index.theme
-├── assets/wallpapers/                # 3 fundos, 3 resoluções + originais
-├── assets/ui/                        # componentes visuais SVG e PNG
-├── assets/previews/                  # galerias e conceito aprovado
-├── applets/                          # dois applets opcionais
-├── desklets/                          # dois desklets opcionais
-├── extras/terminal/                  # cores opcionais de terminal
-├── extras/vscode-theme/              # tema opcional para VS Code
-├── design/                            # tokens e inventário de ícones
-├── docs/                              # compatibilidade, plano de QA e spec
-├── scripts/                           # build, instalação e validação
-├── cinnamon12                         # CLI local
-└── dist/                               # .deb (entregue separadamente)
+themes/        temas Cinnamon12-Light e Cinnamon12-Dark (gerados)
+icons/         Cinnamon12-Icons (freedesktop, herda Yaru/Adwaita)
+applets/       Start, Search, Quick Settings e Quick Links
+desklets/      calendário, monitor do sistema, clima e relógio
+assets/        wallpapers, componentes de UI e imagens de divulgação
+scripts/       geradores, validação, instalador (manage.py) e build do .deb
+docs/          compatibilidade, extras e especificação original
 ```
 
-## Ativação manual sem script
-
-- Tema do shell: **Cinnamon12-Light** ou **Cinnamon12-Dark**.
-- Tema dos aplicativos/controles: mesma variante do shell.
-- Ícones: **Cinnamon12 Icons**.
-- Wallpaper: `~/.local/share/backgrounds/cinnamon12-studio/`.
-- Posicione o painel embaixo, altura sugerida **48 px**; mantenha o menu e os applets atuais até testar os novos.
-- Para centralizar aplicativos, experimente mover o applet de lista de janelas agrupadas para a área **central** do painel, no modo de edição do Cinnamon. Isso é manual e depende do painel existente.
-- Adicione applets/desklets em **Configurações → Applets / Desklets**, apenas quando desejar testá-los; mantenha o menu original enquanto verifica o novo.
-
-## Reconstrução a partir dos fontes
-
-Com `python3`, Pillow e CairoSVG instalados para **desenvolvimento**:
-
-```bash
-python3 scripts/generate-assets.py
-python3 scripts/prepare-wallpapers.py
-python3 scripts/generate-ui-assets.py
-python3 scripts/generate-themes.py
-python3 scripts/generate-extras.py
-python3 scripts/validate.py
-python3 scripts/build-deb.py
-```
-
-Os scripts de geração **não** são necessários para usar os assets pré-compilados. `prepare-wallpapers.py` espera os três arquivos originais de geração de imagem nos caminhos citados dentro do script; esse script é para o ambiente de criação, não uma obrigação para instalação. Os PNG originais já estão em `assets/wallpapers`.
-
-## Limitações importantes
-
-1. Cinnamon 6.0.4 **não foi executado neste ambiente**; a validação visual e funcional deverá acontecer no seu Ubuntu.
-2. Alguns ícones são genéricos, não substituem logos de apps como Firefox, Chrome, VS Code ou Spotify.
-3. Nem todos os apps GTK4, Qt, Firefox ou Electron respeitam o tema GTK3.
-4. Os protótipos de applets não equivalem ainda ao menu e painel de configurações rápidas completo do mockup.
-5. O `.deb` **não** instala fonte Segoe, cursor proprietário, barra de tarefas estilo Windows 12 nem atualizações do sistema.
-
-**Próxima tarefa para o agente:** leia `docs/AGENTE.md`, `docs/SPEC-original.md` e a imagem `assets/previews/conceito-original.png`. Instale em uma sessão de testes, inspecione logs de Looking Glass, corrija o CSS e aprimore os applets até alcançar o visual da imagem.
+Histórico de mudanças em [CHANGELOG.md](CHANGELOG.md). Licença e procedência dos assets em [LICENSE.md](LICENSE.md).

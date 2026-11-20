@@ -1,6 +1,6 @@
 # Histórico
 
-## 0.4.0 (em desenvolvimento)
+## 0.4.0 (2026-11-19, testado em Ubuntu 24.04 + Cinnamon 6.0.4, X11)
 
 - Nemo escuro no tom da referência: barra de título azul-marinho com brilho e filete claro, barra de ferramentas e breadcrumb mais escuros, área de arquivos #122039, barra lateral #0f1b2b, seleção azul com texto branco (4,9:1), hover acinzentado, item selecionado em ícones com contorno azul, barra inferior uniforme. Cores do Nemo viram tokens `fm_*` nas duas variantes.
 - Nemo: caminho em migalhas (breadcrumb) numa caixa arredondada única, pasta atual em negrito e seta › após cada pasta; barra de ferramentas no tom da referência (#d8e8fb). Ctrl+L continua abrindo o caminho em texto.

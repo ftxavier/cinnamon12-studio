@@ -16,7 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
 PKG = 'cinnamon12-studio'
-UPSTREAM = '0.3.0'
+UPSTREAM = '0.4.0'
 REVISION = '1'
 VERSION = f'{UPSTREAM}-{REVISION}'
 MAINTAINER = 'Cinnamon12 Studio Maintainer <maintainer@example.invalid>'  # placeholder
@@ -85,10 +85,12 @@ def main():
             shutil.copyfile(ROOT / n, doc / Path(n).name)
         gz(f'''{PKG} ({VERSION}) noble; urgency=medium
 
-  * Shell theme imports the installed Cinnamon stylesheet.
-  * GTK3 built on Adwaita; also styles Muffin server-side title bars.
-  * Dedicated GTK4 stylesheet; reversible 48 px centered panel profile.
-  * CLI installed as /usr/bin/cinnamon12; no maintainer scripts.
+  * Full-width 48 px taskbar with a show-desktop strip in the corner.
+  * New Cinnamon12 Search applet: apps, settings and files in the home folder.
+  * Quick Settings, Start menu and calendar/monitor/weather desklets.
+  * GTK3: inactive windows and settings choosers follow the theme colors.
+  * Status icons come from Yaru; own symbolic icons redrawn for recoloring.
+  * No maintainer scripts: nothing changes until a user runs cinnamon12 apply.
 
  -- {MAINTAINER}  {stamp}
 ''', doc / 'changelog.Debian.gz')
