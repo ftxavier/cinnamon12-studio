@@ -16,7 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
 PKG = 'cinnamon12-studio'
-UPSTREAM = '0.4.0'
+UPSTREAM = '0.1.0'
 REVISION = '1'
 VERSION = f'{UPSTREAM}-{REVISION}'
 MAINTAINER = 'Cinnamon12 Studio Maintainer <maintainer@example.invalid>'  # placeholder

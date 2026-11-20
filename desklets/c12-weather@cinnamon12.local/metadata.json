@@ -2,7 +2,7 @@
   "uuid": "c12-weather@cinnamon12.local",
   "name": "Cinnamon12 Weather",
   "description": "Current weather and 5-day forecast from Open-Meteo. Off by default: needs a city and explicit network permission.",
-  "version": "0.4.0",
+  "version": "0.1.0",
   "prevent-decorations": true,
   "cinnamon-version": [
     "6.0",

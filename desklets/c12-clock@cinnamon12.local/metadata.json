@@ -2,6 +2,6 @@
   "uuid": "c12-clock@cinnamon12.local",
   "name": "Cinnamon12 | Relógio (experimental)",
   "description": "Relógio e data local com estilo Cinnamon12, sem conexão de rede.",
-  "version": "0.4.0",
+  "version": "0.1.0",
   "prevent-decorations": true
 }

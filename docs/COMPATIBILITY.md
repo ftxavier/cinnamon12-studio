@@ -54,7 +54,7 @@
 - XDG base directories: https://specifications.freedesktop.org/basedir-spec/latest/
 - GTK3 CSS: https://docs.gtk.org/gtk3/css-overview.html
 
-## Resultados de teste real (0.3.0, 2026-11-18)
+## Resultados de teste real (desenvolvimento pré-0.1.0, 2026-11-18)
 
 Ambiente: Ubuntu 24.04.5 LTS, Cinnamon 6.0.4, X11, dois monitores (2560×1440 + 1920×1080).
 
@@ -66,10 +66,10 @@ Ambiente: Ubuntu 24.04.5 LTS, Cinnamon 6.0.4, X11, dois monitores (2560×1440 + 
 | GTK3 / GTK4 CSS | 0 erros de parse (GtkCssProvider) nas duas variantes |
 | Light e Dark | Nemo, menu nativo, calendário e painel conferidos por captura de tela |
 | `apply` → `restore` e `panel apply` → `panel restore` | Valores idênticos ao snapshot anterior (tema, GTK, ícones, wallpaper, applets, altura) |
-| `.deb` 0.3.0-1 | `dpkg-deb -I/-c` ok; lintian: 0 erros, 2 avisos (sem manpage; changelog sem bug) |
+| `.deb` (pré-0.1.0) | `dpkg-deb -I/-c` ok; lintian: 0 erros, 2 avisos (sem manpage; changelog sem bug) |
 | Instalação/remoção via APT | **Pendente** (requer sudo do usuário) |
 
-### Quick Settings (0.4.0-dev, mesmo ambiente)
+### Quick Settings (desenvolvimento pré-0.1.0, mesmo ambiente)
 
 | Controle | Backend | Teste |
 |---|---|---|
@@ -83,7 +83,7 @@ Ambiente: Ubuntu 24.04.5 LTS, Cinnamon 6.0.4, X11, dois monitores (2560×1440 + 
 | Modo de energia | power-profiles-daemon | Serviço ausente → cartão oculto (correto) |
 | Modo avião | NetworkManager + BlueZ | **Não executado** (derrubaria a sessão de teste) |
 
-### Desklets (0.4.0-dev, mesmo ambiente)
+### Desklets (desenvolvimento pré-0.1.0, mesmo ambiente)
 
 | Desklet | Teste |
 |---|---|
@@ -92,7 +92,7 @@ Ambiente: Ubuntu 24.04.5 LTS, Cinnamon 6.0.4, X11, dois monitores (2560×1440 + 
 | Clima | Desligado por padrão (cartão "Desativado"). Teste único com a cidade "Brasília": geocodificação + previsão OK, cache gravado; depois revertido para desligado e cache apagado |
 | `widgets apply/restore` | Restore devolve `enabled-desklets` original (`[]`); reaplicação OK |
 
-### Launcher e contraste (0.4.0-dev)
+### Launcher e contraste (desenvolvimento pré-0.1.0)
 
 | Verificação | Resultado |
 |---|---|
@@ -101,11 +101,11 @@ Ambiente: Ubuntu 24.04.5 LTS, Cinnamon 6.0.4, X11, dois monitores (2560×1440 + 
 | Sair / Reiniciar / Desligar | Mesmas chamadas do menu oficial (`LogoutRemote(0)`, `ShutdownRemote()`) e `cinnamon-session-quit --reboot` sem `--no-prompt`: todas pedem confirmação. Não acionados na sessão de teste |
 | Contraste de texto (20 pares, Light e Dark) | Todos ≥ 4,5:1; verificado a cada `validate.py` |
 
-### Barra flutuante (0.4.0-dev)
+### Barra flutuante (desenvolvimento pré-0.1.0)
 
 | Verificação | Resultado |
 |---|---|
-| `margin` no ator do painel | Ignorada (já constatado em 0.3.0) |
+| `margin` no ator do painel | Ignorada (já constatado antes) |
 | `border` transparente + `border-radius` no painel | Cantos arredondam, mas o fundo é pintado sob a borda: não cria espaço |
 | `border-image` 9-slice com margem transparente | **Funciona**; padding do painel respeitado nas laterais |
 | Padding vertical no painel | Não serve: o `grouped-window-list` força os botões à altura total do painel e centraliza o ícone nela; por isso o espaço é simétrico (6 px acima e abaixo) |

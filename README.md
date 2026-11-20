@@ -32,7 +32,7 @@ Testado no **Ubuntu 24.04 LTS com Cinnamon 6.0.4 (X11)**. Outras versões 6.x do
 Baixe o `.deb` da [última release](https://github.com/ftxavier/cinnamon12-studio/releases/latest) e instale:
 
 ```bash
-sudo apt install ./cinnamon12-studio_0.4.0-1_all.deb
+sudo apt install ./cinnamon12-studio_0.1.0-1_all.deb
 ```
 
 O pacote só copia arquivos para `/usr/share`. Ele não roda scripts de instalação nem muda a aparência de ninguém. Cada usuário ativa no seu próprio login, sem sudo:

@@ -6,7 +6,7 @@ from __future__ import annotations
 import argparse, hashlib, json, os, shutil, subprocess, sys, time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent.parent
-VERSION='0.4.0'
+VERSION='0.1.0'
 HOME=Path.home()
 STATE=Path(os.environ.get('XDG_STATE_HOME',HOME/'.local'/'state'))/'cinnamon12-studio'
 USER_THEME=HOME/'.themes'

@@ -2,7 +2,7 @@
   "uuid": "c12-calendar@cinnamon12.local",
   "name": "Cinnamon12 Calendar",
   "description": "Month calendar in the Cinnamon12 style. Local clock only, no events, no network.",
-  "version": "0.4.0",
+  "version": "0.1.0",
   "prevent-decorations": true,
   "cinnamon-version": [
     "6.0",

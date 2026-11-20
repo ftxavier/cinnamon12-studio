@@ -19,7 +19,7 @@ for variant,c in series.items():
  (p/'Xresources').write_text('! Cinnamon12 Studio colors; import manually.\n'+f'*.background: {c["background"]}\n*.foreground: {c["foreground"]}\n*.cursorColor: {c["cursor"]}\n'+''.join(f'*.color{i}: {co}\n' for i,co in enumerate(c['normal']+c['bright'])))
 
 V=E/'vscode-theme';(V/'themes').mkdir(parents=True,exist_ok=True)
-(V/'package.json').write_text(json.dumps({'name':'cinnamon12-color-themes','displayName':'Cinnamon12 Studio Themes','description':'Optional matching colors for VS Code','version':'0.2.0','publisher':'cinnamon12-studio-local','engines':{'vscode':'^1.80.0'},'categories':['Themes'],'contributes':{'themes':[{'label':f'Cinnamon12 {n}', 'uiTheme':'vs-dark' if n=='Dark' else 'vs','path':f'./themes/cinnamon12-{n.lower()}.json'} for n in ['Light','Dark']]}},indent=2)+'\n')
+(V/'package.json').write_text(json.dumps({'name':'cinnamon12-color-themes','displayName':'Cinnamon12 Studio Themes','description':'Optional matching colors for VS Code','version':'0.1.0','publisher':'cinnamon12-studio-local','engines':{'vscode':'^1.80.0'},'categories':['Themes'],'contributes':{'themes':[{'label':f'Cinnamon12 {n}', 'uiTheme':'vs-dark' if n=='Dark' else 'vs','path':f'./themes/cinnamon12-{n.lower()}.json'} for n in ['Light','Dark']]}},indent=2)+'\n')
 for n,c in series.items():
  dark=(n=='Dark');accent='#2baaff' if dark else '#078fe8';bg=c['background'];fg=c['foreground'];card='#1a3556' if dark else '#dfebfa'
  ui={'editor.background':bg,'editor.foreground':fg,'editorCursor.foreground':accent,

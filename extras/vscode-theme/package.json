@@ -2,7 +2,7 @@
   "name": "cinnamon12-color-themes",
   "displayName": "Cinnamon12 Studio Themes",
   "description": "Optional matching colors for VS Code",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "publisher": "cinnamon12-studio-local",
   "engines": {
     "vscode": "^1.80.0"

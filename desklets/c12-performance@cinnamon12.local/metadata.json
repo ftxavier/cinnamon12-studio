@@ -2,7 +2,7 @@
   "uuid": "c12-performance@cinnamon12.local",
   "name": "Cinnamon12 System Monitor",
   "description": "CPU, memory, disk and network with history graphs, read from /proc and the filesystem. No network access.",
-  "version": "0.4.0",
+  "version": "0.1.0",
   "prevent-decorations": true,
   "cinnamon-version": [
     "6.0",
