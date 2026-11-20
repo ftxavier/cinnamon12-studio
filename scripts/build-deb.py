@@ -16,7 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
 PKG = 'cinnamon12-studio'
-UPSTREAM = '0.1.0'
+UPSTREAM = '0.1.1'
 REVISION = '1'
 VERSION = f'{UPSTREAM}-{REVISION}'
 MAINTAINER = 'ftxavier <ftxavier@users.noreply.github.com>'
@@ -85,6 +85,13 @@ def main():
             shutil.copyfile(ROOT / n, doc / Path(n).name)
         gz(f'''{PKG} ({VERSION}) noble; urgency=medium
 
+  * Local installer: register the wallpaper folder in Settings > Backgrounds
+    on install and remove it on uninstall.
+
+ -- {MAINTAINER}  {stamp}
+
+{PKG} (0.1.0-1) noble; urgency=medium
+
   * Full-width 48 px taskbar with a show-desktop strip in the corner.
   * New Cinnamon12 Search applet: apps, settings and files in the home folder.
   * Quick Settings, Start menu and calendar/monitor/weather desklets.
@@ -92,7 +99,7 @@ def main():
   * Status icons come from Yaru; own symbolic icons redrawn for recoloring.
   * No maintainer scripts: nothing changes until a user runs cinnamon12 apply.
 
- -- {MAINTAINER}  {stamp}
+ -- {MAINTAINER}  Fri, 20 Nov 2026 00:10:48 +0000
 ''', doc / 'changelog.Debian.gz')
         (doc / 'copyright').write_text(f'''Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Cinnamon12 Studio

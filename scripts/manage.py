@@ -6,7 +6,7 @@ from __future__ import annotations
 import argparse, hashlib, json, os, shutil, subprocess, sys, time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent.parent
-VERSION='0.1.0'
+VERSION='0.1.1'
 HOME=Path.home()
 STATE=Path(os.environ.get('XDG_STATE_HOME',HOME/'.local'/'state'))/'cinnamon12-studio'
 USER_THEME=HOME/'.themes'
@@ -16,6 +16,8 @@ USER_APPLET=HOME/'.local'/'share'/'cinnamon'/'applets'
 USER_DESKLET=HOME/'.local'/'share'/'cinnamon'/'desklets'
 BACKUP=STATE/'gsettings-original.json'
 MARK='.cinnamon12-studio-owned'
+# Cinnamon Settings > Backgrounds lists user folders from this file (one path per line).
+BG_FOLDERS=Path(os.environ.get('XDG_CONFIG_HOME') or HOME/'.config')/'cinnamon'/'backgrounds'/'user-folders.lst'
 
 
 def command(args, check=False):
@@ -237,6 +239,28 @@ def doctor(args):
  for _,target in targets():print((' [ok] ' if target.exists() else ' [--] ')+str(target))
  print('Observação: o agente deve testar as partes interativas em Cinnamon 6.0.4 real.')
 
+def bg_folders():
+ if not BG_FOLDERS.is_file():return []
+ return [l for l in BG_FOLDERS.read_text(encoding='utf-8').splitlines() if l.strip()]
+
+def write_bg_folders(lines):
+ BG_FOLDERS.parent.mkdir(parents=True,exist_ok=True)
+ tmp=BG_FOLDERS.with_suffix('.tmp')
+ tmp.write_text(''.join(l+'\n' for l in lines),encoding='utf-8')
+ tmp.replace(BG_FOLDERS)
+
+def register_bg_folder():
+ lines=bg_folders()
+ if str(USER_BG) in lines:return
+ write_bg_folders(lines+[str(USER_BG)])
+ print('Pasta de wallpapers adicionada em Configurações > Planos de fundo:',USER_BG)
+
+def unregister_bg_folder():
+ lines=bg_folders()
+ if str(USER_BG) not in lines:return
+ write_bg_folders([l for l in lines if l!=str(USER_BG)])
+ print('Pasta de wallpapers removida de Configurações > Planos de fundo')
+
 def install(args):
  if not (ROOT/'themes'/'Cinnamon12-Light'/'cinnamon'/'cinnamon.css').is_file():
   if Path('/usr/share/themes/Cinnamon12-Light').is_dir():
@@ -258,6 +282,7 @@ def install(args):
   shutil.copytree(src,dst)
   (dst/MARK).write_text('Installed by Cinnamon12 Studio local installer.\n')
   print('Instalado:',dst)
+ if (USER_BG/MARK).exists():register_bg_folder()
  print('Instalação concluída. Nenhuma configuração do usuário foi alterada.')
  print('Ative explicitamente: ./cinnamon12 apply light  (ou dark)')
 
@@ -344,6 +369,7 @@ def uninstall(args):
    continue
   shutil.rmtree(dst)
   print('Removido:',dst)
+ if not USER_BG.exists():unregister_bg_folder()
  print('Desinstalação local concluída. Para o .deb use: sudo apt remove cinnamon12-studio')
 
 def main():

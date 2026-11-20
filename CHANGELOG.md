@@ -1,5 +1,9 @@
 # Histórico
 
+## 0.1.1 (2026-11-20)
+
+- **Wallpapers na janela Planos de fundo (instalação local)**: `cinnamon12 install` agora adiciona `~/.local/share/backgrounds/cinnamon12-studio` às pastas listadas em Configurações > Planos de fundo, e `cinnamon12 uninstall` remove essa entrada junto com a pasta. Antes, depois de trocar o papel de parede não dava para voltar ao do tema pela janela. As outras pastas da lista não são alteradas, e o `.deb` continua mostrando a coleção Cinnamon12 como antes.
+
 ## 0.1.0 (2026-11-19)
 
 Primeira release pública. Conceito de como seria um Windows 12, funcionando de verdade sobre o Cinnamon. Testado no Ubuntu 24.04 LTS com Cinnamon 6.0.4 (X11).
